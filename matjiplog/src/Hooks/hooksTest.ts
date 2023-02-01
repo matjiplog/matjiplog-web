@@ -1,3 +1,3 @@
-let test;
+let test1;
 
-export default test;
+export default test1;
