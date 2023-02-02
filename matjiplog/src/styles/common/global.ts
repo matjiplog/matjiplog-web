@@ -15,6 +15,13 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         border-collapse: collapse;
     }
+    button{
+        background: none;
+        border: none;
+        &:hover{
+            cursor: Pointer;
+        }
+    }
 `;
 
 export default GlobalStyle;
