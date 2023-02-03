@@ -4,6 +4,7 @@ const GlobalStyle = createGlobalStyle`
     html, body, #root, .App {
         height: 100%;
         font-size: 62.5%;
+        
     }
     li {
         list-style: none;
