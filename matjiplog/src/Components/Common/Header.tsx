@@ -12,7 +12,7 @@ import {
 } from "../../styles/common/header";
 
 import { navStore, navTypes } from "../../stores/home/store";
-import { useNavLink, navLinkTypes } from "../../hooks/useNavLink";
+import { useNavLink, navLinkTypes } from "../../Hooks/useNavLink";
 
 function Header(): JSX.Element {
   const location = useLocation();

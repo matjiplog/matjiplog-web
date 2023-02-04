@@ -9,7 +9,7 @@ import {
   IntroTitle,
 } from "../../styles/home/intro";
 
-import { useIntroIndex, useIntroIndexTypes } from "../../hooks/useIntroSlide";
+import { useIntroIndex, useIntroIndexTypes } from "../../Hooks/useIntroSlide";
 
 function Intro(): JSX.Element {
   const introImages = [
@@ -17,7 +17,6 @@ function Intro(): JSX.Element {
     "/assets/Home/introbg2.png",
     "/assets/Home/introbg2.png",
   ];
-  const slideRef = useRef<HTMLDivElement>(null);
   const { slideIndex, leftClick, rightClick }: useIntroIndexTypes =
     useIntroIndex(introImages.length);
 
@@ -28,11 +27,7 @@ function Intro(): JSX.Element {
       <IntroTitle className="introTitle">
         Hi we are legend<br></br>Let's go fucking food
       </IntroTitle>
-      <ImagesDiv
-        slideIndex={slideIndex}
-        length={introImages.length}
-        ref={slideRef}
-      >
+      <ImagesDiv slideIndex={slideIndex} length={introImages.length}>
         {introImages.map((value: string, index: number): JSX.Element => {
           return <IntroImage src={value} key={index}></IntroImage>;
         })}
