@@ -6,7 +6,6 @@ export const HeaderSection = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 8em 0 0em;
-  background: #263343;
 
   @media screen and (min-width: 700px) {
     .menubar {
@@ -31,27 +30,30 @@ export const HeaderSection = styled.header`
         width: 100%;
         text-align: center;
       }
+
+      & :hover {
+        background-color: #ff6701;
+        button {
+          color: white;
+        }
+      }
     }
 
     .loginDiv {
       width: 100%;
       text-align: center;
-      border-radius: 5px;
       display: none;
-
-      &:hover {
-        background: #ff6701;
-        color: white;
-        .loginBtn {
-          transform: scale(1.2);
-        }
-      }
+      border-radius: 5px;
 
       & .loginBtn {
         padding: 1.2em;
+      }
 
-        &:hover {
+      &:hover {
+        background-color: #ff6701;
+        .loginBtn {
           color: white;
+          transform: scale(1.2);
         }
       }
     }
@@ -76,17 +78,16 @@ export const GnvItem = styled.li`
   border-radius: 5px;
 
   &:hover {
-    background: #ff6701;
     button {
-      color: white;
       transform: scale(1.2);
+      color: #ff6701;
     }
   }
   .nowLocation {
     color: #ff6701;
   }
   .location {
-    color: white;
+    color: black;
   }
 `;
 
@@ -95,7 +96,7 @@ export const GnvBtn = styled.button``;
 export const LoginDiv = styled.div``;
 
 export const LoginBtn = styled.button`
-  color: white;
+  color: black;
 
   &:hover {
     transform: scale(1.2);
