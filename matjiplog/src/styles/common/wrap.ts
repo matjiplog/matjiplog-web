@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const HomePageWrap = styled.div`
-  width: 100%;
-  height: 100%;
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 50px;
 `;

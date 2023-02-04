@@ -5,12 +5,16 @@ import Logo from "../Components/Common/Logo";
 import SignUpInput from "../Components/SignUp/SignUpInput";
 
 function SignUp() {
-  return(
-    <SignUpDiv>
-      <Logo></Logo>
-      <SignUpInput></SignUpInput>
+  return (
+    <>
+      <SignUpWrap>
+        <SignUpDiv>
+          <Logo></Logo>
+          <SignUpInput></SignUpInput>
+        </SignUpDiv>
+      </SignUpWrap>
       <Footer></Footer>
-    </SignUpDiv>
+    </>
   );
 }
 
@@ -21,6 +25,12 @@ const SignUpDiv = styled.div`
   position: relative;
   min-height: 100vh;
   padding-bottom: 100px;
+`;
+
+const SignUpWrap = styled.div`
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 50px;
 `;
 
 export default SignUp;

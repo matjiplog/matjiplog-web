@@ -7,20 +7,20 @@ import Find from "../Components/Login/Find";
 import SideImage from "../Components/Login/SideImage";
 
 function Login() {
-  
   return (
-    <LoginDiv>
-      <Logo></Logo>
-      <WrapDiv>
-        <SideImage></SideImage>
-        <LoginInput></LoginInput>
-      </WrapDiv>
-      <Find></Find>
+    <>
+      <LoginDiv>
+        <Logo></Logo>
+        <WrapDiv>
+          <SideImage></SideImage>
+          <LoginInput></LoginInput>
+        </WrapDiv>
+        <Find></Find>
+      </LoginDiv>
       <Footer></Footer>
-    </LoginDiv>
+    </>
   );
 }
-
 const WrapDiv = styled.div`
   display: flex;
 `;
@@ -28,10 +28,7 @@ const LoginDiv = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  position: relative;
-  min-height: 100vh;
-  padding-bottom: 100px;
+  height: 100%;
+  padding-bottom: 50px;
 `;
-
-
 export default Login;

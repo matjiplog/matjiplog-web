@@ -1,10 +1,16 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-    html, body, #root, .App {
+    html, body, #root{
         height: 100%;
         font-size: 62.5%;
-        
+    }
+    body{
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    body::-webkit-scrollbar {
+        display: none;
     }
     li {
         list-style: none;
