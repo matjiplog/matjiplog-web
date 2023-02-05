@@ -28,7 +28,8 @@ const LoginDiv = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100%;
-  padding-bottom: 50px;
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 100px;
 `;
 export default Login;

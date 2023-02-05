@@ -8,29 +8,21 @@ function SignUp() {
   return (
     <>
       <SignUpWrap>
-        <SignUpDiv>
           <Logo></Logo>
           <SignUpInput></SignUpInput>
-        </SignUpDiv>
       </SignUpWrap>
       <Footer></Footer>
     </>
   );
 }
 
-const SignUpDiv = styled.div`
+const SignUpWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  position: relative;
-  min-height: 100vh;
-  padding-bottom: 100px;
-`;
-
-const SignUpWrap = styled.div`
   min-height: 100%;
   position: relative;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 `;
 
 export default SignUp;

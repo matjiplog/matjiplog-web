@@ -5,6 +5,7 @@ import SignUp from "./Pages/SignUp";
 import HomePage from "./Pages/Home";
 
 import GlobalStyle from "./styles/common/global";
+import Log from "./Pages/Log";
 
 function App(): JSX.Element {
   return (
@@ -15,6 +16,7 @@ function App(): JSX.Element {
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/log" element={<Log />}></Route>
         </Routes>
       </BrowserRouter>
     </>
