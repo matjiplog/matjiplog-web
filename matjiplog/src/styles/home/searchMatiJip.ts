@@ -1,12 +1,9 @@
 import styled from "styled-components";
 
 export const SearchSection = styled.section`
-  position: relative;
-  margin-top: 50px;
   height: 100%;
-`;
-
-export const MatJipItems = styled.article`
-  min-height: 500px;
-  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  margin: 100px 0 50px 0;
+  padding: 0 50px 0 50px;
 `;

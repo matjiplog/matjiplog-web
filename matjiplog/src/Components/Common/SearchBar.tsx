@@ -14,8 +14,8 @@ import {
 } from "../../styles/common/searchBar";
 
 function SearchBar() {
-  const dropBarMenu = ["전체", "지역", "맛집이름"];
-  const hasTagMenu = ["맛집", "대구", "삽겹살", "고기", "내돈내산"];
+  const dropBarMenu: string[] = ["전체", "지역", "맛집이름"];
+  const hasTagMenu: string[] = ["맛집", "대구", "삽겹살", "고기", "내돈내산"];
 
   return (
     <SearchBarDiv>

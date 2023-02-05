@@ -3,9 +3,8 @@ import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 
 export const SearchBarDiv = styled.article`
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
-  margin-top: 50px;
   display: flex;
 `;
 
