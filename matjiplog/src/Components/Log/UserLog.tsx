@@ -3,6 +3,7 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { useState } from "react";
 import DrowDown from "./DrowDown";
 import { BsHeart, BsFillChatSquareDotsFill , BsEmojiSmile, } from "react-icons/bs";
+import { LessP } from "../../styles/common/font";
 
 function UserLog() {
   const userName = "지우초이화이팅";
@@ -73,9 +74,6 @@ const ContentDiv = styled.div`
 const DotDiv =styled.div`
   margin-left: auto;
 `;
-const LessP = styled.p`
-  color: #b4b4b4;
-`;
 const TopTextDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -116,7 +114,6 @@ const EmptyDiv = styled.div`
 
 const UserLogWrap = styled.div`
   padding-top : 5%;
-  margin : 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 20px;

@@ -4,9 +4,10 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import HomePage from "./Pages/Home";
 import NotFound from "./Components/Common/NotFound";
+import Search from "./Pages/Search";
+import Log from "./Pages/Log";
 
 import GlobalStyle from "./styles/common/global";
-import Log from "./Pages/Log";
 
 function App(): JSX.Element {
   return (
@@ -18,6 +19,7 @@ function App(): JSX.Element {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/log" element={<Log />}></Route>
+          <Route path="/search" element={<Search />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
