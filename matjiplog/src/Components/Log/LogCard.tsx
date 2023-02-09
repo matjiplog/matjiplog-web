@@ -4,51 +4,49 @@ import { useState } from "react";
 import DrowDown from "./DrowDown";
 import { BsHeart, BsFillChatSquareDotsFill , BsEmojiSmile, } from "react-icons/bs";
 import { LessP } from "../../styles/common/font";
+import { IUser } from "./UserLogGrid";
 
-function UserLog() {
-  const userName = "지우초이화이팅";
-  const Location = "대구시 달서구 이곡동";
-  const RestaurantName = "미친 돈가쓰";
-  const Review = "여기진짜 존맛탱구리집임 웨이팅은 한시간 넘지만 기다릴 정도로 맛도리입니다 ";
-
+function LogCard({
+    info,
+  } : { 
+    info: IUser;
+  }):JSX.Element {
+ 
   const [drowdown, setDrowdown] = useState(false);
   const DotClick = () =>{
-    setDrowdown(!drowdown);
+    console.log("Ss")
+    var Drowdown = [];
+    Drowdown.push(<DrowDown></DrowDown>)
+    return DrowDown;
   };
 
   return(
-    <UserLogWrap>
-      <CardDiv>
-        <ContentTopDiv>
-          <ProfileImg src="/assets/images/loginPicture.png"></ProfileImg>
-          <TopTextDiv>
-            <p>{userName}</p>
-            <LessP>{Location}</LessP>
-          </TopTextDiv>
-          <DotDiv>
-            <BiDotsHorizontalRounded onClick={DotClick}  size={30} color="black"></BiDotsHorizontalRounded>
-            {drowdown && <DrowDown></DrowDown>}
-          </DotDiv>
-        </ContentTopDiv>
-        <LogImgDiv></LogImgDiv>
-        <ContentDiv>
-          <RNameDiv>{RestaurantName}</RNameDiv>
-          <ReviewDiv>{Review}</ReviewDiv>
-        </ContentDiv>
-        <EmoticonDiv>
-          <BsHeart size={20} style={ {marginRight: "10px"} }></BsHeart>
-          <BsFillChatSquareDotsFill size={20}></BsFillChatSquareDotsFill>
-          {/* <BsEmojiSmile size={20}></BsEmojiSmile> */}
-        </EmoticonDiv>
-      </CardDiv>
-      {/* if문으로 카드 div가 4개보다 작으면 만들어주기 */}
-      <EmptyDiv></EmptyDiv>
-      <EmptyDiv></EmptyDiv>
-      <EmptyDiv></EmptyDiv>
-    </UserLogWrap>
+    <CardDiv>
+      <ContentTopDiv>
+        <ProfileImg src="/assets/images/loginPicture.png"></ProfileImg>
+        <TopTextDiv>
+          <p>{info.userName}</p>
+          <LessP>{info.Location}</LessP>
+        </TopTextDiv>
+        <DotDiv>
+          <BiDotsHorizontalRounded onClick={DotClick}  size={30} color="black"></BiDotsHorizontalRounded>
+          {/* {drowdown && <DrowDown></DrowDown>} */}
+        </DotDiv>
+      </ContentTopDiv>
+      <LogImgDiv></LogImgDiv>
+      <ContentDiv>
+        <RNameDiv>{info.RestaurantName}</RNameDiv>
+        <ReviewDiv>{info.Review}</ReviewDiv>
+      </ContentDiv>
+      <EmoticonDiv>
+        <BsHeart size={20} style={ {marginRight: "10px"} }></BsHeart>
+        <BsFillChatSquareDotsFill size={20}></BsFillChatSquareDotsFill>
+      </EmoticonDiv>
+    </CardDiv>
   );
 }
 
+{/* if문으로 카드 div가 4개보다 작으면 만들어주기 */}
 const EmoticonDiv = styled.div`
   width: 100%;
   display: flex;
@@ -111,12 +109,4 @@ const CardDiv = styled.div`
 const EmptyDiv = styled.div`
   height: 375px;
 `;
-
-const UserLogWrap = styled.div`
-  padding-top : 5%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 20px;
-`;
-
-export default UserLog;
+export default LogCard;

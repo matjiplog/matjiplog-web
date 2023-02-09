@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import { EmptyCard } from "../Common/EmptyCard";
-import LogCard from "../Log/LogCard";
-import { IUser } from "../Log/UserLogGrid";
+import LogCard from "./LogCard";
 
+export interface IUser {
+  userName : string,
+  Location : string,
+  RestaurantName : string,
+  Review : string,
+}
 
-function GridLog() {
-  const MyLogInfo: Array<IUser> = [
+function UserLogGrid() {
+  const UserLogInfo: Array<IUser> = [
     {
       userName : "지우초이화이팅",
       Location : "대구시 달서구 이곡동",
@@ -21,31 +26,20 @@ function GridLog() {
   ];
 
   return(
-    <>
-      <GridLogWrap>
-        <MyLogWrap>
-          {MyLogInfo.map((value: IUser, index: number): JSX.Element =>{
-            return <LogCard info={value} key={index} ></LogCard>
-          })}
-          {EmptyCard(MyLogInfo, "375")}
-        </MyLogWrap>
-      </GridLogWrap>
-    </>
+    <UserLogWrap>
+      {UserLogInfo.map((value: IUser, index: number): JSX.Element =>{
+        return <LogCard info={value} key={index} ></LogCard>
+      })}
+      {EmptyCard(UserLogInfo, "375")}
+    </UserLogWrap>
   );
 }
 
-const MyLogWrap = styled.div`
+const UserLogWrap = styled.div`
   padding-top : 5%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 20px;
 `;
 
-const GridLogWrap = styled.div`
-  padding : 2% 10% 0 10%;
-`;
-
-
-
-
-export default GridLog;
+export default UserLogGrid;
