@@ -1,7 +1,7 @@
-import { searchDropbarStore, searchDropbarTypes } from "../stores/home/dropbar";
+import { dropbarStore, dropbarStoreTypes } from "../stores/common/dropbar";
 
 export function useCancle(): useCancleTypes {
-  const { dropBar, toggleDropbar }: searchDropbarTypes = searchDropbarStore();
+  const { dropBar, toggleDropbar }: dropbarStoreTypes = dropbarStore();
 
   const calncleDropbar = (e: React.MouseEvent<HTMLDivElement>): void => {
     const { target, currentTarget } = e;

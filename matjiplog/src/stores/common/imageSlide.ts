@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export const slideIndexStore = create<slideTypes>((set) => ({
+export const imageSlideStore = create<imageSlideStoreTypes>((set) => ({
   slideIndex: 0,
 
   addSlideIndex: (number) => {
@@ -11,7 +11,7 @@ export const slideIndexStore = create<slideTypes>((set) => ({
   },
 }));
 
-export interface slideTypes {
+export interface imageSlideStoreTypes {
   slideIndex: number;
   addSlideIndex: (number: number) => void;
   initSlideIndex: () => void;

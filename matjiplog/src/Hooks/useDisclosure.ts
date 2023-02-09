@@ -1,13 +1,9 @@
 import { useEffect } from "react";
 
-import {
-  disclosureStore,
-  disclosureStoreTypes,
-} from "../stores/createMyLog/disclosure";
+import { disclosureStore, disclosureStoreTypes } from "../stores/createMyLog/disclosure";
 
 export function useDisclosure(): useDisclosureTypes {
-  const { disclosure, toggleDisclosure, initDisclosure }: disclosureStoreTypes =
-    disclosureStore();
+  const { disclosure, toggleDisclosure, initDisclosure }: disclosureStoreTypes = disclosureStore();
 
   useEffect(() => {
     initDisclosure();

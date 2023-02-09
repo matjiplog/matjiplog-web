@@ -2,24 +2,13 @@ import { useEffect } from "react";
 import { scopeStore, scopeStoreTypes } from "../stores/createMyLog/scope";
 
 export function useScope(): useScopeTypes {
-  const {
-    tasteScope,
-    manyScope,
-    serviceScope,
-    pushTasteScope,
-    pushManyScope,
-    pushServiceScope,
-    initTasteScope,
-    initManyScope,
-    initSeviceScope,
-  }: scopeStoreTypes = scopeStore();
+  const { tasteScope, manyScope, serviceScope, pushTasteScope, pushManyScope, pushServiceScope, initTasteScope, initManyScope, initSeviceScope }: scopeStoreTypes = scopeStore();
 
   const scopeClick = (index: number, order: string): void => {
     let scopesArray: boolean[] = [];
 
-    for (let i = 0; i < 5; i++) {
-      scopesArray[i] = i <= index ? true : false;
-    }
+    for (let i = 0; i < 5; i++) scopesArray[i] = i <= index ? true : false;
+
     if (order === "taste") pushTasteScope(scopesArray);
     if (order === "many") pushManyScope(scopesArray);
     if (order === "service") pushServiceScope(scopesArray);

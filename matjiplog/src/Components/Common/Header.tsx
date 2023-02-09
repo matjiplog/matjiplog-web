@@ -1,15 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-import {
-  HeaderSection,
-  LoginDiv,
-  LoginBtn,
-  LogoImg,
-  Gnv,
-  GnvItem,
-  GnvBtn,
-  MenuBar,
-} from "../../styles/common/header";
+import { HeaderSection, LoginDiv, LoginBtn, LogoImg, Gnv, GnvItem, GnvBtn, MenuBar } from "../../styles/common/header";
 
 import { useNavLink, navLinkTypes } from "../../Hooks/useNavLink";
 import { useNav, useNavTypes } from "../../Hooks/useNav";
@@ -22,46 +13,22 @@ function Header(): JSX.Element {
 
   return (
     <HeaderSection>
-      <LogoImg
-        onClick={locationHref}
-        src="assets/common/mainLogo.png"
-      ></LogoImg>
+      <LogoImg onClick={locationHref} src="assets/common/mainLogo.png"/>
       <Gnv className={nav ? "gnv showNav" : "gnv"}>
         <GnvItem>
-          <GnvBtn
-            className={path === "/search" ? "nowLocation" : "location"}
-            onClick={locationHref}
-          >
-            맛집 찾기
-          </GnvBtn>
+          <GnvBtn className={path === "/search" ? "nowLocation" : "location"} onClick={locationHref}>맛집 찾기</GnvBtn>
         </GnvItem>
         <GnvItem>
-          <GnvBtn
-            className={path === "/log" ? "nowLocation" : "location"}
-            onClick={locationHref}
-          >
-            로그
-          </GnvBtn>
+          <GnvBtn className={path === "/log" ? "nowLocation" : "location"} onClick={locationHref}>로그</GnvBtn>
         </GnvItem>
         <GnvItem>
-          <GnvBtn
-            className={
-              path === "/mylog" || path === "/createMyLog"
-                ? "nowLocation"
-                : "location"
-            }
-            onClick={locationHref}
-          >
-            나만의 맛집
-          </GnvBtn>
+          <GnvBtn className={path === "/mylog" || path === "/createMyLog" ? "nowLocation" : "location"} onClick={locationHref}>나만의 맛집</GnvBtn>
         </GnvItem>
       </Gnv>
       <LoginDiv className={nav ? "loginDiv showNav" : "loginDiv"}>
-        <LoginBtn className="loginBtn" onClick={locationHref}>
-          로그인
-        </LoginBtn>
+        <LoginBtn className="loginBtn" onClick={locationHref}>로그인</LoginBtn>
       </LoginDiv>
-      <MenuBar size={40} className="menubar" onClick={toggleNav}></MenuBar>
+      <MenuBar size={40} className="menubar" onClick={toggleNav}/>
     </HeaderSection>
   );
 }

@@ -12,10 +12,10 @@ function CreateMyLogPage(): JSX.Element {
       <Header />
       <CreateForm>
         <ImgaeAndInfo>
-          <CreateMyLogImage></CreateMyLogImage>
-          <CreateMyLogInfo></CreateMyLogInfo>
+          <CreateMyLogImage/>
+          <CreateMyLogInfo/>
         </ImgaeAndInfo>
-        <CreateMyLogDetail></CreateMyLogDetail>
+        <CreateMyLogDetail/>
       </CreateForm>
       <HomeFooter />
     </CreateMyLogWrap>

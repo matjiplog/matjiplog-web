@@ -1,10 +1,4 @@
-import {
-  DetailDiv,
-  DetailImoge,
-  DetailImogeDiv,
-  DetailInput,
-  SubmitBtn,
-} from "../../styles/createMylog/detail";
+import { DetailDiv, DetailImoge, DetailImogeDiv, DetailInput, SubmitBtn, } from "../../styles/createMylog/detail";
 
 function CreateMyLogDetail(): JSX.Element {
   return (

@@ -8,10 +8,10 @@ import { HomePageWrap } from "../styles/common/wrap";
 function HomePage(): JSX.Element {
   return (
     <HomePageWrap>
-      <Header></Header>
-      <Intro></Intro>
-      <SearchMatJip></SearchMatJip>
-      <HomeFooter></HomeFooter>
+      <Header/>
+      <Intro/>
+      <SearchMatJip/>
+      <HomeFooter/>
     </HomePageWrap>
   );
 }
