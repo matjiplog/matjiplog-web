@@ -8,7 +8,6 @@ export const SearchBarDiv = styled.article`
   display: flex;
 `;
 
-export const SearchInputAndHastags = styled.div``;
 export const DropBarDiv = styled.div<{ visibled?: string }>`
   position: relative;
   flex: 1 1 15%;
