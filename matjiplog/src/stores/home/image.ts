@@ -1,13 +1,5 @@
 import { create } from "zustand";
 
-export const navStore = create<navTypes>((set) => ({
-  navShow: false,
-
-  toggleShow: () => {
-    set((state) => ({ navShow: !state.navShow }));
-  },
-}));
-
 export const slideIndexStore = create<slideTypes>((set) => ({
   slideIndex: 0,
 
@@ -19,10 +11,6 @@ export const slideIndexStore = create<slideTypes>((set) => ({
   },
 }));
 
-export interface navTypes {
-  navShow: boolean;
-  toggleShow: () => void;
-}
 export interface slideTypes {
   slideIndex: number;
   addSlideIndex: (number: number) => void;

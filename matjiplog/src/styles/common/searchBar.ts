@@ -8,7 +8,7 @@ export const SearchBarDiv = styled.article`
   display: flex;
 `;
 
-export const DropBarDiv = styled.div< {visibled?: string} >`
+export const DropBarDiv = styled.div<{ visibled?: string }>`
   position: relative;
   flex: 1 1 15%;
 
@@ -17,7 +17,7 @@ export const DropBarDiv = styled.div< {visibled?: string} >`
       display: block;
     }
   }
-  visibility : ${(props) => props.visibled || "inherit"};
+  visibility: ${(props) => props.visibled || "inherit"};
 `;
 export const Category = styled.span`
   position: absolute;
@@ -48,13 +48,13 @@ export const DropItem = styled.li`
   }
 `;
 
-export const SearchInputAndHastag = styled.div< {visibled?: string} >`
+export const SearchInputAndHastag = styled.div<{ visibled?: string }>`
   display: flex;
   flex-direction: column;
   flex: 1 1 85%;
   margin-left: 10px;
   border-collapse: collapse;
-  visibility : ${(props) => props.visibled || "inherit"};
+  visibility: ${(props) => props.visibled || "inherit"};
 `;
 
 export const SearchForm = styled.form`

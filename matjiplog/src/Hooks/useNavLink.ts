@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 export function useNavLink(): navLinkTypes {
   const navigate = useNavigate();
 
-  const locationHref = (e: React.MouseEvent<HTMLButtonElement>): void => {
+  const locationHref = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLImageElement>
+  ): void => {
     const { target, currentTarget } = e;
     const href = currentTarget.textContent;
 
@@ -25,6 +27,9 @@ export function useNavLink(): navLinkTypes {
       case "로그아웃":
         navigate("/");
         break;
+      default:
+        navigate("/");
+        break;
     }
   };
 
@@ -32,5 +37,7 @@ export function useNavLink(): navLinkTypes {
 }
 
 export interface navLinkTypes {
-  locationHref: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  locationHref: (
+    e: React.MouseEvent<HTMLButtonElement | HTMLImageElement>
+  ) => void;
 }

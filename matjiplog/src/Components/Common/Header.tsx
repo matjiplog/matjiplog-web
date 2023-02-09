@@ -11,19 +11,22 @@ import {
   MenuBar,
 } from "../../styles/common/header";
 
-import { navStore, navTypes } from "../../stores/home/store";
 import { useNavLink, navLinkTypes } from "../../Hooks/useNavLink";
+import { useNav, useNavTypes } from "../../Hooks/useNav";
 
 function Header(): JSX.Element {
   const location = useLocation();
-  const { locationHref }: navLinkTypes = useNavLink();
-  const { navShow, toggleShow }: navTypes = navStore();
   const path: string = location.pathname;
+  const { locationHref }: navLinkTypes = useNavLink();
+  const { nav, toggleNav }: useNavTypes = useNav();
 
   return (
     <HeaderSection>
-      <LogoImg src="assets/common/mainLogo.png"></LogoImg>
-      <Gnv className={navShow ? "gnv showNav" : "gnv"}>
+      <LogoImg
+        onClick={locationHref}
+        src="assets/common/mainLogo.png"
+      ></LogoImg>
+      <Gnv className={nav ? "gnv showNav" : "gnv"}>
         <GnvItem>
           <GnvBtn
             className={path === "/search" ? "nowLocation" : "location"}
@@ -42,19 +45,23 @@ function Header(): JSX.Element {
         </GnvItem>
         <GnvItem>
           <GnvBtn
-            className={path === "/mylog" ? "nowLocation" : "location"}
+            className={
+              path === "/mylog" || path === "/createMyLog"
+                ? "nowLocation"
+                : "location"
+            }
             onClick={locationHref}
           >
             나만의 맛집
           </GnvBtn>
         </GnvItem>
       </Gnv>
-      <LoginDiv className={navShow ? "loginDiv showNav" : "loginDiv"}>
+      <LoginDiv className={nav ? "loginDiv showNav" : "loginDiv"}>
         <LoginBtn className="loginBtn" onClick={locationHref}>
           로그인
         </LoginBtn>
       </LoginDiv>
-      <MenuBar size={40} className="menubar" onClick={toggleShow}></MenuBar>
+      <MenuBar size={40} className="menubar" onClick={toggleNav}></MenuBar>
     </HeaderSection>
   );
 }
