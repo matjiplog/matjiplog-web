@@ -12,7 +12,7 @@ function DrowDown() {
 }
 
 const ItemDiv = styled.div`
-  width: 100px;
+  width: 80px;
   height: 30px;
   display : flex;
   justify-content : center;
@@ -24,7 +24,7 @@ const ItemDiv = styled.div`
 const Content = styled.div`
   justify-content: center;
   position: absolute;
-  margin-left : -80px;
+  margin-left : -65px;
   margin-top : -5px;
   background: white;
   box-shadow: 0 4px 5px 0 #00000026;

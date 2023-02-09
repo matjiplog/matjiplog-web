@@ -12,8 +12,10 @@ function Log() {
       <LogWrap>
         <Header></Header>
         {/* <hr style={{ color: "#b4b4b4", border: "1px solid", width: "85%",margin: "0px auto", marginTop: "10px" }}></hr> */}
-        <SearchBar></SearchBar>
-        <UserLog></UserLog>
+        <Section>
+          <SearchBar></SearchBar>
+          <UserLog></UserLog>
+        </Section>
       </LogWrap>
       <Footer></Footer>
     </>
@@ -21,7 +23,9 @@ function Log() {
   );
 }
 
-
+const Section = styled.div`
+  padding : 2% 10% 0 10%;
+`;
 
 const LogWrap = styled.div`
   min-height: 100%;

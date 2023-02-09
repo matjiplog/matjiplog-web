@@ -5,7 +5,7 @@ import {
   SearchForm,
   SearchIcon,
   SearchInput,
-  SearchInputAndHastag,
+  SearchInputAndHastags,
 } from "../../styles/common/searchBar";
 
 import { DropBar } from "./DropBar";
@@ -30,7 +30,7 @@ function SearchBar() {
         dropBarState={dropBar}
         dropBarClick={toggleDropbar}
       ></DropBar>
-      <SearchInputAndHastag>
+      <SearchInputAndHastags>
         <SearchForm>
           <SearchInput placeholder="검색어 입력..."></SearchInput>
           <SearchIcon size={30}></SearchIcon>
@@ -40,7 +40,7 @@ function SearchBar() {
             return <HasTagItem key={index}>{value}</HasTagItem>;
           })}
         </HasTag>
-      </SearchInputAndHastag>
+      </SearchInputAndHastags>
     </SearchBarDiv>
   );
 }
