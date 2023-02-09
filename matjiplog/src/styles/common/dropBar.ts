@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export const DropBarDiv = styled.div`
+export const DropBarDiv = styled.div<{ visibled?: string }>`
   position: relative;
   flex: 1 1 15%;
+  visibility: ${(props) => props.visibled || "inherit"};
 `;
 export const Category = styled.span`
   position: absolute;

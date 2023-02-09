@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { EmptyCard } from "../Common/EmptyCard";
 import LogCard from "./LogCard";
 
+
 export interface IUser {
   userName : string,
   Location : string,

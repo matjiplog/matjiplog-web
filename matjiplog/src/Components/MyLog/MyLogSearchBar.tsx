@@ -1,36 +1,43 @@
-import { 
-  Category,
-  DropBar,
+import {
   DropBarDiv,
-  DropItem,
+  Category,
+  DropBarTitle,
   DropItems,
+  DropItem,
+} from "../../styles/common/dropBar";
+
+import {
   HasTag,
   HasTagItem,
   SearchForm,
   SearchIcon,
   SearchInput,
-  SearchInputAndHastag, } from "../../styles/common/searchBar";
+  SearchInputAndHastag,
+} from "../../styles/common/searchBar";
 import { showLogStore } from "../../stores/mylog/store";
+import { searchDropbarStore, searchDropbarTypes } from "../../stores/home/dropbar";
+
 
 interface propsType {
   visible : string;
 }
 
 function MyLogSearchBar({visible} : propsType) {
-  const { mapShow, setMapShow} = showLogStore();
   const dropBarMenu: string[] = ["전체", "지역", "맛집이름"];
   const hasTagMenu: string[] = ["맛집", "대구", "삽겹살", "고기", "내돈내산"];
-
+  const { dropBar, menu, toggleDropbar, initDropbar }: searchDropbarTypes = searchDropbarStore();
   return(
     <>
       <DropBarDiv visibled={visible}>
-        <Category>Category</Category>
-        <DropBar>{dropBarMenu[0]}</DropBar>
-        <DropItems>
-          {dropBarMenu.map((value: string, index: number): JSX.Element => {
-            return <DropItem key={index}>{value}</DropItem>;
-          })}
-        </DropItems>
+        <Category>category</Category>
+        <DropBarTitle onClick={toggleDropbar}>{menu}</DropBarTitle>
+        {dropBar && (
+          <DropItems>
+            {dropBarMenu.map((value: string, index: number): JSX.Element => {
+              return <DropItem key={index}>{value}</DropItem>;
+            })}
+          </DropItems>
+        )}
       </DropBarDiv>
       <SearchInputAndHastag visibled={visible}>
         <SearchForm>
