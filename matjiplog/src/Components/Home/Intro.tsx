@@ -7,7 +7,7 @@ import {
   IntroTitle,
 } from "../../styles/home/intro";
 
-import { useIntroIndex, useIntroIndexTypes } from "../../Hooks/useIntroSlide";
+import { useIntroIndex, useIntroIndexTypes } from "../../Hooks/useSlide";
 
 function Intro(): JSX.Element {
   const introImages = [

@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
             cursor: Pointer;
         }
     }
+
 `;
 
 export default GlobalStyle;
