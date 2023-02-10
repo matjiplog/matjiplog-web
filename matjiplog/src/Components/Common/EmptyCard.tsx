@@ -7,7 +7,7 @@ export const EmptyCard = (arr: any[] , height: string) => {
   }
   return newArr;
 };
-// height: 375px;
+
 const EmptyDiv = styled.div<{ height?: string}>`
   height: ${(props) => props.height}px;
 `;

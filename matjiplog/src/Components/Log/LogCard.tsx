@@ -1,36 +1,33 @@
 import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import { useState } from "react";
-import DrowDown from "./DrowDown";
+import DropDown from "./DropDown";
 import { BsHeart, BsFillChatSquareDotsFill , BsEmojiSmile, } from "react-icons/bs";
 import { LessP } from "../../styles/common/font";
 import { IUser } from "./UserLogGrid";
+import useDetectClose, { useDetectCloseTypes } from "../../Hooks/useDetectClose";
 
 function LogCard({
     info,
   } : { 
     info: IUser;
   }):JSX.Element {
- 
-  const [drowdown, setDrowdown] = useState(false);
-  const DotClick = () =>{
-    console.log("Ss")
-    var Drowdown = [];
-    Drowdown.push(<DrowDown></DrowDown>)
-    return DrowDown;
-  };
+
+  const { isOpen, ref, removeHandler } : useDetectCloseTypes = useDetectClose(false);
 
   return(
-    <CardDiv>
+    <CardDiv onClick={() => alert("dd")}>
       <ContentTopDiv>
         <ProfileImg src="/assets/images/loginPicture.png"></ProfileImg>
         <TopTextDiv>
           <p>{info.userName}</p>
           <LessP>{info.Location}</LessP>
         </TopTextDiv>
-        <DotDiv>
-          <BiDotsHorizontalRounded onClick={DotClick}  size={30} color="black"></BiDotsHorizontalRounded>
-          {/* {drowdown && <DrowDown></DrowDown>} */}
+        <DotDiv ref={ref} onClick={(e) =>{
+            e.stopPropagation();
+            removeHandler();
+          }}>
+          <BiDotsHorizontalRounded size={30} color="black"></BiDotsHorizontalRounded>
+          {isOpen && <DropDown></DropDown>}
         </DotDiv>
       </ContentTopDiv>
       <LogImgDiv></LogImgDiv>
@@ -39,14 +36,17 @@ function LogCard({
         <ReviewDiv>{info.Review}</ReviewDiv>
       </ContentDiv>
       <EmoticonDiv>
-        <BsHeart size={20} style={ {marginRight: "10px"} }></BsHeart>
+        <HeartIcon heart={info.heart}  size={20} style={ {marginRight: "10px"} }></HeartIcon>
         <BsFillChatSquareDotsFill size={20}></BsFillChatSquareDotsFill>
       </EmoticonDiv>
     </CardDiv>
   );
 }
 
-{/* if문으로 카드 div가 4개보다 작으면 만들어주기 */}
+const HeartIcon = styled(BsHeart)< {heart?: string} >`
+  color: ${(props) => props.heart==="true" ? "red": "black"}
+`; 
+
 const EmoticonDiv = styled.div`
   width: 100%;
   display: flex;
@@ -106,7 +106,4 @@ const CardDiv = styled.div`
   box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
 `;
 
-const EmptyDiv = styled.div`
-  height: 375px;
-`;
 export default LogCard;

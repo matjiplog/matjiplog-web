@@ -4,27 +4,33 @@ import { EmptyCard } from "../Common/EmptyCard";
 import MatjipCard from "./MatjipCard";
 
 export interface IMatjipInfo {
+  id : number,
   Location : string,
   RestaurantName : string,
   StarPoint : number,
 }
-
 function MatjipGrid() {
   const MatjipInfo: Array<IMatjipInfo> = [
     {
+      id : 1,
       Location : "대구시 달서구 이곡동",
-      RestaurantName : "미친 돈가쓰",
+      RestaurantName : "미친 돈가스",
       StarPoint : 4.5,
     },
-    
+    {
+      id : 2,
+      Location : "대구시 달서구 이곡동",
+      RestaurantName : "미친 돈가쓰",
+      StarPoint : 4.0,
+    },
   ];
   
   return(
     <MatjipWrap>
-      {MatjipInfo.map((value: IMatjipInfo, index: number): JSX.Element =>{
-        return <MatjipCard info={value} key={index} ></MatjipCard>
+      {MatjipInfo.map((value: IMatjipInfo): JSX.Element =>{
+        return <MatjipCard info={value} key={value.id.toString()}></MatjipCard>
       })}
-      {EmptyCard(MatjipInfo, "230")}
+      { EmptyCard(MatjipInfo, "230")}
     </MatjipWrap>
   );
 }
