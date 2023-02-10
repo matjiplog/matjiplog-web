@@ -29,6 +29,11 @@ const GlobalStyle = createGlobalStyle`
             cursor: Pointer;
         }
     }
+    @media screen and (max-width: 700px) {
+        html{
+            font-size: 32.5%;
+        }
+    }
 
 `;
 

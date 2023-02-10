@@ -29,10 +29,10 @@ export const IconAndFileBtn = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3em;
 `;
 
 export const ImageIcon = styled(FaRegImages)`
+  font-size: 10rem;
   color: darkgray;
 `;
 

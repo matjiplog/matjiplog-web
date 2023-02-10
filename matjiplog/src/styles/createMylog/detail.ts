@@ -16,7 +16,7 @@ export const DetailImogeDiv = styled.div`
 `;
 export const DetailImoge = styled(FaRegSmile)``;
 export const DetailInput = styled.textarea`
-  flex: 1 1 70%;
+  flex: 1 1 90%;
   border: none;
   padding: 1em;
   font-size: 1.5rem;

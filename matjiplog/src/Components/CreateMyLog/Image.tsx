@@ -44,7 +44,7 @@ function CreateMyLogImage(): JSX.Element {
       <IconAndFileBtn>
         {!imageFile[0] ? 
           <>
-            <ImageIcon size={100} />
+            <ImageIcon/>
             <ImageLabel htmlFor="profileImg" className="imgAddBtn">사진 추가하기</ImageLabel>
             <ImageFileBtn type="file" accept="image/*" multiple={true} onChange={selectImages} id="profileImg"/>
           </>

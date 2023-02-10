@@ -8,19 +8,20 @@ export const InfoDiv = styled.article`
   border: 1px solid darkgray;
   display: flex;
   flex-direction: column;
-  padding: 10em 10em 10em 10em;
+  justify-content: center;
+  padding : 0 5em 0 5em;
 `;
 
 export const FindMap = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10em;
+  justify-content: space-between;
+  margin: 0 0 5em 0;
 `;
-export const FindMapTitle = styled.label`
+export const FindMapTitle = styled.h3`
   font-size: 1.5rem;
-  cursor: pointer;
+  font-weight: normal;
 `;
 export const FindMapIcon = styled(FaRegMap)`
   cursor: pointer;
@@ -45,10 +46,7 @@ export const Disclosure = styled(FindMap)`
     background-color: white;
   }
 `;
-export const DisclosureTitle = styled.h3`
-  font-size: 1.5rem;
-  font-weight: normal;
-`;
+export const DisclosureTitle = styled(FindMapTitle)``;
 export const DisclosureCheckDiv = styled.div`
   width: 60px;
   height: 30px;
@@ -63,39 +61,34 @@ export const DisclosureCheck = styled.div`
   width: 24px;
   height: 24px;
   background-color: white;
-  counter-reset: green;
   border-radius: 23px;
 `;
 // 공개 여부
 export const Scope = styled(FindMap)`
   flex-direction: column;
-  align-items: flex-start;
-  margin: 0;
 `;
 export const ScopeTitle = styled(FindMapTitle)`
-  cursor: Default;
+  width: 100%;
 `;
 export const ScopeItems = styled.ul`
+  width: 100%;
   display: flex;
   flex-direction: column;
+  margin: 5em 0 0em 0;
   border-top: 1px solid darkgray;
   border-bottom: 1px solid darkgray;
-  width: 100%;
-  margin: 5em 0 5em 0;
 `;
 export const ScopteItem = styled.li`
   display: flex;
+  margin: 2.5em 0 2.5em 0;
   justify-content: space-between;
-  margin: 3em;
+  align-items: center;
 `;
 export const ScopeItemTitleDiv = styled.div`
   width: 30%;
   text-align: center;
 `;
-export const ScopeItemTitle = styled.h3`
-  font-size: 1.5rem;
-  font-weight: normal;
-`;
+export const ScopeItemTitle = styled(FindMapTitle)``;
 export const ScopeStars = styled.div`
   & .yellow {
     color: #ffd400;
@@ -109,11 +102,8 @@ export const Star = styled(ImStarFull)`
 `;
 // 별점
 export const OptionsDiv = styled.div``;
-export const OptionsTitle = styled.h3`
-  font-size: 1.5rem;
-  font-weight: normal;
-  margin-bottom: 2em;
-  cursor: Default;
+export const OptionsTitle = styled(FindMapTitle)`
+  margin-bottom: 1em;
 `;
 export const ScopeAndOptions = styled.div``;
 //  옵션

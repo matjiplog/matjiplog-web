@@ -1,50 +1,36 @@
 import styled from "styled-components";
 
 export const CreateForm = styled.section`
-  width: 75%;
-  flex: 1;
+  width: 70%;
   align-self: center;
-  align-content: center;
+  flex: 1;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 700px) {
+    & {
+      width: 60%;
+    }
+    .detailDiv {
+      margin: 0 0 0 0;
+    }
+  }
 `;
 export const ImgaeAndInfo = styled.div`
   display: flex;
-  flex: 1 1 80%;
-  @media screen and (max-width: 830px) {
+  flex: 1 1 75%;
+  @media screen and (max-width: 700px) {
     & {
       flex-direction: column;
     }
-
-    div {
-      margin: 0em;
-    }
-    h3 {
-      font-size: 1rem;
-    }
-    label {
-      font-size: 1.2rem;
-    }
-
-    .map,
-    .disclosure,
     .scopeAndOptions {
-      margin-bottom: 2em;
-    }
-    .dropbar {
-      margin-top: 3em;
-    }
-    .inofoDiv {
-      padding: 2em 10em 2em 10em;
-    }
-    .imgAddBtn {
-      padding: 1em;
-    }
-    .optionsDiv {
       display: flex;
-
-      > h3 {
-        margin-right: 20em;
+      .scopeDiv{
+        flex: 1 1 50%;
+        margin: 0 5em 0 0;
+      }
+      .optionsDiv{
+        flex: 1 1 50%
       }
     }
   }

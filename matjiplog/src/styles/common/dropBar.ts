@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DropBarDiv = styled.div`
   position: relative;
-  flex: 1 1 15%;
+  flex-basis: 15%;
 `;
 export const Category = styled.span`
   position: absolute;
@@ -18,6 +18,9 @@ export const DropBarTitle = styled.div`
   padding: 3em 2em 3em 2em;
   border: 1px solid #6750a4;
   border-radius: 5px;
+  height: 40px;
+  display: flex;
+  align-items: center;
 `;
 export const DropItems = styled.ul`
   position: absolute;
@@ -29,7 +32,9 @@ export const DropItems = styled.ul`
 export const DropItem = styled.li`
   width: 100%;
   padding: 3em 2em 3em 2em;
-
+  height: 40px;
+  display: flex;
+  align-items: center;
   &:hover {
     color: #ff6701;
   }

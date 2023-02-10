@@ -28,7 +28,7 @@ function CreateMyLogInfo(): JSX.Element {
         </DisclosureCheckDiv>
       </Disclosure>
       <ScopeAndOptions className="scopeAndOptions">
-        <Scope>
+        <Scope className="scopeDiv">
           <ScopeTitle>별점</ScopeTitle>
           <ScopeItems>
             {scopeItems.map((value: scopeItemsTypes, index: number): JSX.Element => {
