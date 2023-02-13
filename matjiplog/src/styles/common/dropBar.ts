@@ -2,7 +2,10 @@ import styled from "styled-components";
 
 export const DropBarDiv = styled.div`
   position: relative;
-  flex-basis: 15%;
+  flex-basis: 10%;
+  @media screen and (max-width: 700px) {
+    flex-basis: 20%;
+  }
 `;
 export const Category = styled.span`
   position: absolute;
@@ -28,6 +31,10 @@ export const DropItems = styled.ul`
   border: 1px solid #eaeaea;
   border-radius: 5px;
   z-index: 999;
+
+  .select {
+    color: #ff6701;
+  }
 `;
 export const DropItem = styled.li`
   width: 100%;
@@ -35,6 +42,7 @@ export const DropItem = styled.li`
   height: 40px;
   display: flex;
   align-items: center;
+  background-color: white;
   &:hover {
     color: #ff6701;
   }

@@ -11,7 +11,7 @@ export function DropBar({ title, DropMenu }: DropBarProps): JSX.Element {
       {dropBar && 
         <DropItems>
           {DropMenu.map((value: string, index: number): JSX.Element => {
-            return <DropItem key={index} onClick={listClick}>{value}</DropItem>
+            return <DropItem key={index} onClick={listClick} className={menu === value ? "select" : ""}>{value}</DropItem>
           })}
         </DropItems>}
     </DropBarDiv>

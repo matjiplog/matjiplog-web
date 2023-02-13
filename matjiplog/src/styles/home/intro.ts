@@ -6,11 +6,6 @@ export const IntroSection = styled.section`
   overflow: hidden;
   position: relative;
 
-  @media screen and (max-width: 700px) {
-    & .introTitle {
-      font-size: 2rem;
-    }
-  }
 `;
 
 export const ImagesDiv = styled.div<{ slideIndex: number; length: number }>`
@@ -50,7 +45,7 @@ export const IntroTitle = styled.h1`
   position: absolute;
   top: 50%;
   right: 10%;
-  font-size: 4rem;
+  font-size: 4.5rem;
   color: white;
   z-index: 999;
 `;

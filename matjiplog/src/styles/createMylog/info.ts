@@ -85,7 +85,7 @@ export const ScopteItem = styled.li`
   align-items: center;
 `;
 export const ScopeItemTitleDiv = styled.div`
-  width: 30%;
+  width: 32%;
   text-align: center;
 `;
 export const ScopeItemTitle = styled(FindMapTitle)``;
@@ -98,6 +98,7 @@ export const ScopeStars = styled.div`
   }
 `;
 export const Star = styled(ImStarFull)`
+  font-size: 2.5rem;
   cursor: pointer;
 `;
 // 별점

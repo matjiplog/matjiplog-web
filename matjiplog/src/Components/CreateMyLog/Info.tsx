@@ -39,7 +39,7 @@ function CreateMyLogInfo(): JSX.Element {
                     </ScopeItemTitleDiv>
                     <ScopeStars>
                       {scopeArray.map((index: number): JSX.Element => (
-                          <Star key={index} onClick={() => scopeClick(index, value.order)} className={value.state[index] ? "yellow" : "darkgray"} size="20"/>
+                          <Star key={index} onClick={() => scopeClick(index, value.order)} className={value.state[index] ? "yellow" : "darkgray"}/>
                         )
                       )}
                     </ScopeStars>

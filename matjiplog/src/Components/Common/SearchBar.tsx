@@ -3,7 +3,7 @@ import { HasTag, HasTagItem, SearchBarDiv, SearchForm, SearchIcon, SearchInput, 
 import { DropBar } from "./DropBar";
 
 function SearchBar() {
-  const dropBarMenu: string[] = ["전체", "지역", "맛집이름"];
+  const dropBarMenu: string[] = ["내 주변", "전체", "메뉴", "지역", "맛집 이름"];
   const hasTagMenu: string[] = ["맛집", "대구", "삽겹살", "고기", "내돈내산"];
 
   return (

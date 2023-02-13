@@ -7,7 +7,6 @@ import { useSlide, useSlideTypes } from "../../Hooks/useSlide";
 function CreateMyLogImage(): JSX.Element {
   const { imageFile, addImageFile, initImageFile }: imageSelectTypes = imageSelectStore();
   const { slideIndex, leftClick, rightClick }: useSlideTypes = useSlide(imageFile.length);
-
   const selectImages = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { target, currentTarget } = e;
     const imageLists = currentTarget.files;

@@ -4,7 +4,6 @@ import SearchMatJip from "../Components/Home/SearchMatJip";
 import HomeFooter from "../Components/Common/HomeFooter";
 
 import { HomePageWrap } from "../styles/common/wrap";
-
 function HomePage(): JSX.Element {
   return (
     <HomePageWrap>
