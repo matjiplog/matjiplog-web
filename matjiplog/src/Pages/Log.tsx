@@ -1,25 +1,21 @@
 import styled from "styled-components";
-import { useState } from "react";
 import SearchBar from "../Components/Common/SearchBar";
 import Header from "../Components/Common/Header";
 import Footer from "../Components/Common/Footer";
-import UserLog from "../Components/Log/UserLog";
+import UserLogGrid from "../Components/Log/UserLogGrid";
 
 function Log() {
-  
   return(
     <>
       <LogWrap>
         <Header></Header>
-        {/* <hr style={{ color: "#b4b4b4", border: "1px solid", width: "85%",margin: "0px auto", marginTop: "10px" }}></hr> */}
         <Section>
           <SearchBar></SearchBar>
-          <UserLog></UserLog>
-        </Section>
+          <UserLogGrid></UserLogGrid>
+        </Section>  
       </LogWrap>
       <Footer></Footer>
     </>
-    
   );
 }
 

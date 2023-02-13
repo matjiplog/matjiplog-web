@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function DrowDown() {
+function DropDown() {
   return(
     <Content>
       <ItemDiv>신고하기</ItemDiv>
@@ -31,4 +31,4 @@ const Content = styled.div`
   border : solid #b4b4b4 1px;
   border-radius: 2px;
 `;
-export default DrowDown;
+export default DropDown;
