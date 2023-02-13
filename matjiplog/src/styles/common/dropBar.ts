@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-export const DropBarDiv = styled.div`
+export const DropBarDiv = styled.div<{ visibled?: string }>`
   position: relative;
   flex-basis: 10%;
   @media screen and (max-width: 700px) {
     flex-basis: 20%;
   }
+  visibility: ${(props) => props.visibled || "inherit"};
 `;
 export const Category = styled.span`
   position: absolute;

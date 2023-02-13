@@ -1,71 +1,40 @@
 import styled from "styled-components";
-import { HiStar } from "react-icons/hi";
-import { AccentP, LessP } from "../../styles/common/font";
 
+import { EmptyCard } from "../Common/EmptyCard";
+import MatjipCard from "./MatjipCard";
+
+export interface IMatjipInfo {
+  id : number,
+  Location : string,
+  RestaurantName : string,
+  StarPoint : number,
+}
 function MatjipGrid() {
-  const Location = "대구시 달서구 이곡동";
-  const RestaurantName = "미친 돈가쓰";
-  const StarPoint = 4.5;
-
-  const StarM = () =>{
-    var StarArray = [];
-    for( var i=0; i<Math.floor(StarPoint); i++){
-      StarArray.push(<HiStar size={20} color="#FFD400"></HiStar>)
-    }
-    for( var i=StarPoint; i<5; i++){
-      StarArray.push(<HiStar size={20} color="#D3D3D3"></HiStar>)
-    }
-    return StarArray;
-  }
-
+  const MatjipInfo: Array<IMatjipInfo> = [
+    {
+      id : 1,
+      Location : "대구시 달서구 이곡동",
+      RestaurantName : "미친 돈가스",
+      StarPoint : 4.5,
+    },
+    {
+      id : 2,
+      Location : "대구시 달서구 이곡동",
+      RestaurantName : "미친 돈가쓰",
+      StarPoint : 4.0,
+    },
+  ];
+  
   return(
     <MatjipWrap>
-      <CardDiv>
-        <MatjipImg></MatjipImg>
-        <ContentDiv>
-          <AccentP>{RestaurantName}</AccentP>
-          <HeartDiv>
-            <p style={{fontWeight:"bold", fontSize:"12px"}}>{StarPoint.toFixed(1)}</p>
-            {StarM()}
-          </HeartDiv>
-        </ContentDiv>
-        <LessP>{Location}</LessP>
-      </CardDiv>
-      
-      <EmptyDiv></EmptyDiv>
-      <EmptyDiv></EmptyDiv>
-      <EmptyDiv></EmptyDiv>
+      {MatjipInfo.map((value: IMatjipInfo): JSX.Element =>{
+        return <MatjipCard info={value} key={value.id.toString()}></MatjipCard>
+      })}
+      { EmptyCard(MatjipInfo, "230")}
     </MatjipWrap>
   );
 }
 
-const HeartDiv = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const ContentDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-const MatjipImg = styled.div`
-  width: auto;
-  height: 150px;
-  background-image: url("/assets/images/Matjip.png");
-  background-repeat : no-repeat;
-  background-size : cover;
-  margin-bottom : 10px;
-`;
-
-const CardDiv = styled.div`
-  height: 230px;
-  border: solid #b4b4b4 1px;
-  border-radius: 6px;
-  box-shadow : 0px 0px 10px 3px rgba(190,190,190, 0.6);
-  padding: 10px;
-`;
-const EmptyDiv = styled.div`
-  height: 230px;
-`;
 const MatjipWrap = styled.div`
   padding-top: 5%;
   display: grid;
