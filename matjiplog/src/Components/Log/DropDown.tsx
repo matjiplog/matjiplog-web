@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
-function DropDown() {
+
+interface DropDownType {
+  items : string[],
+}
+
+function DropDown({ items } : DropDownType) : JSX.Element {
   return(
     <Content>
-      <ItemDiv>신고하기</ItemDiv>
-      <ItemDiv>댓글보기</ItemDiv>
-      <ItemDiv>취소</ItemDiv>
+      {items.map((value : string, index: number) : JSX.Element => {
+        return <ItemDiv key={index}>{value}</ItemDiv>
+      })}
     </Content>
     
   );
