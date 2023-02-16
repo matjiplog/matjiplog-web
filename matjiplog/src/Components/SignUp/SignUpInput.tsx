@@ -6,27 +6,23 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { userDto } from "../../types/userDto";
 import useValid, { validType } from "../../Hooks/useValid";
 import Logo from "../Common/Logo";
+import { useSwal } from "../../Hooks/useSwal";
+import { axiosIdCheck, axiosSignUp } from "../../Services/user-service";
 
 
 function SignUpInput() {
   const genderItems = ["남자", "여자"];
   const { dropBar, menu, toggleDropbar, listClick }: useDropBarTypes = useDropBar("성별을 선택하세요");
-
+  
   //signUp api data
   const [signUpForm, setSignUpForm] = useState<userDto>({
-    id: '',
-    password: '',
-    gender: '',
-    name : '',
-    phoneNumber: '',
-    nickname: '',
-    isActive : false, // 탈퇴 여부, 탈퇴 회원 0 <-> 회원 1
-    isSnsAccount : "M", // SNS 연동 계정 여부, M' : 서비스 계정, 'K' : kakao, 'N' : naver, 'G' : google
-    isAdmin : false, // 관리자 계정 여부, 관리자 1 <-> 회원 0
-    isActiveImg : false, // 사진 등록 여부, 사진 등록 1 <-> 미등록 0
-    imgName : "true", // 사진 이름
-    imgPath : "true", // 사진 경로
-    imgType : "true", // 사진 타입
+    id : '',  // 사용자 ID (이메일 형식)
+    password : '', // 비밀번호
+    gender : '', // 사용자 성별, 'M' : 남자, 'W' : 여자
+    name : '', // 사용자 이름
+    phoneNumber : '', // 폰 번호
+    nickname : '', // 닉네임
+    isSnsAccount : 'M', // SNS 연동 계정 여부, M' : 서비스 계정, 'K' : kakao, 'N' : naver, 'G' : google
   });
   
   const [validForm, setValidForm] = useState<validType>({
@@ -34,19 +30,77 @@ function SignUpInput() {
     password : '',
     passwordConfirm: '',
   });
-
   const { validText, isValid } = useValid(validForm);
 
+  const [idCheck, setIdCheck] = useState(false);
+  const  { apiError ,idCheckAlert, alertTextError } = useSwal();
+  
   //아이디 중복체크
-  const IdDoubleCheck = () => {
+  const IdDoubleCheck = async () => {
+    if(signUpForm.id === ''){
+      alertTextError("아이디를 입력해주세요.");
+      return;
+    }
+    if(!isValid.isId){
+      alertTextError("아이디 형식이 맞지 않습니다.");
+      return;
+    }
 
-  };
+    const { data, status, error } = await axiosIdCheck(signUpForm.id)
+    if(status === 200){
+      if(!data.success){
+        setIdCheck(true);
+        idCheckAlert(true);  
+      }
+      else{
+        idCheckAlert(false);  
+      }
+    }
+    else{
+      apiError();
+      console.log(data);
+      console.log(status);
+      console.log(error);
+    }
+  }
 
   //회원가입 버튼클릭시
-  const PostSignUp = () => {
-
+  const PostSignUp = async () => {
+    if(signUpForm.id === '' || signUpForm.password === '' || validForm.passwordConfirm === '' || signUpForm.name === '' || signUpForm.nickname === '' || signUpForm.phoneNumber === '' || menu === "성별을 선택하세요"){
+      alertTextError("모든 정보를 입력해주세요");
+      return;
+    }
+    if(!idCheck){
+      alertTextError("아이디 중복확인을 해주세요");
+      return;
+    }
+    if(!isValid.isPassword){
+      alertTextError("비밀번호가 형식에 맞지 않습니다.");
+      //숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요
+      return;
+    }
+    if(!isValid.isPasswordConfirm){
+      alertTextError("비밀번호가 일치한지 확인해주세요");
+      return;
+    }
+    else{
+      {menu === "남자" ? setSignUpForm({...signUpForm, gender: 'M'}) : setSignUpForm({...signUpForm, gender: 'W'})};
+      console.log(signUpForm);
+      const { data, status, error } = await axiosSignUp(signUpForm)
+      console.log(data);
+      console.log(status);
+      console.log(error);
+      if(status === 200){
+        alert("status 200")
+      }
+      else{
+        apiError();
+        console.log(data);
+        console.log(status);
+        console.log(error);
+      }
+    }
   }
-  
   return(
     <InputDiv>
       <Logo></Logo>
@@ -61,6 +115,9 @@ function SignUpInput() {
           type="email"
           placeholder="이메일 형식으로 작성해주세요"
           onChange={e => {
+            if(idCheck){
+              setIdCheck(false);
+            }
             setSignUpForm({...signUpForm, id: e.target.value});
             setValidForm({...validForm, id:e.target.value});
           }}
@@ -134,7 +191,7 @@ function SignUpInput() {
       <SignUpBtn onClick={PostSignUp}>회원가입</SignUpBtn>
     </InputDiv>
   );
-}
+};
 
 const Label = styled.label`
   color: gray;

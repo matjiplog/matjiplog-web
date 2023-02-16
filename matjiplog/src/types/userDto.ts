@@ -5,12 +5,15 @@ export interface userDto {
   name : string, // 사용자 이름
   phoneNumber : string, // 폰 번호
   nickname : string, // 닉네임
-  isActive : boolean, // 탈퇴 여부, 탈퇴 회원 0 <-> 회원 1
   isSnsAccount : string, // SNS 연동 계정 여부, M' : 서비스 계정, 'K' : kakao, 'N' : naver, 'G' : google
-  isAdmin : boolean, // 관리자 계정 여부, 관리자 1 <-> 회원 0
-  isActiveImg : boolean, // 사진 등록 여부, 사진 등록 1 <-> 미등록 0
-  imgName : string, // 사진 이름
-  imgPath : string, // 사진 경로
-  imgType : string, // 사진 타입
 }
 
+//   "id": "matjiplog@gmail.com",
+//   "password": "string",
+//   "gender": "M",
+//   "name": "홍길동",
+//   "phoneNumber": "01012345678",
+//   "nickname": "string",
+//   "isActive": false,
+//   "isSnsAccount": "M",
+//   "isAdmin": false
