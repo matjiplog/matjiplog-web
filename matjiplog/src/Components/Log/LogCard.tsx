@@ -11,11 +11,13 @@ function LogCard({
   } : { 
     info: IUser;
   }):JSX.Element {
+  
+  const dropitem = ["신고하기", "댓글보기", "취소"];
 
   const { isOpen, ref, removeHandler } : useDetectCloseTypes = useDetectClose(false);
 
   return(
-    <CardDiv onClick={() => alert("dd")}>
+    <CardDiv>
       <ContentTopDiv>
         <ProfileImg src="/assets/images/loginPicture.png"></ProfileImg>
         <TopTextDiv>
@@ -23,11 +25,11 @@ function LogCard({
           <LessP>{info.Location}</LessP>
         </TopTextDiv>
         <DotDiv ref={ref} onClick={(e) =>{
-            e.stopPropagation();
+            // e.stopPropagation();
             removeHandler();
           }}>
           <BiDotsHorizontalRounded size={30} color="black"></BiDotsHorizontalRounded>
-          {isOpen && <DropDown></DropDown>}
+          {isOpen && <DropDown items={dropitem}></DropDown>}
         </DotDiv>
       </ContentTopDiv>
       <LogImgDiv></LogImgDiv>
