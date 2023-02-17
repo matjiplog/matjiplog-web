@@ -8,15 +8,19 @@ function SignUp() {
   return (
     <>
       <SignUpWrap>
-          <Logo></Logo>
-          <SignUpInput></SignUpInput>
+        <SignUpInput></SignUpInput>
       </SignUpWrap>
       <Footer></Footer>
     </>
   );
 }
 
+const Section =styled.div`
+  background-color: white;
+`;
+
 const SignUpWrap = styled.div`
+  background-color: rgb(250,250,250);
   display: flex;
   align-items: center;
   flex-direction: column;
