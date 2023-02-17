@@ -1,29 +1,24 @@
-import { useEffect } from "react";
-import { scopeStore, scopeStoreTypes } from "../stores/createMyLog/scope";
+import { useState } from "react";
 
-export function useScope(): useScopeTypes {
-  const { tasteScope, manyScope, serviceScope, pushTasteScope, pushManyScope, pushServiceScope, initTasteScope, initManyScope, initSeviceScope }: scopeStoreTypes = scopeStore();
+export function useScope(): returnType {
+  const [ tasteScope, setTasteScope] = useState<boolean[]>([true, false, false, false, false]);
+  const [ manyScope, setManyScope] = useState<boolean[]>([true, false, false, false, false]);
+  const [ serviceScope, setServiceScope] = useState<boolean[]>([true, false, false, false, false]);
 
   const scopeClick = (index: number, order: string): void => {
     let scopesArray: boolean[] = [];
 
     for (let i = 0; i < 5; i++) scopesArray[i] = i <= index ? true : false;
 
-    if (order === "taste") pushTasteScope(scopesArray);
-    if (order === "many") pushManyScope(scopesArray);
-    if (order === "service") pushServiceScope(scopesArray);
+    if (order === "taste") setTasteScope(scopesArray);
+    if (order === "many") setManyScope(scopesArray);
+    if (order === "service") setServiceScope(scopesArray);
   };
-
-  useEffect(() => {
-    initTasteScope();
-    initManyScope();
-    initSeviceScope();
-  }, [initManyScope, initSeviceScope, initTasteScope]);
 
   return { tasteScope, manyScope, serviceScope, scopeClick };
 }
 
-export interface useScopeTypes {
+export interface returnType {
   tasteScope: boolean[];
   manyScope: boolean[];
   serviceScope: boolean[];

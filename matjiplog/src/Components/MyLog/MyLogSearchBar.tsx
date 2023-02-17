@@ -15,7 +15,7 @@ import {
   SearchInputAndHastag,
 } from "../../styles/common/searchBar";
 import { showLogStore } from "../../stores/mylog/store";
-import { dropbarStore, dropbarStoreTypes } from "../../stores/common/dropbar";
+import { useDropBar, useDropBarTypes } from "../../Hooks/useDropBar";
 
 
 interface propsType {
@@ -25,7 +25,7 @@ interface propsType {
 function MyLogSearchBar({visible} : propsType) {
   const dropBarMenu: string[] = ["전체", "지역", "맛집이름"];
   const hasTagMenu: string[] = ["맛집", "대구", "삽겹살", "고기", "내돈내산"];
-  const { dropBar, menu, toggleDropbar, initDropbar }: dropbarStoreTypes = dropbarStore();
+  const { dropBar, menu, toggleDropbar, listClick }: useDropBarTypes = useDropBar(dropBarMenu[0]);
   return(
     <>
       <DropBarDiv visibled={visible}>

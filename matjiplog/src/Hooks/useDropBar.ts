@@ -1,21 +1,19 @@
-import { useEffect } from "react";
-import { dropbarStore, dropbarStoreTypes } from "../stores/common/dropbar";
+import { useState } from "react";
 
-export function useDropBar(initTitle: string) {
-  const { dropBar, menu, toggleDropbar, initMenu, initDropbar }: dropbarStoreTypes = dropbarStore();
-
-  useEffect(() => {
-    initMenu(initTitle);
-    initDropbar();
-  }, [initDropbar, initMenu, initTitle]);
-
+export function useDropBar(initMenu: string) {
+  const [dropBar, setDropb] = useState<boolean>(false);
+  const [menu, setMenu] = useState<string>(initMenu);
+  
+  const toggleDropbar = () => {
+    setDropb(!dropBar);
+  }
   const listClick = (e: React.MouseEvent<HTMLLIElement>) => {
     const { target, currentTarget } = e;
 
     if (target !== currentTarget || !currentTarget.textContent) return;
 
-    initMenu(currentTarget.textContent);
-    toggleDropbar();
+    setMenu(currentTarget.textContent);
+    setDropb(false);
   };
 
   return { dropBar, menu, toggleDropbar, listClick };

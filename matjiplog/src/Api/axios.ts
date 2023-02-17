@@ -1,10 +1,16 @@
 import axios from "axios";
 
-const API = axios.create({
-  baseURL: "",
+export const userAPI = axios.create({
+  baseURL: process.env.REACT_APP_USER_RUL,
   headers: {
     "Content-Type": "apllication/json",
   },
 });
 
-export default API;
+export const matjipAPI = axios.create({
+  baseURL: process.env.REACT_APP_MATJIP_RUL,
+  headers: {
+    "Content-Type": "apllication/json",
+  },
+});
+

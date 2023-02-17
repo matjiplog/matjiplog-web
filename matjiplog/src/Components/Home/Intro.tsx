@@ -4,7 +4,7 @@ import { useSlide, useSlideTypes } from "../../Hooks/useSlide";
 
 function Intro(): JSX.Element {
   const introImages = [ "/assets/Home/introbg1.png", "/assets/Home/introbg2.png", "/assets/Home/introbg2.png" ];
-  const { slideIndex, leftClick, rightClick }: useSlideTypes = useSlide(introImages.length);
+  const { slideIndex, leftClick, rightClick }: useSlideTypes = useSlide(introImages.length-1);
   
   return (
     <IntroSection>

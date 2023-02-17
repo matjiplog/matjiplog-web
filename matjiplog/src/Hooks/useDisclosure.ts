@@ -1,13 +1,9 @@
-import { useEffect } from "react";
+import { useState } from 'react';
 
-import { disclosureStore, disclosureStoreTypes } from "../stores/createMyLog/disclosure";
+export function useDisclosure(initDisclosure: boolean): useDisclosureTypes {
+  const [disclosure, setDisclosure] = useState<boolean>(initDisclosure);
 
-export function useDisclosure(): useDisclosureTypes {
-  const { disclosure, toggleDisclosure, initDisclosure }: disclosureStoreTypes = disclosureStore();
-
-  useEffect(() => {
-    initDisclosure();
-  }, [initDisclosure]);
+  const toggleDisclosure = () => { setDisclosure(!disclosure); }
 
   return { disclosure, toggleDisclosure };
 }

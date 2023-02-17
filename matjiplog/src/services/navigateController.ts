@@ -1,7 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom";
 
-export function useNavLink(): navLinkTypes {
-  const navigate = useNavigate();
+export function navigateController(navigate: NavigateFunction): returnType {
 
   const locationHref = (e: React.MouseEvent<HTMLButtonElement | HTMLImageElement>): void => {
     const { target, currentTarget } = e;
@@ -34,6 +33,6 @@ export function useNavLink(): navLinkTypes {
   return { locationHref };
 }
 
-export interface navLinkTypes {
+export interface returnType {
   locationHref: (e: React.MouseEvent<HTMLButtonElement | HTMLImageElement>) => void;
 }

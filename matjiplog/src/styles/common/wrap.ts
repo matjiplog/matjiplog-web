@@ -9,3 +9,7 @@ export const CreateMyLogWrap = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const MylogDetailWrap = styled.div`
+  height: 100%;
+`

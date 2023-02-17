@@ -3,11 +3,11 @@ import { Disclosure, DisclosureCheck, DisclosureCheckDiv, DisclosureTitle, FindM
 import { DropBar } from "../Common/DropBar";
 
 import { useDisclosure, useDisclosureTypes } from "../../Hooks/useDisclosure";
-import { useScope, useScopeTypes } from "../../Hooks/useScope";
+import { useScope, returnType } from "../../Hooks/useScope";
 
 function CreateMyLogInfo(): JSX.Element {
-  const { tasteScope, manyScope, serviceScope, scopeClick }: useScopeTypes = useScope();
-  const { disclosure, toggleDisclosure }: useDisclosureTypes = useDisclosure();
+  const { tasteScope, manyScope, serviceScope, scopeClick }: returnType = useScope();
+  const { disclosure, toggleDisclosure }: useDisclosureTypes = useDisclosure(false);
   const createMyLogDropbar: string[] = ["선택 없음", "매장 방문", "포장", "배달"];
   const scopeArray: number[] = [0, 1, 2, 3, 4];
   const scopeItems: scopeItemsTypes[] = [
