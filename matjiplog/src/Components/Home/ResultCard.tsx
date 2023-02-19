@@ -1,11 +1,6 @@
-import { Result, ResultImg, Like, Title, TitleAndScope, NumberAndStar, Star, ScopeNumber, Address } from '../../styles/home/ResultCard';
+import { Result, ResultImg, Title, TitleAndScope, NumberAndStar, Star, ScopeNumber, Address } from '../../styles/home/ResultCard';
 
-interface ResultCardProps {
-  imgUrl : string
-  title : string
-  scopeNumber : number
-  address : string
-}
+import { ResultCardProps } from '../../types/props/resultCard';
 
 function ResultCard({imgUrl, title, scopeNumber, address}: ResultCardProps): JSX.Element{
     let starArray: JSX.Element[]= [];
@@ -14,8 +9,8 @@ function ResultCard({imgUrl, title, scopeNumber, address}: ResultCardProps): JSX
 
     return (
       <Result>
-        <ResultImg imgUrl={imgUrl}>
-          <Like />
+        <ResultImg src={imgUrl}>
+          {/* <Like /> */}
         </ResultImg>
         <TitleAndScope>
           <Title>{title}</Title>

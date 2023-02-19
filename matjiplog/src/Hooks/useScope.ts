@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useScope(): returnType {
+export function useScope(): useScopeType {
   const [ tasteScope, setTasteScope] = useState<boolean[]>([true, false, false, false, false]);
   const [ manyScope, setManyScope] = useState<boolean[]>([true, false, false, false, false]);
   const [ serviceScope, setServiceScope] = useState<boolean[]>([true, false, false, false, false]);
@@ -18,7 +18,7 @@ export function useScope(): returnType {
   return { tasteScope, manyScope, serviceScope, scopeClick };
 }
 
-export interface returnType {
+export interface useScopeType {
   tasteScope: boolean[];
   manyScope: boolean[];
   serviceScope: boolean[];

@@ -1,5 +1,5 @@
 import { title } from "process";
-import Swal, { SweetAlertIcon } from "sweetalert2"
+import Swal from "sweetalert2";
 
 export const useSwal = () => {
 

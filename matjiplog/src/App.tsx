@@ -14,7 +14,7 @@ import MyLogDetail from './Pages/MyLogDetail';
 import GlobalStyle from "./styles/common/global";
 
 function App(): JSX.Element {
-  const client = new QueryClient({ defaultOptions: { queries: { retry: 0, suspense: true } } })
+  const client = new QueryClient({ defaultOptions: {} })
   
   return (
     <>

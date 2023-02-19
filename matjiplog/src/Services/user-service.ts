@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import API from "../Api/axios";
+import {API} from "../Api/axios";
 import { userDto } from "../types/userDto";
 
 

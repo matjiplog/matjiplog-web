@@ -14,19 +14,16 @@ export const Result = styled.div`
     transform: scale(1.1);
   }
 `;
-export const ResultImg = styled.div<{imgUrl : string}>`
-  position: relative;
-  height: 70%;
-  background-image: url(${(props) => props.imgUrl || "none"});
-  background-size: 100% 100%;
+export const ResultImg = styled.img`
+  width: 100%;
 `;
-export const Like = styled(FaHeart)`
-  font-size: 20px;
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  color: red;
-`;
+// export const Like = styled(FaHeart)`
+//   font-size: 20px;
+//   position: absolute;
+//   top: 1em;
+//   right: 1em;
+//   color: red;
+// `;
 export const TitleAndScope = styled.div`
   display: flex;
   justify-content: space-between;
