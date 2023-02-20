@@ -94,8 +94,6 @@ const SignUpBtn = styled.button`
   margin-top : 15px;    
   width: 274px;
   height: 35px;
-  background-color: white;
-  border: none;
 `;
 
 const IdDiv = styled.div`

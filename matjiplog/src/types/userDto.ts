@@ -7,13 +7,3 @@ export interface userDto {
   nickname : string, // 닉네임
   isSnsAccount : string, // SNS 연동 계정 여부, M' : 서비스 계정, 'K' : kakao, 'N' : naver, 'G' : google
 }
-
-//   "id": "matjiplog@gmail.com",
-//   "password": "string",
-//   "gender": "M",
-//   "name": "홍길동",
-//   "phoneNumber": "01012345678",
-//   "nickname": "string",
-//   "isActive": false,
-//   "isSnsAccount": "M",
-//   "isAdmin": false

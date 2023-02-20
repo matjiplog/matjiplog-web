@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { EmptyCard } from "../Common/EmptyCard";
+import LodingSpinner from "../Common/Loding";
 import MatjipCard from "./MatjipCard";
 
 export interface IMatjipInfo {
@@ -24,14 +26,25 @@ function MatjipGrid() {
       StarPoint : 4.0,
     },
   ];
-  
+
+  const [loading, setLoading] = useState(true);
+
+  // 로딩창 데이터불러온후 바꿈
+  useEffect(() =>{
+    setLoading(false);
+  }, [])
+
+
   return(
-    <MatjipWrap>
+    <>
+      {loading ? <div style={{ marginTop: "150px"}}><LodingSpinner></LodingSpinner></div>
+       : <MatjipWrap>
       {MatjipInfo.map((value: IMatjipInfo): JSX.Element =>{
-        return <MatjipCard info={value} key={value.id.toString()}></MatjipCard>
+        return <MatjipCard info={value} key={value.id}></MatjipCard>
       })}
       { EmptyCard(MatjipInfo, "230")}
-    </MatjipWrap>
+      </MatjipWrap> }
+    </>
   );
 }
 

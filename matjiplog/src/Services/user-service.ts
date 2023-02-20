@@ -20,12 +20,12 @@ export const axiosIdCheck = async (userId : string) =>{
 
 export const axiosSignUp = async (userData : userDto) => { 
   try {
-    const { data, status } = await API.post("user",{
-      userData,
-    });
+    console.log(userData);
+    const { data, status } = await API.post("user", userData);
+    console.log("success");
     return { data, status, error: null};
   } catch (e) {
-    console.log(e);
+    console.log("failed");
     const { message, response, code } = e as unknown as AxiosError;
     return { data: message, status: response?.status, error : code};
   }
