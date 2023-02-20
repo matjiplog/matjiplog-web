@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { HeaderSection, LoginDiv, LoginBtn, LogoImg, Gnv, GnvItem, GnvBtn, MenuBar } from "../../styles/common/header";
 
-import { navigateController, returnType } from '../../Services/navigateController';
+import { navigateController, returnType } from '../../utils/navigateController';
 
 function Header(): JSX.Element {
   const navigate = useNavigate();
