@@ -1,3 +1,4 @@
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AccentP, LessP } from "../../styles/common/font";
 import { StarMake } from "../Common/StarMake";
@@ -8,9 +9,17 @@ function MatjipCard({
 } : { 
   info: IMatjipInfo;
 }):JSX.Element {
-  
+  const navigate = useNavigate();
+  const detailMatjipNav = () =>{
+    navigate(`${info.id}`, {
+      state : {
+        info : info,
+      }
+    });
+  };
+
   return(
-    <CardDiv>
+    <CardDiv onClick={detailMatjipNav}>
       <MatjipImg></MatjipImg>
       <ContentDiv>
         <AccentP>{info.RestaurantName}</AccentP>
@@ -45,7 +54,8 @@ const CardDiv = styled.div`
   height: 230px;
   border: solid #b4b4b4 1px;
   border-radius: 6px;
-  box-shadow : 0px 0px 10px 3px rgba(190,190,190, 0.6);
+  box-shadow : 0px 0px 10px 3px rgba(220,220,220, 0.6);
   padding: 10px;
+  cursor: pointer;
 `;
 export default MatjipCard

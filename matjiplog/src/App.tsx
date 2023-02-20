@@ -12,6 +12,7 @@ import MyLog from "./Pages/MyLog";
 import MyLogDetail from './Pages/MyLogDetail';
 
 import GlobalStyle from "./styles/common/global";
+import SearchDetail from "./Pages/SearchDetail";
 
 function App(): JSX.Element {
   const client = new QueryClient({ defaultOptions: {} })
@@ -27,7 +28,8 @@ function App(): JSX.Element {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/log" element={<Log />}></Route>
           <Route path="/createMyLog" element={<CreateMyLogPage />}></Route>
-          <Route path="/search" element={<Search />}></Route>
+          <Route path="/search/*" element={<Search />}></Route>
+          <Route path="/search/:matjipSequence" element={<SearchDetail/>}></Route>
           <Route path="/mylog" element={<MyLog />}></Route>
           <Route path='/mylog/:mylogId' element={<MyLogDetail />}/>
           <Route path="*" element={<NotFound />}></Route>

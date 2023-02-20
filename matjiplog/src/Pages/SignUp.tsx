@@ -15,10 +15,6 @@ function SignUp() {
   );
 }
 
-const Section =styled.div`
-  background-color: white;
-`;
-
 const SignUpWrap = styled.div`
   background-color: rgb(250,250,250);
   display: flex;

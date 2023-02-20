@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useDropBar, useDropBarTypes } from "../../Hooks/useDropBar";
 import { DropItem, DropItems } from "../../styles/common/dropBar";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -13,7 +13,7 @@ import { axiosIdCheck, axiosSignUp } from "../../Services/user-service";
 function SignUpInput() {
   const genderItems = ["남자", "여자"];
   const { dropBar, menu, toggleDropbar, listClick }: useDropBarTypes = useDropBar("성별을 선택하세요");
-  
+
   //signUp api data
   const [signUpForm, setSignUpForm] = useState<userDto>({
     id : '',  // 사용자 ID (이메일 형식)
@@ -22,7 +22,7 @@ function SignUpInput() {
     name : '', // 사용자 이름
     phoneNumber : '', // 폰 번호
     nickname : '', // 닉네임
-    isSnsAccount : 'M', // SNS 연동 계정 여부, M' : 서비스 계정, 'K' : kakao, 'N' : naver, 'G' : google
+    isSnsAccount : 'M' // SNS 연동 계정 여부, M' : 서비스 계정, 'K' : kakao, 'N' : naver, 'G' : google
   });
   
   const [validForm, setValidForm] = useState<validType>({
@@ -66,6 +66,7 @@ function SignUpInput() {
 
   //회원가입 버튼클릭시
   const PostSignUp = async () => {
+    console.log(signUpForm);
     if(signUpForm.id === '' || signUpForm.password === '' || validForm.passwordConfirm === '' || signUpForm.name === '' || signUpForm.nickname === '' || signUpForm.phoneNumber === '' || menu === "성별을 선택하세요"){
       alertTextError("모든 정보를 입력해주세요");
       return;
@@ -85,13 +86,18 @@ function SignUpInput() {
     }
     else{
       {menu === "남자" ? setSignUpForm({...signUpForm, gender: 'M'}) : setSignUpForm({...signUpForm, gender: 'W'})};
-      console.log(signUpForm);
-      const { data, status, error } = await axiosSignUp(signUpForm)
+      const { data, status, error } = await axiosSignUp({...signUpForm, phoneNumber: signUpForm.phoneNumber.replace(/-/g, "")});
       console.log(data);
       console.log(status);
       console.log(error);
       if(status === 200){
-        alert("status 200")
+        if(data.success === true){
+          //"회원가입이 완료"
+          alert("status 200")
+        }
+        else{
+          //회원가입 실패
+        }
       }
       else{
         apiError();
@@ -101,6 +107,31 @@ function SignUpInput() {
       }
     }
   }
+
+  //휴대전화 숫자만 입력 + 자동 하이푼
+  const handlePhone = (value: string) => {
+    const onlyNumber = value.replace(/\D+/g, '');
+    const numberLength = 11;
+    
+    let result = "";
+    for(let i=0; i<onlyNumber.length && i < numberLength; i++){
+      switch (i) {
+        case 3:
+          result += "-";
+          break;
+        case 7:
+          result += "-";
+          break;
+
+        default:
+          break;
+      }
+      result += onlyNumber[i];
+    }
+    setSignUpForm({...signUpForm, phoneNumber: result});
+  }
+
+
   return(
     <InputDiv>
       <Logo></Logo>
@@ -185,7 +216,10 @@ function SignUpInput() {
         <ElementInput 
           value={signUpForm.phoneNumber} 
           type="text"
-          onChange={e => setSignUpForm({...signUpForm, phoneNumber: e.target.value})}
+          onChange={e => {
+            handlePhone(e.target.value);
+            
+          }}
         ></ElementInput>
       </ElementDiv>
       <SignUpBtn onClick={PostSignUp}>회원가입</SignUpBtn>

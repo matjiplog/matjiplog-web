@@ -17,7 +17,7 @@ export const matjipAPI = axios.create({
 export const API = axios.create({
   baseURL: "http://61.85.38.39:60548",
   headers: {
-    "Content-Type": "apllication/json",
+    'Content-Type': "application/json",
   },
 });
 
