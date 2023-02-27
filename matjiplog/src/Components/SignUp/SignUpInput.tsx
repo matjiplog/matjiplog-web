@@ -67,6 +67,7 @@ function SignUpInput() {
   //회원가입 버튼클릭시
   const PostSignUp = async () => {
     console.log(signUpForm);
+    {menu === "남자" ? setSignUpForm({...signUpForm, gender: 'M'}) : setSignUpForm({...signUpForm, gender: 'W'})};
     if(signUpForm.id === '' || signUpForm.password === '' || validForm.passwordConfirm === '' || signUpForm.name === '' || signUpForm.nickname === '' || signUpForm.phoneNumber === '' || menu === "성별을 선택하세요"){
       alertTextError("모든 정보를 입력해주세요");
       return;
@@ -85,7 +86,6 @@ function SignUpInput() {
       return;
     }
     else{
-      {menu === "남자" ? setSignUpForm({...signUpForm, gender: 'M'}) : setSignUpForm({...signUpForm, gender: 'W'})};
       const { data, status, error } = await axiosSignUp({...signUpForm, phoneNumber: signUpForm.phoneNumber.replace(/-/g, "")});
       console.log(data);
       console.log(status);
@@ -93,6 +93,7 @@ function SignUpInput() {
       if(status === 200){
         if(data.success === true){
           //"회원가입이 완료"
+          //로그인 유지 후 홈 페이지로
           alert("status 200")
         }
         else{

@@ -1,11 +1,11 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import {API} from "../Api/axios";
+import {userAPI} from "../Api/axios";
 import { userDto } from "../types/userDto";
 
 
 export const axiosIdCheck = async (userId : string) =>{
   try {
-    const {data, status} = await API.get("user/id", {
+    const {data, status} = await userAPI.get("user/id", {
       params : {
         id: userId,
       }
@@ -21,7 +21,7 @@ export const axiosIdCheck = async (userId : string) =>{
 export const axiosSignUp = async (userData : userDto) => { 
   try {
     console.log(userData);
-    const { data, status } = await API.post("user", userData);
+    const { data, status } = await userAPI.post("user", userData);
     console.log("success");
     return { data, status, error: null};
   } catch (e) {
