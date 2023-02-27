@@ -10,7 +10,7 @@ function Log() {
       <LogWrap>
         <Header></Header>
         <Section>
-          <SearchBar></SearchBar>
+          {/* <SearchBar></SearchBar> */}
           <UserLogGrid></UserLogGrid>
         </Section>  
       </LogWrap>

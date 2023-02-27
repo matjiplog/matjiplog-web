@@ -1,4 +1,4 @@
-import { Result, ResultImg, Title, TitleAndScope, NumberAndStar, Star, ScopeNumber, Address } from '../../styles/home/ResultCard';
+import { Result, ResultImg, Title, TitleAndScope, NumberAndStar, Star, ScopeNumber, Address, Like } from '../../styles/search/ResultCard';
 
 import { ResultCardProps } from '../../types/props/resultCard';
 
@@ -9,8 +9,8 @@ function ResultCard({imgUrl, title, scopeNumber, address}: ResultCardProps): JSX
 
     return (
       <Result>
+        <Like />
         <ResultImg src={imgUrl}>
-          {/* <Like /> */}
         </ResultImg>
         <TitleAndScope>
           <Title>{title}</Title>
