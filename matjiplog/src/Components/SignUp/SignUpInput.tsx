@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useRef } from "react"
-import { useDropBar, useDropBarTypes } from "../../Hooks/useDropBar";
+import { useDropBar } from "../../Hooks/useDropBar";
 import { DropItem, DropItems } from "../../styles/common/dropBar";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { userDto } from "../../types/userDto";
@@ -8,11 +8,11 @@ import useValid, { validType } from "../../Hooks/useValid";
 import Logo from "../Common/Logo";
 import { useSwal } from "../../Hooks/useSwal";
 import { axiosIdCheck, axiosSignUp } from "../../Services/user-service";
-
+import { useDropBarResult } from '../../types/hook/dropBar';
 
 function SignUpInput() {
   const genderItems = ["남자", "여자"];
-  const { dropBar, menu, toggleDropbar, listClick }: useDropBarTypes = useDropBar("성별을 선택하세요");
+  const { dropBarShow, dropBarMenu, toggleDropBar, listClick }: useDropBarResult = useDropBar("성별을 선택하세요");
 
   //signUp api data
   const [signUpForm, setSignUpForm] = useState<userDto>({
@@ -67,8 +67,8 @@ function SignUpInput() {
   //회원가입 버튼클릭시
   const PostSignUp = async () => {
     console.log(signUpForm);
-    {menu === "남자" ? setSignUpForm({...signUpForm, gender: 'M'}) : setSignUpForm({...signUpForm, gender: 'W'})};
-    if(signUpForm.id === '' || signUpForm.password === '' || validForm.passwordConfirm === '' || signUpForm.name === '' || signUpForm.nickname === '' || signUpForm.phoneNumber === '' || menu === "성별을 선택하세요"){
+    {dropBarMenu === "남자" ? setSignUpForm({...signUpForm, gender: 'M'}) : setSignUpForm({...signUpForm, gender: 'W'})};
+    if(signUpForm.id === '' || signUpForm.password === '' || validForm.passwordConfirm === '' || signUpForm.name === '' || signUpForm.nickname === '' || signUpForm.phoneNumber === '' || dropBarMenu === "성별을 선택하세요"){
       alertTextError("모든 정보를 입력해주세요");
       return;
     }
@@ -201,13 +201,13 @@ function SignUpInput() {
       <ElementDiv>
         <Label>성별</Label>
         <GenderDropBarDiv>
-          <GenderTitle onClick={toggleDropbar}>{menu}
+          <GenderTitle onClick={toggleDropBar}>{dropBarMenu}
             <IoMdArrowDropdown size={15}></IoMdArrowDropdown>
           </GenderTitle>
-          {dropBar && 
+          {dropBarShow && 
           <DropItems>
             {genderItems.map((value: string, index: number): JSX.Element => {
-              return <DropItem key={index} onClick={listClick} className={menu === value ? "select" : ""}>{value}</DropItem>
+              return <DropItem key={index} onClick={listClick} className={dropBarMenu === value ? "select" : ""}>{value}</DropItem>
             })}
           </DropItems>}
         </GenderDropBarDiv>

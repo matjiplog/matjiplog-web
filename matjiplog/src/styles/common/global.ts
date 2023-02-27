@@ -15,6 +15,9 @@ const GlobalStyle = createGlobalStyle`
     li {
         list-style: none;
     }
+    a{
+        color: black;
+    }
     * {
         padding: 0px;
         margin: 0px;

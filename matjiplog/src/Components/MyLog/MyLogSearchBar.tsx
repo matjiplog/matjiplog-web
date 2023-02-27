@@ -7,7 +7,7 @@ import {
 } from "../../styles/common/dropBar";
 
 import {
-  HasTag,
+  HasTags,
   HasTagItem,
   SearchForm,
   SearchIcon,
@@ -15,25 +15,26 @@ import {
   SearchInputAndHastag,
 } from "../../styles/common/searchBar";
 import { showLogStore } from "../../stores/mylog/store";
-import { useDropBar, useDropBarTypes } from "../../Hooks/useDropBar";
-
+import { useDropBar } from "../../Hooks/useDropBar";
+import { useDropBarResult } from '../../types/hook/dropBar';
 
 interface propsType {
   visible : string;
 }
 
 function MyLogSearchBar({visible} : propsType) {
-  const dropBarMenu: string[] = ["전체", "지역", "맛집이름"];
+  const dropBarMenuArr: string[] = ["전체", "지역", "맛집이름"];
   const hasTagMenu: string[] = ["맛집", "대구", "삽겹살", "고기", "내돈내산"];
-  const { dropBar, menu, toggleDropbar, listClick }: useDropBarTypes = useDropBar(dropBarMenu[0]);
+  const { dropBarShow, dropBarMenu, toggleDropBar, listClick }: useDropBarResult = useDropBar(dropBarMenuArr[0]);
+
   return(
     <>
       <DropBarDiv visibled={visible}>
         <Category>category</Category>
-        <DropBarTitle onClick={toggleDropbar}>{menu}</DropBarTitle>
-        {dropBar && (
+        <DropBarTitle onClick={toggleDropBar}>{dropBarMenu}</DropBarTitle>
+        {dropBarShow && (
           <DropItems>
-            {dropBarMenu.map((value: string, index: number): JSX.Element => {
+            {dropBarMenuArr.map((value: string, index: number): JSX.Element => {
               return <DropItem key={index}>{value}</DropItem>;
             })}
           </DropItems>
@@ -44,11 +45,11 @@ function MyLogSearchBar({visible} : propsType) {
           <SearchInput placeholder="검색어 입력..."></SearchInput>
           <SearchIcon size={30}></SearchIcon>
         </SearchForm>
-        <HasTag>
+        <HasTags>
           {hasTagMenu.map((value: string, index: number): JSX.Element => {
             return <HasTagItem key={index}>{value}</HasTagItem>;
           })}
-        </HasTag>
+        </HasTags>
       </SearchInputAndHastag>
     </>
   );
