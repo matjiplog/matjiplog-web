@@ -1,32 +1,36 @@
-import NotFound from "../Components/Common/NotFound";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { axiosMatjipDetail } from "../Services/matjip-service";
+import LodingSpinner from "../Components/Common/Loding";
+import Header from "../Components/Common/Header";
+import Footer from "../Components/Common/Footer";
+import MatjipTop from "../Components/Search/Detail/MatjipTop";
+import MatjipTab from "../Components/Search/Detail/MatjipTab";
+import { useMatjipDetail } from "../Hooks/apis/useMatjipDetail";
+
 
 function SearchDetail() {
-  const location = useLocation();
-  console.log(location);
-  //state로 정보 보낼시 url로만 입력했을때 오류
-  const state = location.state;
-
-  useEffect(() => {
-    if(state === null){
-      //개별통신
-      
-      //개별통신해서 성공안되면 notfound
-    }
-    //널이 아니면 state정보 사용
-  }, [])
+  const parm = useParams();
+  const { data, isLoading, isError, isFetching } = useMatjipDetail(parm);
   
   return(
     <>
-      {state === null ? <NotFound></NotFound> :
-      <div>{state.info.id}
-      
-      </div>
-      }
-      
+      <SearchDetailWrap>
+        <Header></Header>
+        <MatjipTop></MatjipTop>
+        <MatjipTab></MatjipTab>
+      </SearchDetailWrap>
+      <Footer></Footer>
     </>
   );
 }
+
+const SearchDetailWrap = styled.div`
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 100px;
+  background-color: rgb(250,250,250);
+`;
 
 export default SearchDetail;
