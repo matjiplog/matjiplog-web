@@ -1,6 +1,5 @@
 import Header from "../Components/Common/Header";
 import Intro from "../Components/Home/Intro";
-import SearchMatJip from "../Components/Home/SearchMatJip";
 import HomeFooter from "../Components/Common/HomeFooter";
 
 import { HomePageWrap } from "../styles/common/wrap";
@@ -9,7 +8,6 @@ function HomePage(): JSX.Element {
     <HomePageWrap>
       <Header/>
       <Intro/>
-      <SearchMatJip/>
       <HomeFooter/>
     </HomePageWrap>
   );

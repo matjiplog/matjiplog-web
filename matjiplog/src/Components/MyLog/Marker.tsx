@@ -3,7 +3,6 @@ import { icons } from "react-icons/lib";
 import { MapMarker, useMap } from "react-kakao-maps-sdk";
 import styled from "styled-components";
 import useDetectClose, { useDetectCloseTypes } from "../../Hooks/useDetectClose";
-import useKakaoMarker from "../../Hooks/useKakaoMarker";
 import { StarMake } from "../Common/StarMake";
 import DropDown from "../Log/DropDown";
 import { GoX } from "react-icons/go";
