@@ -25,7 +25,7 @@ function MatjipCard({
         <AccentP>{info.RestaurantName}</AccentP>
         <HeartDiv>
           <p style={{fontWeight:"bold", fontSize:"12px"}}>{info.StarPoint.toFixed(1)}</p>
-          {StarMake(info.StarPoint)}
+          {/* {StarMake(info.StarPoint)} */}
         </HeartDiv>
       </ContentDiv>
       <LessP>{info.Location}</LessP>

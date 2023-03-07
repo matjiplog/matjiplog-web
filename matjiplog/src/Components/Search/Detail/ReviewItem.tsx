@@ -18,7 +18,7 @@ function ReviewItem({
         </UserDiv>
         <StarItem>
           <p style={{fontWeight:"bold", fontSize:"12px"}}>{starpoint.toFixed(1)}</p>
-          {StarMake(starpoint)}
+          {StarMake(starpoint, 20)}
         </StarItem>
       </ReviewTop>
       <ReviewContent>

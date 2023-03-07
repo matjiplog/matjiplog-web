@@ -1,8 +1,5 @@
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { axiosMatjipDetail } from "../Services/matjip-service";
-import LodingSpinner from "../Components/Common/Loding";
 import Header from "../Components/Common/Header";
 import Footer from "../Components/Common/Footer";
 import MatjipTop from "../Components/Search/Detail/MatjipTop";
