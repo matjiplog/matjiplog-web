@@ -86,7 +86,7 @@ const LoginBtn = styled.input`
   height: 35px;
   background-color : #FF6701;
   border : solid #FF6701 1px;
-  border-radius: 4px;
+  border-radius: 6px;
   color: white;
 `;
 
