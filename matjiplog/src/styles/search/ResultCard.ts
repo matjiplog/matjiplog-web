@@ -4,6 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { ImStarFull } from "react-icons/im";
 
 export const Result = styled.div`
+  position: relative;
   padding: 10px;
   border: solid #b4b4b4 1px;
   border-radius: 6px;
@@ -17,13 +18,13 @@ export const Result = styled.div`
 export const ResultImg = styled.img`
   width: 100%;
 `;
-// export const Like = styled(FaHeart)`
-//   font-size: 20px;
-//   position: absolute;
-//   top: 1em;
-//   right: 1em;
-//   color: red;
-// `;
+export const Like = styled(FaHeart)`
+  font-size: 20px;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  color: red;
+`;
 export const TitleAndScope = styled.div`
   display: flex;
   justify-content: space-between;

@@ -12,19 +12,19 @@ function MyLog() {
 
   return(
     <>
-      <MyLogWrap>
+      <MyLogWrap footer={mapShow.toString()}>
         <Header></Header>
         <SelectLogView></SelectLogView>
         {mapShow ? <MapLog/> : <GridLog/>}
       </MyLogWrap>
-      <Footer></Footer>
+      {!mapShow && <Footer></Footer>}
     </>
   );
 }
 
-const MyLogWrap = styled.div`
+const MyLogWrap = styled.div<{ footer : string}>`
   min-height: 100%;
   position: relative;
-  padding-bottom: 100px;
+  padding-bottom: ${(props) => props.footer === "false" && "100px"};
 `;
 export default MyLog;

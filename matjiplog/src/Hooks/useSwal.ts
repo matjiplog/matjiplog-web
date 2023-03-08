@@ -11,25 +11,22 @@ export const useSwal = () => {
     })
   }
 
-  const idCheckAlert = (check : boolean) =>{
-    if(check){
-      Swal.fire({
-        icon: "success",
-        showConfirmButton: false,
-        title : "사용 가능한 아이디 입니다.",
-        timer: 1000,
-      })
-    }
-    else{
-      Swal.fire({
-        icon: "error",
-        showConfirmButton: false,
-        title : "중복된 아이디가 있습니다.",
-        timer: 1000,
-      })
-    }
-  }  
-  
+  const apiIdCheck = () => {
+    Swal.fire({
+      title: "전송중입니다 \n잠시만 기다려주세요",
+      onOpen: () => {
+        Swal.showLoading();
+      }
+    })
+  };
+
+  const alertTextSucess = (text : string) =>{
+    Swal.fire({
+      icon: "success",
+      title: text,
+    })
+  }
+ 
   const alertTextError = (text : string) => {
     Swal.fire({
       icon: "error",
@@ -37,5 +34,5 @@ export const useSwal = () => {
     })
   }
   
-  return { apiError, idCheckAlert, alertTextError };
+  return { apiError, apiIdCheck, alertTextSucess, alertTextError };
 }

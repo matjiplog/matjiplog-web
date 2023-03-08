@@ -16,10 +16,10 @@ function SelectLogView() {
         {mapShow ? <MyLogSearchBar visible="hidden"></MyLogSearchBar>:
           <MyLogSearchBar visible="inherit"></MyLogSearchBar>}
         <SelectViewDiv>
-          <MapIcon size={25}  on={mapShow.toString()} onClick={() => {
+          <MapIcon size={23}  on={mapShow.toString()} onClick={() => {
             setMapShow(true);
           }}></MapIcon>
-          <GridIcon size={25}  on={mapShow.toString()} onClick={() => {
+          <GridIcon size={20}  on={mapShow.toString()} onClick={() => {
             setMapShow(false);
           }}></GridIcon>
         </SelectViewDiv>
@@ -34,7 +34,7 @@ const MapIcon = styled(BsMap)< { on:string } >`
 `;
 const GridIcon = styled(TbGridDots)< { on:string } >`
   cursor: pointer;
-  color: ${(props) => props.on === "true" ? "black" : "#ff6701"}};
+  color: ${(props) => props.on === "true" ? "black" : "#ff6701"};
 `;
 
 const MylogTopDiv = styled.div`
