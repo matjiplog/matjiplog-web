@@ -15,6 +15,7 @@ import { dropBarMenuState } from '../../types/store/dropBar';
 import { hastagState } from '../../types/store/hastag';
 
 import { useObserverPage } from '../../Hooks/useObserverPage';
+import { useMatjipList } from '../../Hooks/useMatjipList';
 
 import { hastagStore } from '../../stores/hastag';
 import { dropBarMenuStore } from '../../stores/dropBar';
@@ -22,21 +23,19 @@ import { dropBarMenuStore } from '../../stores/dropBar';
 function SearchMatJip(): JSX.Element {
   const { dropBarMenu }: dropBarMenuState = dropBarMenuStore();
   const { hastags }: hastagState = hastagStore();
-  const [matjipList, setMatjipList] = useState<MatjipDto[]>([]);
   const [hastagList, setHastagList] = useState<MatjipDto[]>([]);
   const [matjipKey, setMatjipKey] = useState<"matjips" | "searchAll" | "searchName" | "searchAddress">("matjips");
-  const [matjipPage, setMatjipPage] = useState<number>(0);
   const [keyword, setKeyword] = useState<string>("");
-
+  const { page, setPage, setLastCardRef } = useObserverPage();
   const matjipQuery = {
-    matjips: useQuery(['matjips', matjipPage], () => getMatjipData(matjipPage), { enabled: matjipKey === "matjips" && !keyword }),
-    searchAll: useQuery(['matjipsSearch', matjipPage, keyword], () => getMatjipSearch(keyword, matjipPage), { enabled: matjipKey === "searchAll" && !!keyword }),
-    searchName: useQuery(['matjipsSearchName', matjipPage, keyword], () => getMatjipSearchName(keyword, matjipPage), { enabled: matjipKey === "searchName" && !!keyword }),
-    searchAddress: useQuery(['matjipsSearchAddress', matjipPage, keyword], () => getMatjipSearchAddress(keyword, matjipPage), { enabled: matjipKey === "searchAddress" && !!keyword }),
+    matjips: useQuery(['matjips', page], () => getMatjipData(page), { enabled: matjipKey === "matjips" && !keyword }),
+    searchAll: useQuery(['matjipsSearch', page, keyword], () => getMatjipSearch(keyword, page), { enabled: matjipKey === "searchAll" && !!keyword }),
+    searchName: useQuery(['matjipsSearchName', page, keyword], () => getMatjipSearchName(keyword, page), { enabled: matjipKey === "searchName" && !!keyword }),
+    searchAddress: useQuery(['matjipsSearchAddress', page, keyword], () => getMatjipSearchAddress(keyword, page), { enabled: matjipKey === "searchAddress" && !!keyword }),
   };
   const { data, isLoading, isError, error } = matjipQuery[matjipKey];
+  const { matjipList } = useMatjipList(data, isLoading, page);
   const viewList = hastags[0] ? hastagList : matjipList;
-  const { setLastCardRef } = useObserverPage(() => setMatjipPage((prev) => prev + 1));
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -45,7 +44,7 @@ function SearchMatJip(): JSX.Element {
     if (!keyword) {
       setMatjipKey("matjips");
       setKeyword("");
-      setMatjipPage(0);
+      setPage(0);
       return;
     }
   
@@ -57,7 +56,7 @@ function SearchMatJip(): JSX.Element {
       setMatjipKey("searchName");
     }
     setKeyword(keyword);
-    setMatjipPage(0);
+    setPage(0);
   }
 
   useEffect(() => {
@@ -69,16 +68,6 @@ function SearchMatJip(): JSX.Element {
     setHastagList([...newHastagList]);
   }, [hastags, matjipList]);
 
-  useEffect(() => {
-    if (!isLoading && data?.matjipListData) {
-      if(matjipPage === 0){
-        setMatjipList([...data.matjipListData]);
-      }else{
-        setMatjipList((prev) => [...prev, ...data.matjipListData]);
-      }
-    }
-  }, [data, isLoading, matjipPage]);
-
   return (
     <SearchSection>
       <SearchBar submitHandler={submitHandler}/>
@@ -86,11 +75,12 @@ function SearchMatJip(): JSX.Element {
       {viewList.map((value: MatjipDto, index: number) => {
         const {matjipSequence, name, ratingTaste, ratingPortion, ratingService, address, roadAddress, category } = value;
         const scopeNumber = (ratingPortion + ratingService + ratingTaste) / 3;
-        const isLastCard = index === matjipList.length - 1;
+        const isLastCard = index === viewList.length - 1;
 
         return (
           <Link to={`/search/${matjipSequence}`} key={matjipSequence}>
             <ResultCard 
+              category={category}
               imgUrl="/assets/images/Matjip.png"
               title={name}
               scopeNumber={scopeNumber}

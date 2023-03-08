@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 
-export function useObserverPage(addPage: () => void) {
-  const [lastCard, setlastCard] = useState<HTMLDivElement | null>(null);
+export function useObserverPage() {
+  const [page, setPage] = useState<number>(0);
+  const [lastCard, setlastCard] = useState<HTMLDivElement>();
   
   const onIntersect: IntersectionObserverCallback = (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        addPage();
+        setPage((prev) => prev + 1)
         observer.unobserve(entry.target);
       }
     });
   };
-  const setLastCardRef = (ref: HTMLDivElement | null) => { setlastCard(ref); };
+  const setLastCardRef = (ref: HTMLDivElement) => { setlastCard(ref); };
 
   useEffect(() => {
     let observer: IntersectionObserver;
@@ -22,5 +23,5 @@ export function useObserverPage(addPage: () => void) {
     return () => observer && observer.disconnect();
   }, [lastCard]);
 
-  return { setLastCardRef };
+  return { page, setPage, setLastCardRef };
 }

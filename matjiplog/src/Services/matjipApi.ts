@@ -8,7 +8,8 @@ export const getMatjipData = async (page: number): Promise<Matjips | null> => {
 
     if (!res?.data?.success || res?.status !== 200) return null;
     return res.data;
-  } catch (error: unknown) {
+  } 
+  catch (error: unknown) {
     handleError(error);
     throw error;
   }
@@ -20,7 +21,8 @@ export const getMatjipSearch = async (keyword: string, page: number): Promise<Ma
 
     if (!res?.data?.success || res?.status !== 200) return null;
     return res.data;
-  } catch (error: unknown) {
+  } 
+  catch (error: unknown) {
     handleError(error);
     throw error;
   }
@@ -32,7 +34,8 @@ export const getMatjipSearchName = async (keyword: string, page: number): Promis
 
     if (!res?.data?.success || res?.status !== 200) return null;
     return res.data;
-  } catch (error: unknown) {
+  } 
+  catch (error: unknown) {
     handleError(error);
     throw error;
   }
@@ -44,8 +47,22 @@ export const getMatjipSearchAddress = async (keyword: string, page: number): Pro
 
     if (!res?.data?.success || res?.status !== 200) return null;
     return res.data;
-  } catch (error: unknown) {
+  } 
+  catch (error: unknown) {
     handleError(error);
     throw error;
   }
 };
+
+export const getMatjipMyPlace = async (lat: number, lng: number, radius: number, page: number) => {
+  try{
+    const res = await matjipAPI.get(`matjip/myplace`, {params: { lat: lat, lng: lng, radius: radius, page: page}})
+    
+    if (!res?.data?.success || res?.status !== 200) return null;
+    return res.data;
+  }
+  catch(error: unknown){
+    handleError(error);
+    throw error;
+  }
+}
