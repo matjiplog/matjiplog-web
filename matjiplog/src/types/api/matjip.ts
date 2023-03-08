@@ -9,6 +9,8 @@ export interface MatjipDto {
     address: string,
     roadAddress: string,
     category: string,
+    locationLatitude: string,
+    locationLongitude: string,
     imageDetail: {}
 }
 
