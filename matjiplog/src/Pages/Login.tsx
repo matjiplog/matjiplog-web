@@ -1,36 +1,15 @@
 import styled from "styled-components";
 
 import Footer from "../Components/Common/Footer";
-import Logo from "../Components/Common/Logo";
-import LoginInput from "../Components/Login/LoginInput";
-import Find from "../Components/Login/Find";
-import SideImage from "../Components/Login/SideImage";
+import LoginContainer from "../Components/Login/Container/LoginContainer";
 
 function Login() {
   return (
     <>
-      <LoginDiv>
-        <Logo></Logo>
-        <WrapDiv>
-          <SideImage></SideImage>
-          <LoginInput></LoginInput>
-        </WrapDiv>
-        <Find></Find>
-      </LoginDiv>
+      <LoginContainer></LoginContainer>
       <Footer></Footer>
     </>
   );
 }
-const WrapDiv = styled.div`
-  display: flex;
-  margin-top: 30px;
-`;
-const LoginDiv = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100%;
-  position: relative;
-  padding-bottom: 100px;
-`;
+
 export default Login;

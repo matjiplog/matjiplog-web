@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
-export const skipTextDiv = styled.div`
+export const SkipTextDiv = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
 
-export const backgroundImgDiv = styled.div<{ url : string }>`
+export const BackgroundImgDiv = styled.div<{ url : string }>`
   background-image: url(${(props) => props.url || "none"});
   background-repeat: no-repeat;
   background-size: cover;
 `;
 
-export const profileImgDiv = styled.div<{ url : string }>`
+export const ProfileImgDiv = styled.div<{ url : string }>`
   background-image: url(${(props) => props.url || "none"});
   background-repeat : no-repeat;
   background-size : cover;
