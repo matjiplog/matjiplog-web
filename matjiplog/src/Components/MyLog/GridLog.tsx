@@ -41,8 +41,8 @@ function GridLog() {
 const MyLogWrap = styled.div`
   padding-top : 5%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit,300px);
+  grid-gap: 30px;
 `;
 
 const GridLogWrap = styled.div`

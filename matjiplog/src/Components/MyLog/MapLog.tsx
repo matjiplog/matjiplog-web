@@ -32,7 +32,7 @@ function MapLog() {
   return(
     <MapLogWrap>
       <KakaoMap
-        center={{ lat: 36.269209, lng: 127.719955 }}
+        center={{ lat: 37.5668712, lng: 127.1942225 }}
         level={ 12 }
         maxLevel={ 13 }
         minLevel= { 3 }
@@ -58,13 +58,12 @@ function MapLog() {
 const KakaoMap = styled(Map)`
   width: 100%;
   height: 500px;
-  margin: 0px 10% 0px 10%;
+  margin: 0px 10% 20px 10%;
 `;
 
 const MapLogWrap = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
 `;
 
 

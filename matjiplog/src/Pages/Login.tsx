@@ -23,6 +23,7 @@ function Login() {
 }
 const WrapDiv = styled.div`
   display: flex;
+  margin-top: 30px;
 `;
 const LoginDiv = styled.div`
   display: flex;

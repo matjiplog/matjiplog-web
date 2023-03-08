@@ -61,16 +61,16 @@ function SignUpInput(){
   //아이디 중복체크
   const IdDoubleCheck = async () => {
     if(signUpForm.id === ''){
-      alertTextError("아이디를 입력해주세요.");
+      alertTextError("이메일를 입력해주세요.");
       return;
     }
     if(!isValid.isId){
-      alertTextError("아이디 형식이 맞지 않습니다.");
+      alertTextError("이메일 형식이 맞지 않습니다.");
       return;
     }
     await axiosIdCheck(signUpForm.id).then(async res =>{ 
       if(res){
-        alertTextError("중복된 아이디가 있습니다.\n다시 시도해주세요");
+        alertTextError("중복된 이메일이 있습니다.\n다시 시도해주세요");
         return;
       }
       setIdCheck(true);
@@ -79,6 +79,10 @@ function SignUpInput(){
   }
   //이메일 인증 번호 전송
   const EmailAuthCodeSend =async () =>{
+    if(signUpForm.id === ''){
+      alertTextError("이메일을 입력해주세요.");
+      return;
+    }
     apiIdCheck();
     const res = await axiosEmailPost(signUpForm.id); 
     console.log(res);
@@ -171,7 +175,6 @@ function SignUpInput(){
       alertTextError("인증번호가 일치하지 않습니다.");
     }
   }
-
   
   return(
     <SignUpDiv>
@@ -190,6 +193,15 @@ function SignUpInput(){
           border="#b4b4b4"
         ></ElementInput>
       </ElementDiv>
+      {/* <ElementDiv>
+        <ElementP>아이디</ElementP>
+        <ElementInput
+          value={signUpForm.name} 
+          type="text"
+          style={{marginRight:"90px"}}
+          border="#b4b4b4"
+        ></ElementInput>
+      </ElementDiv> */}
       <ElementDiv>
         <ElementP>이메일</ElementP>
         <EmailInput
@@ -203,7 +215,7 @@ function SignUpInput(){
             setSignUpForm({...signUpForm, id: e.target.value});
             setValidForm({...validForm, id:e.target.value});
           }}
-          border={isValid.isId === false ? "red" : "#b4b4b4"}
+          border={isValid.isId === false && signUpForm.id !== '' ? "red" : "#b4b4b4"}
           readOnly={emailReadOnly}
           background = {emailReadOnly === true ? "rgb(225,225,225)" : ""}
         ></EmailInput>
@@ -237,11 +249,10 @@ function SignUpInput(){
             setValidForm({...validForm, password:e.target.value});
           }}
           style={{marginRight:"90px"}}
-          border={isValid.isPassword === false ? "red" : "#b4b4b4"}
+          border={isValid.isPassword === false && signUpForm.password !== '' ? "red" : "#b4b4b4"}
         ></ElementInput>
       </ElementDiv>
       <ValidDiv valid="true">*숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요</ValidDiv>
- 
       <ElementDiv>
         <ElementP>비밀번호 확인</ElementP>
         <ElementInput
@@ -326,7 +337,7 @@ const InputRadio = styled.input`
 
 const GenderInputDiv = styled.div`
   position: relative;
-  width: 350px;
+  width: 290px;
   margin-right: 90px;
   height: 30px;
   display: flex;
@@ -334,7 +345,7 @@ const GenderInputDiv = styled.div`
 `;
 
 const ValidDiv = styled.div<{ valid: string}>`
-  width: 350px;
+  width: 290px;
   height: 30px;
   margin: -10px 90px 0px 110px;
   color : ${props => props.valid === "false" ? "red" : "rgb(174,174,174)"};
@@ -359,7 +370,7 @@ const EmailBtn = styled.div`
 `;
 const ElementInput = styled.input<{ border : string}>`
   font-size: 10px;
-  width: 350px;
+  width: 290px;
   height: 35px;
   padding : 0px 10px 0px 10px;
   border: 1px solid;
@@ -373,7 +384,7 @@ const EmailInput = styled(ElementInput)< {background : string} >`
 `;
 
 const EmailAuthCodeInput = styled(ElementInput)`
-  width: 260px;
+  width: 200px;
 `;
 
 const ElementP = styled.p`
@@ -403,7 +414,7 @@ const TextH = styled.h2`
 const SignUpBtn = styled.div`
   border: 1px solid rgb(219,219,219);
   border-radius: 3px;
-  width: 400px;
+  width: 350px;
   height: 35px;
   font-size: 12px;
   background-color: #FF6701;
@@ -413,6 +424,7 @@ const SignUpBtn = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  margin-bottom: 10px;
 `;
 
 const SignUpDiv = styled.form`

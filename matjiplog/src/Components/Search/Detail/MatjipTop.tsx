@@ -13,10 +13,6 @@ function MatjipTop(){
   const parm = useParams();
   const { data, isLoading, isError, isFetching } = useMatjipDetail(parm);
 
-  console.log(data);
-  console.log(isLoading);
-  console.log(isError);
-  console.log(isFetching);
   if(data){  
     const name = data.name;
     const starPoint = (data.ratingPortion + data.ratingService + data.ratingTaste)/3;
