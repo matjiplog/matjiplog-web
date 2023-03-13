@@ -1,15 +1,15 @@
 import { SearchPageWrap } from '../styles/common/wrap';
 
-import Footer from "../Components/Common/Footer";
-import Header from "../Components/Common/Header";
-import SearchMatJip from '../Components/Search/SearchMatJip';
+import FooterContainer from '../Components/Common/Container/Footer2/FooterContainer';
+import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
+import SearchMatjipContainer from '../Components/Search/Container/SearchMatjipContainer';
 
 function Search(): JSX.Element {
   return(
     <SearchPageWrap>
-      <Header />
-      <SearchMatJip />
-      <Footer />
+      <HeaderContainer />
+      <SearchMatjipContainer />
+      <FooterContainer />
     </SearchPageWrap>
   );
 }

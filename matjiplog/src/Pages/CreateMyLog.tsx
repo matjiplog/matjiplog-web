@@ -1,15 +1,16 @@
-import Header from "../Components/Common/Header";
-import HomeFooter from "../Components/Common/HomeFooter";
+import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
+import FooterContainer from '../Components/Common/Container/Footer2/FooterContainer';
 import CreateMyLogImage from "../Components/CreateMyLog/Image";
 import CreateMyLogInfo from "../Components/CreateMyLog/Info";
 import CreateMyLogDetail from "../Components/CreateMyLog/Detail";
+
 import { CreateMyLogWrap } from "../styles/common/wrap";
 import { CreateForm, ImgaeAndInfo } from "../styles/createMylog/createForm";
 
 function CreateMyLogPage(): JSX.Element {
   return (
     <CreateMyLogWrap>
-      <Header />
+      <HeaderContainer />
       <CreateForm>
         <ImgaeAndInfo>
           <CreateMyLogImage/>
@@ -17,7 +18,7 @@ function CreateMyLogPage(): JSX.Element {
         </ImgaeAndInfo>
         <CreateMyLogDetail/>
       </CreateForm>
-      <HomeFooter />
+      <FooterContainer />
     </CreateMyLogWrap>
   );
 }

@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import { dropBarStore, dropBarMenuStore } from '../stores/dropBar';
 
 import { dropBarState, dropBarMenuState } from '../types/store/dropBar';
-import { useDropBarResult } from '../types/hook/dropBar';
+import { useDropBarResult } from '../types/hook/useDropBar';
 
 export function useDropBar(initMenu: string): useDropBarResult {
   const {dropBarShow, toggleDropBar, initDropBar}: dropBarState = dropBarStore();
   const {dropBarMenu, setDropBarMenu, initDropBarMenu}: dropBarMenuState = dropBarMenuStore();
 
-  const listClick = (e: React.MouseEvent<HTMLLIElement>) => {
+  const updateSelectItem = (e: React.MouseEvent<HTMLLIElement>) => {
     const { target, currentTarget } = e;
 
     if (target !== currentTarget || !currentTarget.textContent) return;
@@ -23,6 +23,6 @@ export function useDropBar(initMenu: string): useDropBarResult {
     setDropBarMenu(initMenu);
   }, [initDropBar, initMenu, setDropBarMenu])
 
-  return { dropBarShow, dropBarMenu, toggleDropBar, listClick };
+  return { dropBarShow, dropBarMenu, toggleDropBar, updateSelectItem };
 }
 

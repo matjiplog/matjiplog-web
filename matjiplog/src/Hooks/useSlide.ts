@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
-export function useSlide(length: number): useSlideTypes {
+import { useSlideResult } from '../types/hook/useSlide';
+
+export function useSlide(length: number): useSlideResult {
   const [slideIndex, setSlideIndex] = useState<number>(0);
 
   const leftClick = (): void => { setSlideIndex(slideIndex-1); };
@@ -14,8 +16,4 @@ export function useSlide(length: number): useSlideTypes {
   return { slideIndex, leftClick, rightClick };
 }
 
-export interface useSlideTypes {
-  slideIndex: number;
-  leftClick: () => void;
-  rightClick: () => void;
-}
+

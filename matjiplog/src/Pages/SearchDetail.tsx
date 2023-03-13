@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import Header from "../Components/Common/Header";
+import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
 import Footer from "../Components/Common/Footer";
-import MatjipTop from "../Components/Search/Detail/MatjipTop";
-import MatjipTab from "../Components/Search/Detail/MatjipTab";
+import MatjipTop from "../Components/Detail/MatjipTop";
+import MatjipTab from "../Components/Detail/MatjipTab";
 import { useMatjipDetail } from "../Hooks/apis/useMatjipDetail";
 
 
@@ -14,7 +14,7 @@ function SearchDetail() {
   return(
     <>
       <SearchDetailWrap>
-        <Header></Header>
+        <HeaderContainer></HeaderContainer>
         <MatjipTop></MatjipTop>
         <MatjipTab></MatjipTab>
       </SearchDetailWrap>

@@ -1,0 +1,15 @@
+import { LoginDiv, LoginBtn, MenuBar } from './LoginStyle';
+
+import { LoginProps } from '../../../../../types/props/Header/Login';
+
+function Login({ navShow, navHandler, toggleNavShow }: LoginProps): JSX.Element {
+
+  return <>
+    <LoginDiv show={navShow ? true : false}>
+        <LoginBtn onClick={navHandler}>로그인</LoginBtn>
+    </LoginDiv>
+    <MenuBar size={40} onClick={toggleNavShow}/>
+  </>
+}
+
+export default Login;

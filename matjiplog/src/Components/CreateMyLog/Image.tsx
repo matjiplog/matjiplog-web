@@ -1,11 +1,11 @@
 import { ImageDiv, ImageTitleAndBtnDiv, ImageTitle, IconAndFileBtn, ImageIcon, ImageFileBtn, ImageLabel, ImagesSelectDiv, SelectImage, SlideLeftBtn, SlideRightBtn, DeleteBtn } from "../../styles/createMylog/image";
 
-import { useSlide, useSlideTypes } from "../../Hooks/useSlide";
+import { useSlide } from "../../Hooks/useSlide";
 import { useImageSelect, useImageSelectTypes } from '../../Hooks/useImageSelect';
 
 function CreateMyLogImage(): JSX.Element {
   const { images, selectImages, deleteImages }: useImageSelectTypes = useImageSelect();
-  const { slideIndex, leftClick, rightClick }: useSlideTypes = useSlide(images.length-1);
+  const { slideIndex, leftClick, rightClick } = useSlide(images.length-1);
 
   return (
     <ImageDiv className="imageDiv">

@@ -21,7 +21,7 @@ export const InputGrayRadius6 = styled.input`
   border-radius: 6px;
 `;
 
-export const inputMainRadius6 = styled.input`
+export const InputMainRadius6 = styled.input`
   border: solid #FF6701 1px;
   border-radius: 6px;
 `;

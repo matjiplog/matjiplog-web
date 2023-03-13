@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { MatjipDto, Matjips } from '../types/api/matjip';
+import { MatjipDto } from '../types/api/matjip';
 
-export const useMatjipList = (data: Matjips | null | undefined, isLoading: boolean, page: number) => {
+import { useMatjipListResult } from '../types/hook/common/useMatjipList';
+
+export const useMatjipList = (): useMatjipListResult => {
     const [matjipList, setMatjipList] = useState<MatjipDto[]>([]);
 
-    useEffect(() => {
-        if (!isLoading && data?.matjipListData) {
-          if(page === 0){
-            setMatjipList([...data.matjipListData]);
-          }else{
-            setMatjipList((prev) => [...prev, ...data.matjipListData]);
-          }
-        }
-      }, [data, isLoading, page]);
+    const pushMatjipList = (newMatjipList: MatjipDto[]) => {
+      setMatjipList((prev) => [...prev, ...newMatjipList]);
+    }
+    const newMatjipList = (newMatjipList: MatjipDto[]) => {
+      setMatjipList([...newMatjipList]);
+    }
 
-      
-      return { matjipList }
+    return { matjipList, pushMatjipList, newMatjipList }
 }

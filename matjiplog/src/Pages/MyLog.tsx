@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Footer from "../Components/Common/Footer";
-import Header from "../Components/Common/Header";
+import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
 
 import { showLogStore } from "../stores/mylog/store";
 import GridLog from "../Components/MyLog/GridLog";
@@ -13,7 +13,7 @@ function MyLog() {
   return(
     <>
       <MyLogWrap footer={mapShow.toString()}>
-        <Header></Header>
+        <HeaderContainer></HeaderContainer>
         <SelectLogView></SelectLogView>
         {mapShow ? <MapLog/> : <GridLog/>}
       </MyLogWrap>

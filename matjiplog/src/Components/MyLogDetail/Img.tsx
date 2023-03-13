@@ -1,14 +1,14 @@
 import { Image, ImagesDiv, SlideLeftBtn, SlideRightBtn } from '../../styles/mylogDetail/img';
 import { ImgArticle } from '../../styles/mylogDetail/area';
 
-import { useSlide, useSlideTypes } from '../../Hooks/useSlide';
+import { useSlide } from '../../Hooks/useSlide';
 
 interface props {
     imgsUrl : string[];
 }
 
 function Img({imgsUrl} : props): JSX.Element {
-    const { slideIndex, leftClick, rightClick }: useSlideTypes = useSlide(imgsUrl.length-1);
+    const { slideIndex, leftClick, rightClick } = useSlide(imgsUrl.length-1);
     return <ImgArticle>
         <SlideLeftBtn onClick={leftClick} />
         <SlideRightBtn onClick={rightClick} />

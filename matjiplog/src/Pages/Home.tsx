@@ -1,17 +1,17 @@
-import Header from "../Components/Common/Header";
-import Intro from "../Components/Home/Intro";
-import HomeFooter from "../Components/Common/HomeFooter";
-import MyPlaceMatjipContainer from '../Components/Home/MyPlaceMatjipContainer/MyPlaceMatjipContainer';
+import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
+import IntroContainer from '../Components/Home/Container/IntroContainer';
+import FooterContainer from '../Components/Common/Container/Footer2/FooterContainer';
+import MyPlaceMatjipContainer from '../Components/Home/Container/MyPlaceMatjipContainer';
 
 import { HomePageWrap } from "../styles/common/wrap";
 
 function HomePage(): JSX.Element {
   return (
     <HomePageWrap>
-      <Header/>
-      <Intro/>
+      <HeaderContainer/>
+      <IntroContainer/>
       <MyPlaceMatjipContainer />
-      <HomeFooter/>
+      <FooterContainer/>
     </HomePageWrap>
   );
 }
