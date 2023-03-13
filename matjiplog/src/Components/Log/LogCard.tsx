@@ -4,7 +4,7 @@ import DropDown from "./DropDown";
 import { BsHeart, BsFillChatSquareDotsFill , BsEmojiSmile, } from "react-icons/bs";
 import { LessP } from "../../styles/common/font";
 import { IUser } from "./UserLogGrid";
-import useDetectClose, { useDetectCloseTypes } from "../../Hooks/useDetectClose";
+import useDetectClose, { useDetectCloseTypes } from "./Presentational/useDetectClose";
 
 function LogCard({
     info,

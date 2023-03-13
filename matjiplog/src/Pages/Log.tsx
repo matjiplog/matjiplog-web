@@ -3,6 +3,7 @@ import SearchBar from "../Components/Common/SearchBar";
 import Header from "../Components/Common/Header";
 import Footer from "../Components/Common/Footer";
 import UserLogGrid from "../Components/Log/UserLogGrid";
+import LogContainer from "../Components/Log/Container/LogContainer";
 
 function Log() {
   return(
@@ -11,7 +12,7 @@ function Log() {
         <Header></Header>
         <Section>
           {/* <SearchBar></SearchBar> */}
-          <UserLogGrid></UserLogGrid>
+          <LogContainer/>
         </Section>  
       </LogWrap>
       <Footer></Footer>

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { icons } from "react-icons/lib";
 import { MapMarker, useMap } from "react-kakao-maps-sdk";
 import styled from "styled-components";
-import useDetectClose, { useDetectCloseTypes } from "../../Hooks/useDetectClose";
+import useDetectClose, { useDetectCloseTypes } from "../Log/Presentational/useDetectClose";
 import { StarMake } from "../Common/StarMake";
 import DropDown from "../Log/DropDown";
 import { GoX } from "react-icons/go";

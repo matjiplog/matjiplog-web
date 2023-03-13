@@ -13,3 +13,10 @@ export const matjipAPI = axios.create({
     'Content-Type': "application/json",
   },
 });
+
+export const logAPI = axios.create({
+  baseURL: process.env.REACT_APP_LOG_URL,
+  headers: {
+    'Content-Type': "application/json",
+  },
+});
