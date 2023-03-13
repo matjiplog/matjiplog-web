@@ -44,6 +44,7 @@ export const DropItem = styled.li`
   display: flex;
   align-items: center;
   background-color: white;
+  
   &:hover {
     color: #ff6701;
   }

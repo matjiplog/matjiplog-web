@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 
-import Header from '../Components/Common/Header';
-import HomeFooter from '../Components/Common/HomeFooter';
+import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
+import FooterContainer from '../Components/Common/Container/Footer2/FooterContainer';
 import AddComment from '../Components/MyLogDetail/AddComment';
 import Comment from '../Components/MyLogDetail/Comment';
 import Count from '../Components/MyLogDetail/Count';
@@ -15,7 +15,7 @@ function MyLogDetailPage(): JSX.Element {
     const { mylogId } = useParams();
 
     return <MylogDetailWrap>
-        <Header /> 
+        <HeaderContainer /> 
         <InfoSection>
             <ImgAndInfo>
                 <Img imgsUrl={["/assets/Home/introbg1.png","/assets/Home/introbg1.png"]}/>
@@ -25,7 +25,7 @@ function MyLogDetailPage(): JSX.Element {
             <Comment imgUrl='/assets/images/google.png' nickName='이보연개짜증' time={1} content="진짜 이보연 자기마음대로 막 바꾸지말라구요요"/>
             <AddComment />
         </InfoSection>
-        <HomeFooter />
+        <FooterContainer />
     </MylogDetailWrap>
 }
 

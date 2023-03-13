@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import SearchBar from "../Components/Common/SearchBar";
-import Header from "../Components/Common/Header";
+// import SearchBar from "../Components/Common/SearchBar";
+import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
 import Footer from "../Components/Common/Footer";
 import UserLogGrid from "../Components/Log/UserLogGrid";
 import LogContainer from "../Components/Log/Container/LogContainer";
@@ -9,7 +9,7 @@ function Log() {
   return(
     <>
       <LogWrap>
-        <Header></Header>
+        <HeaderContainer></HeaderContainer>
         <Section>
           {/* <SearchBar></SearchBar> */}
           <LogContainer/>

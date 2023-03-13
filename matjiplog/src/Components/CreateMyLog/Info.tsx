@@ -1,6 +1,6 @@
 import { Disclosure, DisclosureCheck, DisclosureCheckDiv, DisclosureTitle, FindMap, FindMapIcon, FindMapTitle, InfoDiv, Scope, ScopeTitle, ScopeItems, ScopteItem, ScopeItemTitleDiv, ScopeItemTitle, ScopeStars, Star, OptionsDiv, OptionsTitle, ScopeAndOptions } from "../../styles/createMylog/info";
 
-import { DropBar } from "../Common/DropBar";
+// import { DropBar } from "../Common/DropBar";
 
 import { useDisclosure, useDisclosureTypes } from "../../Hooks/useDisclosure";
 import { useScope, useScopeType } from "../../Hooks/useScope";
@@ -51,7 +51,7 @@ function CreateMyLogInfo(): JSX.Element {
         </Scope>
         <OptionsDiv className="optionsDiv">
           <OptionsTitle>주문 방식</OptionsTitle>
-          <DropBar title={createMyLogDropbar[0]} DropMenu={createMyLogDropbar}/>
+          {/* <DropBar title={createMyLogDropbar[0]} DropMenu={createMyLogDropbar}/> */}
         </OptionsDiv>
       </ScopeAndOptions>
     </InfoDiv>

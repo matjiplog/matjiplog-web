@@ -1,8 +1,9 @@
 import { NavigateFunction } from "react-router-dom";
 
-export function navigateController(navigate: NavigateFunction): returnType {
+import { NavigateControllerResult } from '../types/util/navigateControllerResult';
 
-  const locationHref = (e: React.MouseEvent<HTMLButtonElement | HTMLImageElement>): void => {
+export function navigateController(navigate: NavigateFunction): NavigateControllerResult {
+  const navHandler = (e: React.MouseEvent<HTMLButtonElement | HTMLImageElement>): void => {
     const { target, currentTarget } = e;
     const href = currentTarget.textContent;
 
@@ -30,9 +31,5 @@ export function navigateController(navigate: NavigateFunction): returnType {
     }
   };
 
-  return { locationHref };
-}
-
-export interface returnType {
-  locationHref: (e: React.MouseEvent<HTMLButtonElement | HTMLImageElement>) => void;
+  return { navHandler };
 }
