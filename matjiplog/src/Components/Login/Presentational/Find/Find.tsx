@@ -1,6 +1,6 @@
 import { FindBtn, FindDiv } from "./style";
 
-function Find() {
+function Find() : JSX.Element {
   return(
     <FindDiv>
         <FindBtn>아이디 찾기</FindBtn>
@@ -9,3 +9,5 @@ function Find() {
       </FindDiv>
   );
 }
+
+export default Find;
