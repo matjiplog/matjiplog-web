@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import {userAPI} from "../Api/axios";
-import { useSwal } from "../Hooks/useSwal";
+import { useSwal } from "../Components/SignUp/Presentational/useSwal";
 import { userDto } from "../types/userDto";
 import qs from 'qs';
 
@@ -38,7 +38,7 @@ export const axiosEmailPost = async (userId : string) =>{
   }
 }
 
-export const axiosEmailauthCodeCheck = async (email : string, authCode : string) =>{
+export const axiosEmailauthCodeCheck = async (email : string, authCode : string|undefined) =>{
   try{
     const data = { 'email': email , 'authCode' : authCode};
     const options = {

@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
+import { warningTextType, isvalidType } from "../../../types/props/SignUp/signUpProps";
+import { signUpInputType } from "../../../types/userDto";
 
-export default function useValid(changeValue: validType) {
+export default function useValid(changeValue: signUpInputType) {
   const [validText, setValidText] = useState<warningTextType>({
     idText : '',
     passwordText : '',
     passwordCheckText : '',
   });
-  const [isValid, setIsValid] = useState({
+  const [isValid, setIsValid] = useState<isvalidType>({
     isId : false,
     isPassword : false,
     isPasswordConfirm : false,
@@ -15,14 +17,14 @@ export default function useValid(changeValue: validType) {
   //이메일 검사
   useEffect(() => {
     const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-    if(!emailRegex.test(changeValue.id)) {
+    if(!emailRegex.test(changeValue.email)) {
       setValidText({...validText, idText:'이메일 형식을 확인해주세요'});
       setIsValid({...isValid, isId:false});
     }else {
       setValidText({...validText, idText:''});
       setIsValid({...isValid, isId:true});
     }
-  }, [changeValue.id]);
+  }, [changeValue.email]);
 
   //비밀번호 검사
   useEffect(() => {
@@ -48,15 +50,4 @@ export default function useValid(changeValue: validType) {
   }, [changeValue.passwordConfirm]);
 
   return { validText, isValid };
-}
-
-export interface warningTextType {
-  idText : string,
-  passwordText : string,
-  passwordCheckText : string,
-}
-export interface validType {
-  id : string,  // 사용자 ID (이메일 형식)
-  password : string, // 비밀번호
-  passwordConfirm: string,
 }

@@ -7,9 +7,6 @@ export const LoginDiv  = styled(FlexColumnAlignCenter)`
   padding-bottom: 100px;
 `;
 
-
-
-// export const WrapDiv = styled.div`
-//   display: flex;
-//   margin-top: 30px;
-// `;
+export const ContentDiv = styled(FlexRow)`
+  margin-top: 30px;
+`;

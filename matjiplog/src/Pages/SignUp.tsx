@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 import Footer from "../Components/Common/Footer";
 import Logo from "../Components/Common/Logo";
-import SignUpInput from "../Components/SignUp/SignUpInput";
+import SignUpContainer from "../Components/SignUp/Container/SignUpContainer";
 
 function SignUp() {
   return (
     <>
       <SignUpWrap>
-        <SignUpInput></SignUpInput>
+        <SignUpContainer></SignUpContainer>
       </SignUpWrap>
       <Footer></Footer>
     </>
