@@ -4,7 +4,7 @@ import { MatjipItem, MatjipItemImg, Like, Category, TitleAndScope, Title, Number
 
 function SearchMatjipItem({imgUrl, category, title, scopeNumber, address}: SearchMatjipItemProps): JSX.Element{
     let starArray: JSX.Element[]= [];
-    for(let i=1 ; i<=5 ; i++) starArray.push(<Star active={i<=scopeNumber ? true : false} key={i}/>);
+    for(let i=1 ; i<=5 ; i++) starArray.push(<Star active={i<=scopeNumber} key={i}/>);
 
     return (
       <MatjipItem>

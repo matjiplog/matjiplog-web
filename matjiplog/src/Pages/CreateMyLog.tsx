@@ -1,23 +1,14 @@
 import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
 import FooterContainer from '../Components/Common/Container/Footer2/FooterContainer';
-import CreateMyLogImage from "../Components/CreateMyLog/Image";
-import CreateMyLogInfo from "../Components/CreateMyLog/Info";
-import CreateMyLogDetail from "../Components/CreateMyLog/Detail";
+import CreateMyLogFormContainer from '../Components/CreateMyLog/Container/CreateMyLogFormContainer';
 
-import { CreateMyLogWrap } from "../styles/common/wrap";
-import { CreateForm, ImgaeAndInfo } from "../styles/createMylog/createForm";
+import { CreateMyLogWrap } from "../styles/wrap";
 
 function CreateMyLogPage(): JSX.Element {
   return (
     <CreateMyLogWrap>
       <HeaderContainer />
-      <CreateForm>
-        <ImgaeAndInfo>
-          <CreateMyLogImage/>
-          <CreateMyLogInfo/>
-        </ImgaeAndInfo>
-        <CreateMyLogDetail/>
-      </CreateForm>
+      <CreateMyLogFormContainer />
       <FooterContainer />
     </CreateMyLogWrap>
   );

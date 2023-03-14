@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import DropDown from "./DropDown";
 import { BsHeart, BsFillChatSquareDotsFill , BsEmojiSmile, } from "react-icons/bs";
-import { LessP } from "../../styles/common/font";
+import { LessP } from "../../styles/font";
 import { IUser } from "./UserLogGrid";
 import useDetectClose, { useDetectCloseTypes } from "../../Hooks/useDetectClose";
 

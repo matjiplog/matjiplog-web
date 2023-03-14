@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DivGrayRadius6, InputGrayRadius6, inputMainRadius6 } from "../../../../styles/borderStyle";
+import { DivGrayRadius6, InputGrayRadius6, InputMainRadius6 } from "../../../../styles/borderStyle";
 import { BackgroundImgDiv } from "../../../../styles/divStyle";
 import { FlexColumn, FlexRowBetweenCenter, FlexRowCenterCenter } from "../../../../styles/flexStyle";
 
@@ -27,7 +27,7 @@ export const InputLogin = styled(InputGrayRadius6)`
   margin-top: 5px;
 `;
 
-export const LoginBtn = styled(inputMainRadius6)`
+export const LoginBtn = styled(InputMainRadius6)`
   margin-top : 20px;    
   width: 274px;
   height: 35px;

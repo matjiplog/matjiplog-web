@@ -1,14 +1,13 @@
 import { useState } from 'react';
 
-export function useDisclosure(initDisclosure: boolean): useDisclosureTypes {
+import { useDisclosureResult } from '../types/hook/common/useDisclosure';
+
+export function useDisclosure(initDisclosure: boolean): useDisclosureResult{
   const [disclosure, setDisclosure] = useState<boolean>(initDisclosure);
 
-  const toggleDisclosure = () => { setDisclosure(!disclosure); }
+  const toggleDisclosure = () => { 
+      setDisclosure((prev) => !prev);
+  }
 
   return { disclosure, toggleDisclosure };
-}
-
-export interface useDisclosureTypes {
-  disclosure: boolean;
-  toggleDisclosure: () => void;
 }

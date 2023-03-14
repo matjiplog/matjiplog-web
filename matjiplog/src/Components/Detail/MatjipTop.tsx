@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useMatjipDetail } from "../../Hooks/apis/useMatjipDetail";
 import { axiosMatjipDetail } from "../../Services/matjip-service";
-import { AccentP, LessP } from "../../styles/common/font";
+import { AccentP, LessP } from "../../styles/font";
 import { MatjipDto } from "../../types/api/matjip";
 import LodingSpinner from "../Common/Loding";
 

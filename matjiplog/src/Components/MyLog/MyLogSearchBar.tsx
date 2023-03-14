@@ -1,19 +1,19 @@
-import {
-  DropBarDiv,
-  Category,
-  DropBarTitle,
-  DropItems,
-  DropItem,
-} from "../../styles/common/dropBar";
+// import {
+//   DropBarDiv,
+//   Category,
+//   DropBarTitle,
+//   DropItems,
+//   DropItem,
+// } from "../../styles/dropBar";
 
-import {
-  HasTags,
-  HasTagItem,
-  SearchForm,
-  SearchIcon,
-  SearchInput,
-  SearchInputAndHastag,
-} from "../../styles/common/searchBar";
+// import {
+//   HasTags,
+//   HasTagItem,
+//   SearchForm,
+//   SearchIcon,
+//   SearchInput,
+//   SearchInputAndHastag,
+// } from "../../styles/searchBar";
 import { showLogStore } from "../../stores/mylog/store";
 import { useDropBar } from "../../Hooks/useDropBar";
 import { useDropBarResult } from '../../types/hook/useDropBar';
@@ -29,7 +29,7 @@ function MyLogSearchBar({visible} : propsType) {
 
   return(
     <>
-      <DropBarDiv visibled={visible}>
+      {/* <DropBarDiv visibled={visible}>
         <Category>category</Category>
         <DropBarTitle onClick={toggleDropBar}>{dropBarMenu}</DropBarTitle>
         {dropBarShow && (
@@ -50,7 +50,7 @@ function MyLogSearchBar({visible} : propsType) {
             return <HasTagItem key={index}>{value}</HasTagItem>;
           })}
         </HasTags>
-      </SearchInputAndHastag>
+      </SearchInputAndHastag> */}
     </>
   );
 }

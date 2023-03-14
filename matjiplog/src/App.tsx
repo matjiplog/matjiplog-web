@@ -11,7 +11,7 @@ import Log from "./Pages/Log";
 import MyLog from "./Pages/MyLog";
 import MyLogDetail from './Pages/MyLogDetail';
 
-import GlobalStyle from "./styles/common/global";
+import GlobalStyle from "./styles/global";
 import SearchDetail from "./Pages/SearchDetail";
 
 function App(): JSX.Element {

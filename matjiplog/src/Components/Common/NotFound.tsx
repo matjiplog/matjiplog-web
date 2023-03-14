@@ -1,4 +1,4 @@
-import { NotFoundDiv, NotFoundMessege } from "../../styles/common/notFound";
+import { NotFoundDiv, NotFoundMessege } from "../../styles/notFound";
 
 function NotFound(): JSX.Element {
   return (
