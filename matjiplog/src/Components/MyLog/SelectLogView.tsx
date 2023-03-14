@@ -44,10 +44,10 @@ const MylogTopDiv = styled.div`
 `;
 const SelectViewDiv = styled.div`
   display: flex;
-  justify-contet: space-between;
+  justify-content: space-between;
   align-items: center;
   height: 38px;
-  padding: 0px 20px 0 20px;
+  padding: 0 0 0 5em;
 `;
 const LogViewDiv = styled.div`
   padding : 2% 10% 0 10%;

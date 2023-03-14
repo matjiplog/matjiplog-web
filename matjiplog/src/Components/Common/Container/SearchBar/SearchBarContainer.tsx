@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 
 import HasTagList from '../../Presentational/SearchBar/HasTagList/HasTagList';
 import KeyWordForm from '../../Presentational/SearchBar/KeywordForm/KeyWordForm';
+import SelectLogView from '../../Presentational/SearchBar/SelectLogView/SelectLogView';
 import DropBarContinaer from '../DropBar/DropBarContainer';
 
 import { SearchBarDiv, InputAndHastag } from './SearchBarContainerStyle';
@@ -21,6 +22,7 @@ function SearchBarContainer(): JSX.Element {
                 <KeyWordForm />
                 <HasTagList hasTagList={hasTagList}/>
             </InputAndHastag>
+            <SelectLogView />
         </SearchBarDiv>
     );
 }

@@ -12,6 +12,8 @@ import { FaRegMap } from "react-icons/fa";
 import { FaRegHeart, FaRegCommentDots } from "react-icons/fa";
 import { AiFillLock, AiFillUnlock } from "react-icons/ai";
 import { BsArrow90DegRight, BsTelephone } from "react-icons/bs";
+import { TbGridDots } from "react-icons/tb";
+
 import FadeLoader from "react-spinners/FadeLoader";
 
 export const LikeFullIcon = styled(FaHeart)`
@@ -48,5 +50,7 @@ export const DotIcon = styled(FiMoreHorizontal)`
 `
 export const PhoneIcon = styled(BsTelephone)`
 `
-export const ArrowRightIcon =styled(BsArrow90DegRight)`
+export const ArrowRightIcon = styled(BsArrow90DegRight)`
+`
+export const GridDotIcon = styled(TbGridDots)`
 `

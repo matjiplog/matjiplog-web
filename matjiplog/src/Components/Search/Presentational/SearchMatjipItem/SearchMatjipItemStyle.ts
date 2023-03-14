@@ -39,7 +39,7 @@ export const TitleAndScope = styled.div`
 
 export const Title = styled.div`
   flex: 1;
-  font-size: 15px;
+  font-size: 1.5rem;
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;

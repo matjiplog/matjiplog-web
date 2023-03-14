@@ -17,7 +17,7 @@ export const GnvBtn = styled.button<{ active: boolean }>`
   color: ${(props) => props.active ? mainFont : blackFont};
 `;
 
-export const Gnv = styled.ul<{ show: boolean}>`
+export const Gnv = styled.ul<{ active: boolean }>`
   display: flex;
   align-items: center;
 
@@ -25,7 +25,7 @@ export const Gnv = styled.ul<{ show: boolean}>`
       flex-direction: column;
       width: 100%;
       align-items: center;
-      display: ${(props) => props.show ? "none" : "flex"};
+      display: ${(props) => props.active ? "flex" : "none"};
 
       ${GnvItem} {
         width: 100%;

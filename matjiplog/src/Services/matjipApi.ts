@@ -66,3 +66,18 @@ export const getMatjipMyPlace = async (lat: number, lng: number, radius: number,
     throw error;
   }
 }
+
+// {
+//     @"name": "string",// 맛집이름
+//     "phoneNumber": "string",
+//     "zipcode": "string",
+//     "address": "string",
+//     "roadAddress": "string",
+//     "category": "string",
+//     @"locationLatitude": 0,
+//     @"locationLongitude": 0,
+//     "isActive": true,
+//     "isApproval": true,
+//     @"requester": 0,// 신청자
+//     "managementSource": "string"
+//   } custum add

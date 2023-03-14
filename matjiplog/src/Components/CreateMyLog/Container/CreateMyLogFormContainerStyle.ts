@@ -10,7 +10,7 @@ export const CreateMyLogForm = styled.form`
     flex-direction: column;
 
     @media screen and (max-width: 700px) {
-        width: 60%;
+        width: 90%;
     }
 `;
 

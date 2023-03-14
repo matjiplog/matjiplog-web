@@ -17,3 +17,7 @@ export const CreateMyLogWrap = styled.div`
 export const MylogDetailWrap = styled.div`
   height: 100%;
 `
+
+export const MyLogWrap = styled.div`
+  height: 100%;
+`

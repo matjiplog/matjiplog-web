@@ -5,7 +5,7 @@ import { GlobalNavProps } from '../../../../../types/props/Header/GlobalNav';
 function GlobalNav({ navShow, path, navHandler }: GlobalNavProps): JSX.Element {
 
     return(
-        <Gnv show={navShow ? true : false}>
+        <Gnv active={navShow}>
             <GnvItem>
                 <GnvBtn active={path === "/search"} onClick={navHandler}>맛집 찾기</GnvBtn>
             </GnvItem>

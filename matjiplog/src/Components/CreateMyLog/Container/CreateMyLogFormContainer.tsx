@@ -30,23 +30,25 @@ function CreateMyLogFormContainer(): JSX.Element {
     ];
 
     
-    return <CreateMyLogForm>
-        <ImgaeAndInfo>
-            <ImageDiv>
-                <SelectImageHeader images={images} leftClick={leftClick} deleteImages={deleteImages} rightClick={rightClick}/>
-                <SelectImage images={images} selectImages={selectImages} slideIndex={slideIndex} />
-            </ImageDiv>
-            <InfoDiv>
-                <InputMap />
-                <InputDisclosure disclosure={disclosure} toggleDisclosure={toggleDisclosure}/>
-                <ScopeAndOptions>
-                    <InputScope scopeItems={scopeItems} updateScope={updateScope} />
-                    <InputOtion />
-                </ScopeAndOptions>
-            </InfoDiv>
-        </ImgaeAndInfo>
-        <InputDetail />
-    </CreateMyLogForm>
+    return (
+        <CreateMyLogForm>
+            <ImgaeAndInfo>
+                <ImageDiv>
+                    <SelectImageHeader images={images} leftClick={leftClick} deleteImages={deleteImages} rightClick={rightClick}/>
+                    <SelectImage images={images} selectImages={selectImages} slideIndex={slideIndex} />
+                </ImageDiv>
+                <InfoDiv>
+                    <InputMap />
+                    <InputDisclosure disclosure={disclosure} toggleDisclosure={toggleDisclosure}/>
+                    <ScopeAndOptions>
+                        <InputScope scopeItems={scopeItems} updateScope={updateScope} />
+                        <InputOtion />
+                    </ScopeAndOptions>
+                </InfoDiv>
+            </ImgaeAndInfo>
+            <InputDetail />
+        </CreateMyLogForm>
+    )
 }
 
 export default CreateMyLogFormContainer;
