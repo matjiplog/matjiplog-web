@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import IntroImage from '../Presentational/IntroImage/IntroImage';
 import IntroButton from '../Presentational/IntroButton/IntroButton';
 import IntroTitle from '../Presentational/IntroTitle/IntroTitle';
-import MyPlaceMap from '../Presentational/MyPlaceMap/MyPlaceMap';
+import MyPlaceMap from '../../Common/Presentational/MyPlaceMap/MyPlaceMap';
 import RadiusForm from '../Presentational/RadiusForm/RadiusForm';
 import MyPlaceMatjip from '../Presentational/MyPlaceMatjip/MyPlaceMatjip';
 import LodingSpinner from '../../Common/Loding';
@@ -19,11 +19,11 @@ import { useMatjipListResult } from '../../../types/hook/common/useMatjipList';
 import { useDrawMarkerResult } from '../../../types/hook/useDrawMarker';
 
 import { useImageSlide } from '../../../Hooks/useImageSlide';
-import { useMyPlaceMap } from '../Presentational/useMyPlaceMap';
+import { useMyPlaceMap } from '../../../Hooks/useMyPlaceMap';
 import { useObserverPage } from '../../../Hooks/useObserverPage';
 import { useMatjipList } from '../../../Hooks/useMatjipList';
 import { useRadius } from '../Presentational/useRadius';
-import { useDrawMarker } from '../Presentational/useDrawMarker';
+import { useDrawMarker } from '../../../Hooks/useDrawMarker';
 
 import { getMatjipMyPlace } from '../../../Services/matjipApi';
 
@@ -34,32 +34,42 @@ function HomeContainer(): JSX.Element {
     }, [])
     const { slideIndex, leftClick, rightClick }: useImageSlideResult = useImageSlide(introImageUrl.length-1);
     // MyPlace
-    const { mapRef, map, myPlace }: useMyPlaceMapResult = useMyPlaceMap();
+    const { mapRef, map, myPlace }: useMyPlaceMapResult = useMyPlaceMap(3);
     const { page, initPage, setLastCardRef }: useObserverPageResult = useObserverPage();
     const { radius, inquireRadiusHandler }: useRadiusResult = useRadius();
     const { matjipList, pushMatjipList, newMatjipList }: useMatjipListResult = useMatjipList();
-    const { markers, deleteMarkers, drawMakers }: useDrawMarkerResult = useDrawMarker();
+    const { markers, deleteMarkers, drawMatjipMakers }: useDrawMarkerResult = useDrawMarker();
     const { data, isLoading } = useQuery(["myPlace", myPlace.latitude, myPlace.longitude, radius, page], () => getMatjipMyPlace(myPlace.latitude, myPlace.longitude, radius, page));
     // const sequenceSet = new Set(matjipList.map(matjip => matjip.matjipSequence));
     // console.log(sequenceSet);
 
     useEffect(() => {
-        if(page) initPage();
+        if(page){
+            initPage();
+        }
     }, [radius])
 
     useEffect(() => {
-        if(markers) deleteMarkers();
+        if(markers){
+            deleteMarkers();
+        } 
     }, [radius])
 
     useEffect(() => {
         if (data?.matjipListData) {
-            if(page === 0) newMatjipList(data.matjipListData);
-            else pushMatjipList(data.matjipListData);
+            if(page === 0){
+                newMatjipList(data.matjipListData);
+            }
+            else{
+                pushMatjipList(data.matjipListData);
+            }
         }
     }, [data])
 
     useEffect(() => {
-        if (data?.matjipListData) drawMakers(map, data.matjipListData);
+        if(data?.matjipListData){
+            drawMatjipMakers(map, data.matjipListData);
+        } 
     }, [data])
 
     return (

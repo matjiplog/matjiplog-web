@@ -7,7 +7,7 @@ function InputDisclosure({ disclosure, toggleDisclosure }: InputDisclosureProps)
     return (
         <Disclosure>
                 <DisclosureTitle>공개</DisclosureTitle>
-                <DisclosureCheckDiv active={disclosure} onClick={toggleDisclosure}>
+                <DisclosureCheckDiv active={disclosure ? 1 : 0} onClick={toggleDisclosure}>
                     <DisclosureCheck  />
                 </DisclosureCheckDiv>
         </Disclosure>

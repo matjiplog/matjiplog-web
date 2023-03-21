@@ -25,7 +25,7 @@ export const MenuBar = styled(MenuBarIcon)`
   }
 `;
 
-export const LoginDiv = styled.div<{ active: boolean }>`
+export const LoginDiv = styled.div<{ active: number }>`
 
     @media screen and (max-width: 700px) {
         width: 100%;

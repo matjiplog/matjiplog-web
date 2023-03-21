@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { useMyPlaceMapResult } from '../../../types/hook/useMyPlaceMap';
+import { useMyPlaceMapResult } from '../types/hook/useMyPlaceMap';
 
 declare global { interface Window { kakao: any;} }
 
-export const useMyPlaceMap = (): useMyPlaceMapResult => {
+export const useMyPlaceMap = (level: number): useMyPlaceMapResult => {
     const [map, setMap] = useState<any>(null);
     const [myPlace, setMyPlace] = useState<{ latitude: number, longitude: number }>({ latitude : 0, longitude : 0 });
     const mapRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        if(!mapRef?.current) return;
+
         const container = mapRef.current;
-        const options = { center: new window.kakao.maps.LatLng(37.5665, 126.9780), level: 3, };
+        const options = { center: new window.kakao.maps.LatLng(37.5665, 126.9780), level: level, };
         const map = new window.kakao.maps.Map(container, options);
 
         if (navigator.geolocation) {
@@ -33,7 +35,7 @@ export const useMyPlaceMap = (): useMyPlaceMapResult => {
         } else {
             console.error('Geolocation is not supported by this browser.');
         }
-    }, []);
+    }, [mapRef.current]);
 
     return { mapRef, map, myPlace }
 }

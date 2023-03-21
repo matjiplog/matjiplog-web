@@ -61,7 +61,7 @@ export const ScopeNumber = styled.h3`
   font-size: 15px;
 `;
 
-export const Star = styled(StarIcon)<{ active: boolean }>`
+export const Star = styled(StarIcon)<{ active: number }>`
   font-size: 15px;
   cursor: pointer;
   color: ${(props) => props.active ? yellowFont : darkgrayFont};

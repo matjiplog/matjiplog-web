@@ -21,7 +21,9 @@ export function useDropBar(initMenu: string): useDropBarResult {
   useEffect(() => {
     setDropBarMenu(initMenu);
 
-    return initDropBar();
+    return () => {
+      initDropBar();
+    }
   }, [])
 
 

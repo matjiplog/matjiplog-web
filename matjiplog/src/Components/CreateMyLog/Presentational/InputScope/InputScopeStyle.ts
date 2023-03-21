@@ -50,7 +50,7 @@ export const ScopeStars = styled.div`
     
 `;
 
-export const Star = styled(StarIcon)<{ active: boolean }>`
+export const Star = styled(StarIcon)<{ active: number }>`
     font-size: 2rem;
     cursor: pointer;
     color: ${(props) => props.active ? yellowFont : darkgrayFont};

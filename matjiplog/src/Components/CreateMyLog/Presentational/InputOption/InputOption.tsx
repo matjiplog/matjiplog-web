@@ -6,7 +6,7 @@ function InputOtion(): JSX.Element {
     const dropList: string[] = ["선택 없음", "매장 방문", "포장", "배달"];
 
     return (
-        <OptionsDiv className="optionsDiv">
+        <OptionsDiv>
             <OptionsTitle>주문 방식</OptionsTitle>
             <DropBarContinaer title={dropList[0]} dropList={dropList} category={"선택사항"} />
         </OptionsDiv>

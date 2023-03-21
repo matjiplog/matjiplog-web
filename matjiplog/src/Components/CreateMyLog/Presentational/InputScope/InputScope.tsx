@@ -18,7 +18,7 @@ function InputScope({ scopeItems, updateScope }: InputScopeProps): JSX.Element {
                         </ScopeItemTitleDiv>
                         <ScopeStars>
                             {scopeArray.map((index: number): JSX.Element => (
-                                <Star key={index} onClick={() => updateScope(index, value.order)} active={value.state[index]}/>
+                                <Star key={index} onClick={() => updateScope(index, value.order)} active={value.state[index] ? 1 : 0}/>
                             ))}
                         </ScopeStars>
                     </ScopteItem>

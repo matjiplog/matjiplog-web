@@ -11,22 +11,22 @@ function SearchMatjipList({ viewList, setLastCardRef }: SearchMatjipListProps): 
     
     return <SearchListGrid>
         {viewList.map((value: MatjipDto, index: number) => {
-        const {matjipSequence, name, ratingTaste, ratingPortion, ratingService, address, roadAddress, category } = value;
-        const scopeNumber = (ratingPortion + ratingService + ratingTaste) / 3;
-        const isLastCard = index === viewList.length - 1;
+          const { matjipSequence, name, ratingTaste, ratingPortion, ratingService, address, roadAddress, category } = value;
+          const scopeNumber = (ratingPortion + ratingService + ratingTaste) / 3;
+          const isLastCard = index === viewList.length - 1;
 
-        return (
-          <Link to={`/search/${matjipSequence}`} key={matjipSequence}>
-            <SearchMatjipItem 
-              category={category}
-              imgUrl="/assets/images/Matjip.png"
-              title={name}
-              scopeNumber={scopeNumber}
-              address={roadAddress}
-            />
-            {isLastCard && <div ref={setLastCardRef} />}
-          </Link>
-        );
+          return (
+            <Link to={`/search/${matjipSequence}`} key={matjipSequence}>
+              <SearchMatjipItem 
+                category={category}
+                imgUrl="/assets/images/Matjip.png"
+                title={name}
+                scopeNumber={scopeNumber}
+                address={roadAddress}
+              />
+              {isLastCard && <div ref={setLastCardRef} />}
+            </Link>
+          );
       })}
     </SearchListGrid>
 }

@@ -3,16 +3,16 @@ import { BsMap } from "react-icons/bs";
 import { TbGridDots } from "react-icons/tb";
 
 import MyLogSearchBar from "./MyLogSearchBar";
-import { showLogStore } from "../../stores/mylog/store";
+// import { showLogStore } from "../../stores/mylog/store";
 
 
 
 function SelectLogView() {
-  const { mapShow, setMapShow} = showLogStore();
+  // const { mapShow, setMapShow} = showLogStore();
   
   return(
     <LogViewDiv>
-      <MylogTopDiv>
+      {/* <MylogTopDiv>
         {mapShow ? <MyLogSearchBar visible="hidden"></MyLogSearchBar>:
           <MyLogSearchBar visible="inherit"></MyLogSearchBar>}
         <SelectViewDiv>
@@ -23,7 +23,7 @@ function SelectLogView() {
             setMapShow(false);
           }}></GridIcon>
         </SelectViewDiv>
-      </MylogTopDiv>
+      </MylogTopDiv> */}
     </LogViewDiv>
   );
 }

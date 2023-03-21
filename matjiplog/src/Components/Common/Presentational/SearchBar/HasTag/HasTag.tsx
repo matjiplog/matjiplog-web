@@ -13,7 +13,7 @@ function HasTag({ hasTagTitle }: HasTagProps): JSX.Element {
     const { addHasTag, deleteHasTag } = useContext(handlerContext);
     const { active, toggleActive }: useActiveHastagResult = useActiveHasTag(addHasTag, deleteHasTag);
 
-    return <HasTagItem active={active} onClick={toggleActive}>{hasTagTitle}</HasTagItem>
+    return <HasTagItem active={active ? 1 : 0} onClick={toggleActive}>{hasTagTitle}</HasTagItem>
 }
 
 export default HasTag;

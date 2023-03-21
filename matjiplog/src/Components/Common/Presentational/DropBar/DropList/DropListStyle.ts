@@ -11,7 +11,7 @@ export const DropItems = styled.ul`
   z-index: 999;
 `;
 
-export const DropItem = styled.li<{ active: boolean }>`
+export const DropItem = styled.li<{ active: number }>`
   width: 100%;
   padding: 3em 2em 3em 2em;
   height: 40px;

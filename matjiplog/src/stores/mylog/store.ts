@@ -1,13 +1,15 @@
 import { create } from 'zustand';
 
-interface ShowMapLog {
-  mapShow: boolean;
-  setMapShow: (select: boolean) => void;
-}
+import { MapShowState } from '../../types/store/mapShow';
 
-export const showLogStore = create<ShowMapLog>((set) => ({
-  mapShow : true,
-  setMapShow : (select) =>{
-    set(() => ({ mapShow: select}));
-  }
+export const mapShowStore = create<MapShowState>((set) => ({
+  mapShow : false,
+
+  activeMapShow : () => {
+    set(() => ({ mapShow: true }));
+  },
+
+  inActiveMapShow : () => {
+    set(() => ({ mapShow: false }));
+  },
 }));

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { blackFont, mainFont, whiteFont } from '../../../../../styles/fontColor';
 
-export const HasTagItem = styled.li<{ active: boolean }>`
+export const HasTagItem = styled.li<{ active: number }>`
     margin: 2em;
     padding: 10px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);

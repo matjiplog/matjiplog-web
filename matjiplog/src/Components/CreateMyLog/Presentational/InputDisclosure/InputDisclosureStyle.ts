@@ -15,7 +15,7 @@ export const DisclosureTitle = styled.h3`
     font-weight: normal;
 `;
 
-export const DisclosureCheckDiv = styled.div<{ active: boolean }>`
+export const DisclosureCheckDiv = styled.div<{ active: number }>`
     width: 60px;
     height: 30px;
     border-radius: 100px;

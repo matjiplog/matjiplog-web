@@ -14,7 +14,7 @@
 //   SearchInput,
 //   SearchInputAndHastag,
 // } from "../../styles/searchBar";
-import { showLogStore } from "../../stores/mylog/store";
+// import { showLogStore } from "../../stores/mylog/store";
 import { useDropBar } from "../../Hooks/useDropBar";
 import { useDropBarResult } from '../../types/hook/useDropBar';
 

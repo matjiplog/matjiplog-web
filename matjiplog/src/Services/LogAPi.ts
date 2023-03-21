@@ -1,10 +1,13 @@
 import { logAPI } from '../Api/axios';
 import { handleError } from '../utils/handleError';
+import { MyLogs } from './../types/api/myLog';
 
-
-export const getLogDetail = async () => {
+export const getMyLogData = async (user_sequence: number, page: number): Promise<MyLogs | null> => {
     try{
+        const res = await logAPI.get("/log/list", { params: { user_sequence: user_sequence, page: page }})
 
+        if (!res?.data?.success || res?.status !== 200) return null;
+        return res.data;
     }
     catch (error: unknown) {
         handleError(error);
@@ -12,6 +15,18 @@ export const getLogDetail = async () => {
     }
 }
 
+export const deleteMyLogData = async (user_sequence: number, log_sequence: number): Promise<boolean | null> => {
+    try{
+        const res = await logAPI.delete("/log", { params: { user_sequence: user_sequence, log_sequence: log_sequence }})
+
+        if (!res?.data?.success || res?.status !== 200) return null;
+        return res.data.success;
+    }
+    catch (error: unknown) {
+        handleError(error);
+        throw error;
+    }
+}
 
 
 

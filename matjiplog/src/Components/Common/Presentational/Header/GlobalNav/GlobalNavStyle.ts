@@ -13,7 +13,7 @@ export const GnvItem = styled.li`
   }
 `;
 
-export const GnvBtn = styled.button<{ active: boolean }>`
+export const GnvBtn = styled.button<{ active: number }>`
   color: ${(props) => props.active ? mainFont : blackFont};
 `;
 
