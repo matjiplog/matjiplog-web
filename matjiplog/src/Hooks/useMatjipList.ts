@@ -15,6 +15,9 @@ export const useMatjipList = (): useMatjipListResult => {
     const newMatjipList = (newMatjipList: MatjipDto[]) => {
       setMatjipList([...newMatjipList]);
     };
+    const initMatjipList = () => {
+      setMatjipList([]);
+    };
 
     const newMyLogList = (newMyLogList: MyLogDto[]) => {
       setMyLogList([...newMyLogList]);
@@ -26,5 +29,5 @@ export const useMatjipList = (): useMatjipListResult => {
       setMyLogList((prev) => [...prev.filter(v => v.logSequence !== logSequence)]);
     };
     
-    return { matjipList, myLogList, pushMatjipList, newMatjipList, newMyLogList, pushMyLogList, filterMyLogList }
+    return { matjipList, myLogList, pushMatjipList, newMatjipList, initMatjipList, newMyLogList, pushMyLogList, filterMyLogList }
 }

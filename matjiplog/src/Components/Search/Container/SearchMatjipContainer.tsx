@@ -26,7 +26,7 @@ import { useDrawMarker } from '../../../Hooks/useDrawMarker';
 import { handlerContext } from '../../../Contexts/handler';
 
 import { dropBarMenuStore } from '../../../stores/dropBar';
-import { mapShowStore } from '../../../stores/mylog/store';
+import { mapShowStore } from '../../../stores/mapShow';
 
 import { getMatjipData, getMatjipSearch, getMatjipSearchAddress, getMatjipSearchName } from '../../../Services/matjipApi';
 
@@ -63,13 +63,10 @@ function SearchMatjipContainer(): JSX.Element {
             return;
         }
         
-        if (dropBarMenu === "전체") {
-            setSearchKey("searchAll");
-        } else if (dropBarMenu === "지역") {
-            setSearchKey("searchAddress");
-        } else if (dropBarMenu === "이름") {
-            setSearchKey("searchName");
-        }
+        if (dropBarMenu === "전체") setSearchKey("searchAll");
+        else if (dropBarMenu === "지역") setSearchKey("searchAddress");
+        else if (dropBarMenu === "이름") setSearchKey("searchName");
+
         setKeyword(keyword);
         initPage();
     }
@@ -84,28 +81,18 @@ function SearchMatjipContainer(): JSX.Element {
 
     useEffect(() => {
         if (data?.matjipListData) {
-            if(page === 0){
-                newMatjipList(data.matjipListData);
-            }
-            else{
-                pushMatjipList(data.matjipListData);
-            }
+            if(page === 0) newMatjipList(data.matjipListData);
+            else pushMatjipList(data.matjipListData);
         }
     }, [data])
 
     useEffect(() => {
-        if(markers){
-            deleteMarkers();
-        }
-        if(map && viewList[0]){
-            drawMatjipMakers(map, viewList);
-        }
+        if(markers) deleteMarkers();
+        if(map && viewList[0]) drawMatjipMakers(map, viewList);
     }, [map, viewList])
 
     useEffect(() => {
-        if(hasTags[0]){
-            filterMatjipHasTag(matjipList);
-        }
+        if(hasTags[0]) filterMatjipHasTag(matjipList);
     }, [hasTags, matjipList]);
 
     return (

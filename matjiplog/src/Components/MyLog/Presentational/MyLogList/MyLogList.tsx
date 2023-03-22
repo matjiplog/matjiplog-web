@@ -10,9 +10,9 @@ function MyLogList({ viewList, setLastCardRef, handleMyLogDetailPage, deleteMyLo
     return (
         <MyLogListGrid>
             {viewList.map((myLog: MyLogDto, index: number) => {
-                const { content, imageSerial, logSequence, matjip, matjipSequence, ratingProtion, ratingService, ratingTaste, userSequence } = myLog;
+                const { content, imageSerial, logSequence, matjip, matjipSequence, ratingPortion, ratingService, ratingTaste, userSequence } = myLog;
                 const { name, address, roadAddress, category } = matjip;
-                const scopeNumber = (ratingProtion + ratingService + ratingTaste) / 3;
+                const scopeNumber = (ratingPortion + ratingService + ratingTaste) / 3;
                 const isLastCard = index === viewList.length - 1;
 
                 return (

@@ -28,49 +28,44 @@ import { useDrawMarker } from '../../../Hooks/useDrawMarker';
 import { getMatjipMyPlace } from '../../../Services/matjipApi';
 
 function HomeContainer(): JSX.Element {
-    // Intro
-    const introImageUrl = useMemo(() => {
+    const introImageUrl: string[] = useMemo(() => {
         return [ "/assets/Home/introbg1.png", "/assets/Home/introbg2.png", "/assets/Home/introbg2.png" ];
-    }, [])
+    }, []);
+
     const { slideIndex, leftClick, rightClick }: useImageSlideResult = useImageSlide(introImageUrl.length-1);
-    // MyPlace
     const { mapRef, map, myPlace }: useMyPlaceMapResult = useMyPlaceMap(3);
     const { page, initPage, setLastCardRef }: useObserverPageResult = useObserverPage();
     const { radius, inquireRadiusHandler }: useRadiusResult = useRadius();
-    const { matjipList, pushMatjipList, newMatjipList }: useMatjipListResult = useMatjipList();
+    const { matjipList, pushMatjipList, newMatjipList, initMatjipList }: useMatjipListResult = useMatjipList();
     const { markers, deleteMarkers, drawMatjipMakers }: useDrawMarkerResult = useDrawMarker();
-    const { data, isLoading } = useQuery(["myPlace", myPlace.latitude, myPlace.longitude, radius, page], () => getMatjipMyPlace(myPlace.latitude, myPlace.longitude, radius, page));
-    // const sequenceSet = new Set(matjipList.map(matjip => matjip.matjipSequence));
-    // console.log(sequenceSet);
+
+    const { data, isLoading } = useQuery(
+        ["myPlace", myPlace.latitude, myPlace.longitude, radius, page], 
+        () => getMatjipMyPlace(myPlace.latitude, myPlace.longitude, radius, page)
+    );
 
     useEffect(() => {
-        if(page){
-            initPage();
-        }
-    }, [radius])
+        if(page) initPage();
+    }, [radius]);
 
     useEffect(() => {
-        if(markers){
-            deleteMarkers();
-        } 
-    }, [radius])
+        if(markers) deleteMarkers(); 
+    }, [radius]);
+
+    useEffect(() => {
+        initMatjipList();
+    }, [radius]);
 
     useEffect(() => {
         if (data?.matjipListData) {
-            if(page === 0){
-                newMatjipList(data.matjipListData);
-            }
-            else{
-                pushMatjipList(data.matjipListData);
-            }
+            if(page === 0) newMatjipList(data.matjipListData);
+            else pushMatjipList(data.matjipListData);
         }
-    }, [data])
+    }, [data]);
 
     useEffect(() => {
-        if(data?.matjipListData){
-            drawMatjipMakers(map, data.matjipListData);
-        } 
-    }, [data])
+        if(data?.matjipListData) drawMatjipMakers(map, data.matjipListData); 
+    }, [data]);
 
     return (
         <>

@@ -2,7 +2,7 @@ import { GridDot, IconBtn, Map, MapAndGrid } from './SelectLogViewStyle';
 
 import { MapShowState } from '../../../../../types/store/mapShow';
 
-import { mapShowStore } from '../../../../../stores/mylog/store';
+import { mapShowStore } from '../../../../../stores/mapShow';
 
 function SelectLogView(): JSX.Element {
     const { mapShow, activeMapShow, inActiveMapShow }: MapShowState = mapShowStore();

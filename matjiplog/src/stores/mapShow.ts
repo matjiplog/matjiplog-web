@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { MapShowState } from '../../types/store/mapShow';
+import { MapShowState } from '../types/store/mapShow';
 
 export const mapShowStore = create<MapShowState>((set) => ({
   mapShow : false,

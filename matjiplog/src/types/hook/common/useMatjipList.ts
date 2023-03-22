@@ -6,6 +6,7 @@ export interface useMatjipListResult {
     myLogList: MyLogDto[];
     pushMatjipList: (newMatjipList: MatjipDto[]) => void,
     newMatjipList: (newMatjipList: MatjipDto[]) => void,
+    initMatjipList: () => void,
     newMyLogList: (newMyLogList: MyLogDto[]) => void,
     pushMyLogList: (newMyLogList: MyLogDto[]) => void,
     filterMyLogList: (logSequence: number) => void,

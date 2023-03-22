@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const ContentInfoDiv = styled.div`
     padding: 7em 5em 0em 5em;
-    flex: 1;
     overflow: auto;
 `
 export const Title = styled.h1`

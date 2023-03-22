@@ -12,7 +12,7 @@ export const ImgAndContent = styled.div`
     }
 `;
 
-export const UserAndContent = styled.article`
+export const UserAndContent = styled.div`
     flex: 1 1 60%;
     display: flex;
     flex-direction: column;
@@ -23,6 +23,11 @@ export const UserAndContent = styled.article`
         flex: 1 1 100%;
     }
 `;
+
+export const ContentAndRating = styled.div`
+    flex: 1 1 90%;
+    overflow: auto;
+`
 
 export const CommentArticle = styled.article`
     height: 450px;
