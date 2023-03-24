@@ -15,13 +15,13 @@ import GlobalStyle from "./styles/global";
 import SearchDetail from "./Pages/SearchDetail";
 
 function App(): JSX.Element {
-  const client = new QueryClient({ defaultOptions: {} })
+  const queryClient = new QueryClient({ defaultOptions: {} })
   
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
-      <QueryClientProvider client={client}>
+      <QueryClientProvider client={queryClient}>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/login" element={<Login />}></Route>

@@ -30,6 +30,9 @@ export const ContentAndRating = styled.div`
 `
 
 export const CommentArticle = styled.article`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     height: 450px;
     padding: 5em 5em 5em 5em;
     overflow: auto;

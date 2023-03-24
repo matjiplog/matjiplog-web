@@ -1,8 +1,10 @@
 import { Scope, ScopeItems, ScopeItemTitle, ScopeItemTitleDiv, ScopeStars, ScopteItem, Star } from './RatingStyle';
 
 import { RatingProps } from '../../../../types/props/MyLogDetail/Rating';
+import { MyLogDto } from '../../../../types/api/myLog';
 
-function Rating({ ratingPortion, ratingService, ratingTaste }: RatingProps): JSX.Element {
+function Rating({ data }: RatingProps): JSX.Element {
+    const { ratingPortion, ratingService, ratingTaste }: MyLogDto = data;
     const scopeArray: number[] = [0, 1, 2, 3, 4];
     const scopeItems = [{
         title: "맛",

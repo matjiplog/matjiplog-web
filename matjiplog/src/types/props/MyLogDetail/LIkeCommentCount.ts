@@ -1,4 +1,4 @@
+import { MyLogDto } from './../../api/myLog';
 export interface LikeCommentCountProps {
-    likeCount: number,
-    commnetCount: number
+    data: MyLogDto
 }

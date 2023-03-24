@@ -129,6 +129,7 @@ export const ConfigItem = styled.div`
     align-items : center;
 
     &:hover {
+        color: #ff6701;
         background-color: ${hoverFont};
     }
 `;

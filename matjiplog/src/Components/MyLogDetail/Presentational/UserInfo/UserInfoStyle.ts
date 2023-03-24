@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 
+import { darkgrayFont, hoverFont, whiteFont } from '../../../../styles/fontColor';
 import { LockIcon, UnLockIcon, DotIcon } from '../../../../styles/icons';
+
+export const CommonIconStlye = `
+    font-size: 8em;
+    color: black;
+    cursor: pointer;
+    :hover{
+        transform: scale(1.2);
+        transition: all 0.1 ease-in-out;
+    }
+`
 
 export const UserInfoDiv = styled.div`
     display: flex;
@@ -30,25 +41,27 @@ export const UserNickName = styled.p`
 `
 
 export const UnLockBtn = styled(UnLockIcon)`
-    font-size: 8em;
-    color: black;
+    ${CommonIconStlye};
 `
 
 export const LockBtn = styled(LockIcon)`
-    font-size: 8em;
-    color: black;
+    ${CommonIconStlye};
 `
 
 export const ConfigBtn = styled(DotIcon)`
-    font-size: 8em;
-    color: black;
+    ${CommonIconStlye};
 `
 
-export const ConfigDropDown = styled.ul`
+export const ConfigDropDown = styled.ul<{ active: number }>`
+    display: ${(props) => props.active ? "block" : "none"};
+    width: 80px;
+    background: ${whiteFont};
+    box-shadow: 0 4px 5px 0 #00000026;
+    border : solid ${darkgrayFont} 1px;
+    border-radius: 2px;
     position: absolute;
     top: 8em;
     right: 0px;
-    border: 1px solid darkgray;
 `
 
 export const ConfigMenu = styled.li`
@@ -58,6 +71,7 @@ export const ConfigMenu = styled.li`
     
     &:hover {
         color: #ff6701;
+        background-color: ${hoverFont};
     }
     :last-child{
         border-top: 1px solid darkgray;

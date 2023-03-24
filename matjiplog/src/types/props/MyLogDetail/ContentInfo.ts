@@ -1,5 +1,4 @@
+import { MyLogDto } from './../../api/myLog';
 export interface ContentInfoProps {
-    title : string
-    address : string
-    content : string
+    data: MyLogDto
 }

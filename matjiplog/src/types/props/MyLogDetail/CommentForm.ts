@@ -1,4 +1,4 @@
 export interface CommentFormProps {
     onChangeHandler: (e: any) => void,
-    submitComment: () => void,
+    submitPostComment: (e: React.MouseEvent<HTMLFormElement>) => void,
 }

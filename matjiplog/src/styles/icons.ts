@@ -4,8 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { ImStarFull } from "react-icons/im";
 import { TbMenu2 } from "react-icons/tb";
 import { BiSearch } from "react-icons/bi";
-import { FaRegSmile } from "react-icons/fa";
-import { FaRegImages } from "react-icons/fa";
+import { FaRegSmile, FaRegTrashAlt, FaRegImages } from "react-icons/fa";
 import { FiArrowLeftCircle, FiArrowRightCircle, FiMoreHorizontal } from "react-icons/fi";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { FaRegMap } from "react-icons/fa";
@@ -53,4 +52,6 @@ export const PhoneIcon = styled(BsTelephone)`
 export const ArrowRightIcon = styled(BsArrow90DegRight)`
 `
 export const GridDotIcon = styled(TbGridDots)`
+`
+export const TrashIcon = styled(FaRegTrashAlt)`
 `

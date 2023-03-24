@@ -2,10 +2,10 @@ import { Form, ImogeDiv, Imoge, Input, SubmitBtn } from './CommentFormStyle';
 
 import { CommentFormProps } from '../../../../types/props/MyLogDetail/CommentForm';
 
-function CommentForm({ onChangeHandler, submitComment }: CommentFormProps): JSX.Element {
+function CommentForm({ onChangeHandler, submitPostComment }: CommentFormProps): JSX.Element {
     
     return (
-        <Form onSubmit={submitComment}>
+        <Form onSubmit={submitPostComment}>
             <ImogeDiv>
                 <Imoge />
             </ImogeDiv>

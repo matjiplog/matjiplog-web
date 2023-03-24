@@ -10,20 +10,13 @@ function MyLogList({ viewList, setLastCardRef, handleMyLogDetailPage, deleteMyLo
     return (
         <MyLogListGrid>
             {viewList.map((myLog: MyLogDto, index: number) => {
-                const { content, imageSerial, logSequence, matjip, matjipSequence, ratingPortion, ratingService, ratingTaste, userSequence } = myLog;
-                const { name, address, roadAddress, category } = matjip;
-                const scopeNumber = (ratingPortion + ratingService + ratingTaste) / 3;
+                const { logSequence, matjipSequence, user } = myLog;
                 const isLastCard = index === viewList.length - 1;
 
                 return (
                     <div key={logSequence}>
                         <MyLogItem 
-                            logSequence={logSequence}
-                            logImageUrl="/assets/images/Matjip.png"
-                            title={name}
-                            category={category}
-                            address={roadAddress}
-                            content={content}
+                            myLog={myLog}
                             handleMyLogDetailPage={handleMyLogDetailPage}
                             deleteMyLog={deleteMyLog}
                         />

@@ -1,8 +1,10 @@
 import { LikeCommentCountArticle, LikeDiv, CommentDiv, Like, LikeCount, Comment, CommentCount } from './LikeCommentCountStyle'
 
 import { LikeCommentCountProps } from '../../../../types/props/MyLogDetail/LIkeCommentCount';
+import { MyLogDto } from '../../../../types/api/myLog';
 
-function LikeCommentCount({ likeCount, commnetCount }: LikeCommentCountProps): JSX.Element {
+function LikeCommentCount({ data }: LikeCommentCountProps): JSX.Element {
+    const { likeCount, comments }: MyLogDto = data;
 
     return (
         <LikeCommentCountArticle>
@@ -12,7 +14,7 @@ function LikeCommentCount({ likeCount, commnetCount }: LikeCommentCountProps): J
             </LikeDiv>
             <CommentDiv>
                 <Comment />
-                <CommentCount>{commnetCount}</CommentCount>
+                <CommentCount>{comments.length}</CommentCount>
             </CommentDiv>
         </LikeCommentCountArticle>
     )

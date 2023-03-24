@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom"
-import { useMutation, useQuery } from 'react-query';
+import { NavigateFunction, useParams } from "react-router-dom"
+import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
+import { useNavigate } from "react-router-dom";
 
 import ImageInfo from '../Presentational/ImageInfo/ImageInfo';
 import UserInfo from '../Presentational/UserInfo/UserInfo';
@@ -14,57 +15,116 @@ import { CommentArticle, ContentAndRating, ImgAndContent, InfoSection, UserAndCo
 
 import { useImageSlideResult } from '../../../types/hook/common/useImageSlide';
 import { useInputResult } from '../../../types/hook/useInput';
-import { CommentData } from '../../../types/api/myLog';
+import { PutIsPublicRequest, PostCommentRequest, CommentDto } from '../../../types/api/myLog';
 
 import { useImageSlide } from '../../../Hooks/useImageSlide';
 import { useInput } from '../../../Hooks/useInput';
 
-import { getMyLogDetailData } from '../../../Services/LogAPi';
-import { postLogCommnet } from '../../../Services/LogAPi';
+import { deleteMyLogData, getMyLogDetailData, putLogIsPublic, postLogComment, getLogCommentData, deleteCommentData } from '../../../Services/LogAPi';
 
 function MyLogDetailContainer(): JSX.Element {
-    const { log_sequence } = useParams();
-    const imageUrl = ["/assets/Home/introbg1.png","/assets/Home/introbg1.png"];
+    const { log_sequence }: any = useParams();
+    const urlHandler: NavigateFunction = useNavigate();
+    const queryClient: QueryClient = useQueryClient();
+    const logSequence = Number(log_sequence);
+    const userSequence = 22;
+
+    const imageUrl = ["/assets/Home/introbg1.png", "/assets/Home/introbg1.png"];
+    const { slideIndex, leftClick, rightClick }: useImageSlideResult = useImageSlide(imageUrl.length - 1);
+    const { form, onChangeHandler }: useInputResult = useInput({ comment: "" });
+
+    const myLogDetail = useQuery(["myLogDetail", logSequence], () => getMyLogDetailData(logSequence), { enabled: !!logSequence, });
+    const logComment = useQuery(["logComment", logSequence], () => getLogCommentData(logSequence), { enabled: !!logSequence, });
     
-    const { slideIndex, leftClick, rightClick }: useImageSlideResult = useImageSlide(imageUrl.length-1);
-    const { form, onChangeHandler }: useInputResult = useInput({comment : ""});
-    
-    const { mutate, isSuccess } = useMutation((commentData: CommentData) => postLogCommnet(commentData));
-    const { data, isLoading } = useQuery(["myLogDetail", log_sequence], () => getMyLogDetailData(Number(log_sequence)), { enabled: !!log_sequence, });
-    if (isLoading || !data) return <LodingSpinner />;
-
-    const { content, imageSerial, logSequence, matjip, matjipSequence, ratingPortion, ratingService, ratingTaste, userSequence } = data.data;
-    const { name, address, category } = matjip;
-
-    const submitComment = () => {
-        if(!logSequence || !userSequence || !form?.comment) return;
-
-        const commentData = {
-            logSequence: logSequence,
-            userSequence: userSequence,
-            content: form.comment,
+    const commentPostMutaion = useMutation((commentData: PostCommentRequest) => postLogComment(commentData), {
+        onSuccess() {
+            queryClient.invalidateQueries(["logComment", logSequence]);
         }
+    });
+    const myLogDeleteMutation = useMutation((logSequence: number) => deleteMyLogData(userSequence, logSequence), {
+        onSuccess() {
+            urlHandler("/mylog");
+        }
+    });
+    const commentDeleteMutation = useMutation((comment_sequence: number) => deleteCommentData(comment_sequence, userSequence), {
+        onSuccess() {
+            queryClient.invalidateQueries(["logComment", logSequence]);
+        }
+    });
+    const isPublicPutMutation = useMutation((logPublicData: PutIsPublicRequest) => putLogIsPublic(logPublicData), {
+        onSuccess() {
+            queryClient.invalidateQueries(["myLogDetail", logSequence]);
+        }
+    });
+    
+    const submitPostComment = (e: React.MouseEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!logSequence || !userSequence || !form?.comment) return alert("실패");
 
-        mutate(commentData);
+        commentPostMutaion.mutate({ logSequence, userSequence, content: form.comment });
+        e.currentTarget.comment.value = "";
+    };
+
+    const deleteMyLog = () => {
+        if (!logSequence) return alert("실패");
+
+        myLogDeleteMutation.mutate(logSequence);
+    };
+
+    const deleteCommnet = (comment_sequence: number) => {
+        if(!comment_sequence) return alert("실패");
+
+        commentDeleteMutation.mutate(comment_sequence);
     }
+
+    const submitPutIsPublic = (isPublic: boolean) => {
+        if (!logSequence || !userSequence) return alert("실패");
+
+        isPublicPutMutation.mutate({ logSequence, userSequence, isPublic: !isPublic });
+    };
+
+    if (myLogDetail?.isLoading || !myLogDetail?.data?.data ) return <LodingSpinner />;
 
     return (
         <InfoSection>
             <ImgAndContent>
-                <ImageInfo leftClick={leftClick} rightClick={rightClick} slideIndex={slideIndex} />
+                <ImageInfo 
+                    leftClick={leftClick}
+                    rightClick={rightClick}
+                    slideIndex={slideIndex}
+                />
                 <UserAndContent>
-                    <UserInfo imgUrl='/assets/images/google.png' nickName='지우초이화이팅' />
+                    <UserInfo 
+                        imgUrl='/assets/images/google.png'
+                        data={myLogDetail.data.data}
+                        deleteMyLog={deleteMyLog}
+                        submitPutIsPublic={submitPutIsPublic}    
+                    />
                     <ContentAndRating>
-                        <ContentInfo title={name} address={address} content={content}/>
-                        <Rating ratingPortion={ratingPortion} ratingService={ratingService} ratingTaste={ratingTaste}/>
+                        <ContentInfo data={myLogDetail.data.data} />
+                        <Rating data={myLogDetail.data.data} />
                     </ContentAndRating>
                 </UserAndContent>
             </ImgAndContent>
-            <LikeCommentCount likeCount={18} commnetCount={18} />
+            <LikeCommentCount data={myLogDetail.data.data} />
             <CommentArticle>
-                <CommentItem imgUrl='/assets/images/google.png' nickName='이보연개짜증' time={1} content="진짜 이보연 자기마음대로 막 바꾸지말라구요요" />
+                {logComment?.data?.data.map((comment: CommentDto) => {
+                    const { commentSequence }: CommentDto = comment
+                    return (
+                        <CommentItem 
+                            key={commentSequence}
+                            imgUrl='/assets/images/google.png'
+                            userSequence={userSequence}
+                            data={comment}
+                            deleteCommnet={deleteCommnet}
+                        />
+                    )
+                })}
             </CommentArticle>
-            <CommentForm onChangeHandler={onChangeHandler} submitComment={submitComment}/>
+            <CommentForm
+                onChangeHandler={onChangeHandler}
+                submitPostComment={submitPostComment}
+            />
         </InfoSection>
         
     )

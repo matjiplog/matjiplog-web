@@ -1,5 +1,4 @@
+import { MyLogDto } from './../../api/myLog';
 export interface RatingProps {
-    ratingPortion: number,
-    ratingService: number,
-    ratingTaste: number
+    data: MyLogDto
 }

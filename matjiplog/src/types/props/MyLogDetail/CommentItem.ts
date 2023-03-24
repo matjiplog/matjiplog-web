@@ -1,6 +1,7 @@
+import { CommentDto } from './../../api/myLog';
 export interface CommentItemProps {
     imgUrl : string,
-    nickName : string,
-    time : number,
-    content : string,
+    userSequence: number,
+    data: CommentDto
+    deleteCommnet: (comment_sequence: number) => void,
 }

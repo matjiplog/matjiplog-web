@@ -3,9 +3,16 @@ import { useState } from 'react';
 import { Content, Dot, IconBtn, LikeAndComment, MyLogItemDiv, NickName, Title, UserImage, UserInfo, Like, Comment, UserImageAndNickName, LogImage, LogImageDiv, Address, Category, IconAndCount, Count, ConfigDiv, ConfigItem } from './MyLogItemStyle';
 
 import { MyLogItemProps } from '../../../../types/props/MyLog/MyLogItem';
+import { MyLogDto } from '../../../../types/api/myLog';
+import { MatjipDto } from '../../../../types/api/matjip';
+import { UserDto } from '../../../../types/api/user';
 
-function MyLogItem({ logSequence, logImageUrl, title, category, address, content, handleMyLogDetailPage, deleteMyLog }: MyLogItemProps): JSX.Element {
+function MyLogItem({ myLog, handleMyLogDetailPage, deleteMyLog }: MyLogItemProps): JSX.Element {
     const [configShow, setconfigShow] = useState<boolean>(false);
+
+    const { content, logSequence, matjip, matjipSequence, ratingPortion, ratingService, ratingTaste, likeCount, comments, user }: MyLogDto = myLog;
+    const { name: matjipName, address, roadAddress, category }: MatjipDto = matjip;
+    const { userSequence, id, name: userName, nickname, imageSerial, imageDetail }: UserDto = user;
 
     const toggleConfigShow = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
@@ -17,25 +24,25 @@ function MyLogItem({ logSequence, logImageUrl, title, category, address, content
             <UserInfo>
                 <UserImageAndNickName>
                     <UserImage src="/assets/images/loginPicture.png" />
-                    <NickName>대포동</NickName>
+                    <NickName>{nickname}</NickName>
                 </UserImageAndNickName>
                 <IconBtn onClick={toggleConfigShow}><Dot /></IconBtn>
             </UserInfo>
             <LogImageDiv>
-                <LogImage src={logImageUrl} />
+                <LogImage src={"/assets/images/Matjip.png"} />
             </LogImageDiv>
-            <Title>{title}</Title>
+            <Title>{matjipName}</Title>
             <Category>{category}</Category>
             <Address>{address}</Address>
             <Content>{content}</Content>
             <LikeAndComment>
                 <IconAndCount>
                     <Like />
-                    <Count>12</Count>
+                    <Count>{likeCount}</Count>
                 </IconAndCount>
                 <IconAndCount>
                     <Comment />
-                    <Count>12</Count>
+                    <Count>{comments.length}</Count>
                 </IconAndCount>
             </LikeAndComment>
 

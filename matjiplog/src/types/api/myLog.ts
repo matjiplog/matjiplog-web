@@ -1,5 +1,13 @@
+import { UserDto } from './user';
 import { MatjipDto } from './matjip';
 
+export interface CommentDto{
+    commentSequence: number,
+    logSequence: number,
+    userSequence: number,
+    user: UserDto,
+    content: string
+}
 export interface MyLogDto {
     content: string,
     custom: boolean,
@@ -8,30 +16,46 @@ export interface MyLogDto {
     matjip: MatjipDto,
     matjipSequence: number,
     orderingMethod: string,
-    public: boolean,
+    isPublic: boolean,
     ratingPortion: number,
     ratingService: number,
     ratingTaste: number,
     userSequence: number,
+    user: UserDto,
+    imageDetail: []
+    likeCount: number,
+    comments: CommentDto[]
 }
 
-export interface MyLogs{
+export interface GetMyLogsResponse{
     data: MyLogDto[],
     success: boolean
 }
-export interface MyLog{
+export interface GetMyLogResponse{
     data: MyLogDto,
     success: boolean
 }
-export interface CommentData {
-    logSequence: number,
-    userSequence: number,
-    content: string
-}
-
 export interface PostCommentResponse {
     commentSequence: number,
     logSequence: number,
     userSequence: number,
     content: string
+}
+
+export interface GetCommentResponse{
+    data: CommentDto[],
+    success: boolean
+}
+
+// BODY DATA
+export interface PostCommentRequest {
+    logSequence: number,
+    userSequence: number,
+    content: string
+}
+
+export interface PutIsPublicRequest {
+    logSequence: number,
+    userSequence: number,
+    isPublic: boolean
 }
