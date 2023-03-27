@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CardBorderShaodw } from "../../../../styles/borderStyle";
 import { BackgroundImgDiv, ProfileImgDiv, SkipTextDiv } from "../../../../styles/divStyle";
-import { FlexRowAlignCenter, FlexColumn, FlexRow } from "../../../../styles/flexStyle";
+import { FlexRowAlignCenter, FlexColumn, FlexRow, FlexRowCenterCenter } from "../../../../styles/flexStyle";
 import { mainFont } from "../../../../styles/fontColor";
 
 export const CardDiv = styled(CardBorderShaodw)`
@@ -18,11 +18,12 @@ export const LogImgDiv = styled(BackgroundImgDiv)`
 
 export const ContentTopDiv = styled(FlexRowAlignCenter)`
   margin : 10px 20px 10px 20px;
-`
+  
+`;
 
 export const ProfileImg = styled(ProfileImgDiv)`
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
 `;
 
 export const TopTextDiv = styled(FlexColumn)`
@@ -30,6 +31,7 @@ export const TopTextDiv = styled(FlexColumn)`
 `
 
 export const DotDiv = styled.div`
+  position : relative;
   margin-left: auto;
 `
 
@@ -40,6 +42,11 @@ export const ContentDiv = styled.div`
 export const RNameDiv =styled.div`
   color: ${mainFont};
   font-size: 14px;
+  font-weight: bold;
+`;
+
+export const IconCount = styled(FlexRowCenterCenter)`
+  font-size: 15px;
   font-weight: bold;
 `;
 
@@ -55,3 +62,7 @@ export const EmoticonDiv = styled(FlexRow)`
   padding: 10px 20px 10px 20px;
 `;
 
+export const AddressDiv = styled(SkipTextDiv)`
+  color: #b4b4b4;
+  width: 150px;
+`;

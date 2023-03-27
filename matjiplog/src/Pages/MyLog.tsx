@@ -3,7 +3,6 @@ import Footer from "../Components/Common/Footer";
 import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
 
 import { showLogStore } from "../stores/mylog/store";
-import GridLog from "../Components/MyLog/GridLog";
 import MapLog from "../Components/MyLog/MapLog";
 import SelectLogView from "../Components/MyLog/SelectLogView";
 
@@ -15,7 +14,7 @@ function MyLog() {
       <MyLogWrap footer={mapShow.toString()}>
         <HeaderContainer></HeaderContainer>
         <SelectLogView></SelectLogView>
-        {mapShow ? <MapLog/> : <GridLog/>}
+        <MapLog/>
       </MyLogWrap>
       {!mapShow && <Footer></Footer>}
     </>

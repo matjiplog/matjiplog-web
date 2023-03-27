@@ -1,7 +1,7 @@
 import { RadioText, InputRadio, GenderInputDiv, ValidDiv, EmailBtn, ElementInput, EmailInput ,EmailAuthCodeInput, ElementP, ElementDiv, TextH, SignUpBtn } from "./style";
 import {signUpProps} from "../../../../types/props/SignUp/signUpProps";
 
-function SignUpInput({ signUpForm, onChangehandler, emailReadOnly, validText, isValid, displaySeconds, displayMinutes, timer, EventIdDoubleCheck, EventPostSignUp, EventEmailAuthCodeCheck, EventEmailAuthCodeSend}: signUpProps): JSX.Element  {
+function SignUpInput({ signUpForm, onChangehandler, emailReadOnly, idReadOnly, validText, isValid, displaySeconds, displayMinutes, timer, EventEmailDoubleCheck, EventIdDoubleCheck, EventPostSignUp, EventEmailAuthCodeCheck, EventEmailAuthCodeSend}: signUpProps): JSX.Element  {
 
   return(
     <>
@@ -21,13 +21,16 @@ function SignUpInput({ signUpForm, onChangehandler, emailReadOnly, validText, is
       </ElementDiv>
       <ElementDiv>
         <ElementP>아이디</ElementP>
-        <ElementInput
+        <EmailInput
           type="text"
           value={signUpForm.id} 
           name="id"
           onChange={onChangehandler}
           border="#b4b4b4"
-        ></ElementInput>
+          readOnly={idReadOnly}
+          background = {idReadOnly === true ? "rgb(225,225,225)" : ""}
+        ></EmailInput>
+        <EmailBtn  onClick={EventIdDoubleCheck}>중복확인</EmailBtn>
       </ElementDiv>
       <ElementDiv>
         <ElementP>비밀번호</ElementP>
@@ -104,11 +107,11 @@ function SignUpInput({ signUpForm, onChangehandler, emailReadOnly, validText, is
           type="email"
           placeholder="이메일 형식으로 작성해주세요"
           onChange={onChangehandler}
-          border={isValid.isId === false && signUpForm.email !== '' ? "red" : "#b4b4b4"}
+          border={isValid.isEmail === false && signUpForm.email !== '' ? "red" : "#b4b4b4"}
           readOnly={emailReadOnly}
           background = {emailReadOnly === true ? "rgb(225,225,225)" : ""}
         ></EmailInput>
-        <EmailBtn  onClick={EventIdDoubleCheck}>인증번호 전송</EmailBtn>
+        <EmailBtn  onClick={EventEmailDoubleCheck}>인증번호 전송</EmailBtn>
       </ElementDiv>
       <ValidDiv valid="true">*이메일 형식으로 작성해주세요</ValidDiv>
       {!emailReadOnly &&

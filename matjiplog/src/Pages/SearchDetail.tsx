@@ -2,9 +2,11 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
 import Footer from "../Components/Common/Footer";
-import MatjipTop from "../Components/Detail/MatjipTop";
-import MatjipTab from "../Components/Detail/MatjipTab";
-import { useMatjipDetail } from "../Hooks/apis/useMatjipDetail";
+// import MatjipTop from "../Components/MatJipDetail/MatjipTop";
+// import MatjipTab from "../Components/MatJipDetail/MatjipTab";
+import { useMatjipDetail } from "../Components/MatJipDetail/Presentational/useMatjipDetail";
+import TopContainer from "../Components/MatJipDetail/Container/TopContainer";
+import TabContainer from "../Components/MatJipDetail/Container/TabContainer";
 
 
 function SearchDetail() {
@@ -15,8 +17,8 @@ function SearchDetail() {
     <>
       <SearchDetailWrap>
         <HeaderContainer></HeaderContainer>
-        <MatjipTop></MatjipTop>
-        <MatjipTab></MatjipTab>
+        <TopContainer></TopContainer>
+        <TabContainer></TabContainer>
       </SearchDetailWrap>
       <Footer></Footer>
     </>

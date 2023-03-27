@@ -4,7 +4,7 @@ import { MapMarker, useMap } from "react-kakao-maps-sdk";
 import styled from "styled-components";
 import useDetectClose, { useDetectCloseTypes } from "../Log/Presentational/useDetectClose";
 import { StarMake } from "../Common/StarMake";
-import DropDown from "../Log/DropDown";
+import DropDown from "../Log/Presentational/DropDown/DropDown";
 import { GoX } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 

@@ -21,9 +21,26 @@ export const axiosIdCheck = async (userId : string) =>{
   }
 }
 
-export const axiosEmailPost = async (userId : string) =>{
+export const axiosEmailCheck = async (userEmail : string) =>{
   try {
     const res = await userAPI.get("user/email", {
+      params : {
+        email: userEmail,
+      }
+    })
+    return res.data.success;
+  } catch (e) {
+    const { message, response, code } = e as unknown as AxiosError;
+    console.log(message);
+    console.log(response);
+    console.log(code);
+    throw e;
+  }
+}
+
+export const axiosEmailPost = async (userId : string) =>{
+  try {
+    const res = await userAPI.get("user/authEmail", {
       params : {
         toEmail: userId,
       }
@@ -45,7 +62,7 @@ export const axiosEmailauthCodeCheck = async (email : string, authCode : string|
       method: 'POST',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
       data: qs.stringify(data),
-      url : "http://61.85.38.39:60548/user/email"
+      url : "http://61.85.38.39:60548/user/authEmail"
     };
     const res = await axios(options);
     return res.data.success;
@@ -70,5 +87,23 @@ export const axiosSignUp = async (userData : userDto) => {
     return { data: message, status: response?.status, error : code};
   }
 }
+
+export const axiosUserInfo = async (userSeq : number) : Promise<userDto> =>{
+  try {
+    const res = await userAPI.get("user", {
+      params : {
+        userSeq : userSeq,
+      }
+    })
+    return res.data.data;
+  } catch (e) {
+    const { message, response, code } = e as unknown as AxiosError;
+    console.log(message);
+    console.log(response);
+    console.log(code);
+    throw e;
+  }
+}
+
 
 

@@ -1,6 +1,5 @@
-import styled from "styled-components";
-import MenuItem from "./MenuItem";
-
+import MenuItem from "../MenuItem/MenuItem";
+import { MenuWrap } from "./style";
 
 export interface MenuType {
   menuName: string;
@@ -8,7 +7,7 @@ export interface MenuType {
   price: string;
 }
 
-function MatjipTabMenu() {
+function TabMenu() {
   const menuList : MenuType[] = [
     { 
       menuName : "돈까스1",
@@ -50,10 +49,4 @@ function MatjipTabMenu() {
   );
 }
 
-const MenuWrap = styled.div`
-  margin : 20px 0px 20px 0px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  grid-gap: 20px;
-`;
-export default MatjipTabMenu;
+export default TabMenu;

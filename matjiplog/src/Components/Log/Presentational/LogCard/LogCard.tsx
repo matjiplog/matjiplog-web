@@ -1,51 +1,57 @@
-import { LessP } from "../../../../styles/common/font";
-import { CommentIcon, DotIcon, LikeFullIcon } from "../../../../styles/icons";
+import { CommentIcon, LikeFullIcon, LikeIcon } from "../../../../styles/icons";
 import { logDto } from "../../../../types/logDto";
-import { IUser } from "../../UserLogGrid";
-import { CardDiv, ContentDiv, ContentTopDiv, DotDiv, EmoticonDiv, LogImgDiv, ProfileImg, ReviewDiv, RNameDiv, TopTextDiv } from "./style";
+import LogBodyBlackout from "../LogBodyBlackout/LogBodyBlackout";
+import LogCardModal from "../LogCardModal/LogCardModal";
+import useModal from "../useModal";
+import { AddressDiv, CardDiv, ContentDiv, ContentTopDiv, EmoticonDiv, IconCount, LogImgDiv, ProfileImg, ReviewDiv, RNameDiv, TopTextDiv } from "./style";
 
 function LogCard( {
-  logInfo , 
+  cardInfo, 
+  comment,
+  onChangeComment,
+  EventCommentCreate,
+
 } : {
-  logInfo : logDto;
+  cardInfo : logDto;
+  comment : string,
+  onChangeComment : React.ChangeEventHandler<HTMLInputElement>,
+  EventCommentCreate : (logSequence: number, userSequence: number) => void
 }):JSX.Element {
-  
-  const UserLogInfo: IUser = {
-    id: 1,
-    userName : "지우초이화이팅",
-    Location : "대구시 달서구 이곡동",
-    RestaurantName : "미친 돈가쓰",
-    Review : "여기진짜 존맛탱구리집임 웨이팅은 한시간 넘지만 기다릴 정도로 맛도리입니다 ",
-    heart : "true",
-  };
-  
+  const {isModalOpen, setIsModalOpen} = useModal(false);
   return(
-    <CardDiv>
+    <>
+      <CardDiv onClick={()=> setIsModalOpen(true)}>
       <ContentTopDiv>
         <ProfileImg url="/assets/images/loginPicture.png"></ProfileImg>
         <TopTextDiv>
-          <p>{UserLogInfo.userName}</p>
-          <LessP>{UserLogInfo.Location}</LessP>
+          <p>{cardInfo.user.nickname}</p>
+          <AddressDiv>{cardInfo.matjip.address}</AddressDiv>
         </TopTextDiv>
-        <DotDiv onClick={(e) =>{
-          // ref={ref}
-            // e.stopPropagation();
-            // removeHandler();
-          }}>
-          <DotIcon size={30} color="black"></DotIcon>
-          {/* {isOpen && <DropDown items={dropitem}></DropDown>} */}
-        </DotDiv>
       </ContentTopDiv>
       <LogImgDiv url=""></LogImgDiv>
       <ContentDiv>
-        <RNameDiv>{UserLogInfo.RestaurantName}</RNameDiv>
-        <ReviewDiv>{UserLogInfo.Review}</ReviewDiv>
+        <RNameDiv>{cardInfo.matjip.name}</RNameDiv>
+        <ReviewDiv>{cardInfo.content}</ReviewDiv>
       </ContentDiv>
       <EmoticonDiv>
-        <LikeFullIcon size={20} style={ {marginRight: "10px"} }></LikeFullIcon>
-        <CommentIcon size={20}></CommentIcon>
+        {/* <LikeIcon size={20}></LikeIcon> */}
+        <LikeFullIcon size={20} color="red" ></LikeFullIcon>
+        <IconCount style={ {marginLeft : "5px", marginRight: "10px"} }>{cardInfo.likeCount}</IconCount>
+        <CommentIcon size={20} ></CommentIcon>
+        <IconCount style={ {marginLeft : "5px"} }>{cardInfo.comments.length}</IconCount>
       </EmoticonDiv>
-    </CardDiv>
+      </CardDiv>
+      {isModalOpen && <LogBodyBlackout setIsModalOpen={setIsModalOpen}></LogBodyBlackout>}
+      {isModalOpen && 
+        <LogCardModal 
+          isModalOpen={isModalOpen} 
+          modalData={cardInfo}
+          comment={comment}
+          onChangeComment={onChangeComment}
+          EventCommentCreate={EventCommentCreate}
+        ></LogCardModal>}
+    </>
+    
   );
 }
 

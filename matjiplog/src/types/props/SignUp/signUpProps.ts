@@ -5,11 +5,13 @@ export interface signUpProps {
   signUpForm : signUpInputType,
   onChangehandler : (e: React.ChangeEvent<HTMLInputElement>) => void;
   emailReadOnly: boolean,
+  idReadOnly: boolean,
   validText: warningTextType,
   isValid:isvalidType,
   displaySeconds:number,
   displayMinutes:number,
   timer: boolean,
+  EventEmailDoubleCheck: (e: React.MouseEvent<HTMLDivElement>) => void;
   EventIdDoubleCheck: (e: React.MouseEvent<HTMLDivElement>) => void;
   EventPostSignUp: (e: React.MouseEvent<HTMLDivElement>) => void;
   EventEmailAuthCodeCheck: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -17,13 +19,13 @@ export interface signUpProps {
 }
 
 export interface warningTextType {
-  idText : string,
+  emailText : string,
   passwordText : string,
   passwordCheckText : string,
 }
 
 export interface isvalidType {
-  isId : boolean,
+  isEmail : boolean,
   isPassword : boolean,
   isPasswordConfirm : boolean,
 }

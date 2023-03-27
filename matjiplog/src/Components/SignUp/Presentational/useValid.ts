@@ -4,12 +4,12 @@ import { signUpInputType } from "../../../types/userDto";
 
 export default function useValid(changeValue: signUpInputType) {
   const [validText, setValidText] = useState<warningTextType>({
-    idText : '',
+    emailText : '',
     passwordText : '',
     passwordCheckText : '',
   });
   const [isValid, setIsValid] = useState<isvalidType>({
-    isId : false,
+    isEmail : false,
     isPassword : false,
     isPasswordConfirm : false,
   });
@@ -18,11 +18,11 @@ export default function useValid(changeValue: signUpInputType) {
   useEffect(() => {
     const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
     if(!emailRegex.test(changeValue.email)) {
-      setValidText({...validText, idText:'이메일 형식을 확인해주세요'});
-      setIsValid({...isValid, isId:false});
+      setValidText({...validText, emailText:'이메일 형식을 확인해주세요'});
+      setIsValid({...isValid, isEmail:false});
     }else {
-      setValidText({...validText, idText:''});
-      setIsValid({...isValid, isId:true});
+      setValidText({...validText, emailText:''});
+      setIsValid({...isValid, isEmail:true});
     }
   }, [changeValue.email]);
 

@@ -1,11 +1,38 @@
+import { matjipDto } from "./matjipDto";
+import { imageDetailDto, ResponseLogUserDto } from "./userDto";
+
 export interface logDto {
-  user_sequence : number,
-  is_custom : boolean,
-  matjip_sequence : number,
+  logSequence : number,
+  userSequence : number,
+  user : ResponseLogUserDto,
+  matjipSequence : number,
   content : string,
   rating_taste : number,
   ratring_portion : number,
   rating_service : number,
   ordering_method : string,
-  is_public : boolean,
+  imageSerial : string,
+  imageDetail : imageDetailDto[],
+  likeCount : number,
+  matjip : matjipDto,
+  comments : commentDto[],
 }
+
+export interface commentDto {
+  commentSequence : number,
+  logSequence : number,
+  userSequence: number,
+  user : ResponseLogUserDto,
+  content : string,
+}
+
+export interface requestCommentDto {
+  logSequence : number,
+  userSequence : number,
+  content : string,
+}
+
+// export interface logLikeDto {
+//   logSequence : number,
+//   userSequence : number,
+// }

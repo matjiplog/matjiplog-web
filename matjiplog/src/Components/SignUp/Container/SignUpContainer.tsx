@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSwal } from "../Presentational/useSwal";
-import { axiosEmailauthCodeCheck, axiosEmailPost, axiosIdCheck, axiosSignUp } from "../../../Services/user-service";
+import { axiosEmailauthCodeCheck, axiosEmailCheck, axiosEmailPost, axiosIdCheck, axiosSignUp } from "../../../Services/user-service";
 import Logo from "../../Common/Logo";
 import SignUpInput from "../Presentational/Input/SignUpInput";
 import { useInput } from "../Presentational/useInput";
@@ -16,28 +16,48 @@ function SignUpContainer() : JSX.Element  {
   
   const [timer , setTimer] = useState<boolean>(false);
   const [emailReadOnly, setEmailReadOnly] = useState<boolean>(false);
+  const [idReadOnly, setIdReadonly] = useState<boolean>(false);
   const [idCheck, setIdCheck] = useState(false);
-  
-  //아이디 중복체크
-  const EventIdDoubleCheck = async () => {
+  const [emailCheck, setEmailCheck] = useState(false);
+
+  //이메일 중복체크
+  const EventEmailDoubleCheck = async () => {
     if(signUpForm.email === ''){
       alertTextError("이메일를 입력해주세요.");
       return;
     }
-    if(!isValid.isId){
+    if(!isValid.isEmail){
       alertTextError("이메일 형식이 맞지 않습니다.");
       return;
     }
-    await axiosIdCheck(signUpForm.email).then(async res =>{ 
+    await axiosEmailCheck(signUpForm.email).then(async res =>{ 
       if(res){
         alertTextError("중복된 이메일이 있습니다.\n다시 시도해주세요");
         return;
       }
-      setIdCheck(true);
+      setEmailCheck(true);
       EventEmailAuthCodeSend();
     })
   }
-  
+
+  //아이디 중복 확인
+  const EventIdDoubleCheck = async () =>{
+    if(signUpForm.id === ''){
+      alertTextError("아이디를 입력해주세요.");
+      return;
+    }
+    await axiosIdCheck(signUpForm.id).then(async res =>{ 
+      if(res){
+        alertTextError("중복된 아이디가 있습니다.\n다시 시도해주세요");
+        return;
+      }
+      alertTextSucess("사용할수 있는 아이디 입니다.");
+      setIdCheck(true);
+      setIdReadonly(true);
+    })
+  }
+
+  //회원가입
   const EventPostSignUp = async () => {
 
     if(signUpForm.id === '' || signUpForm.password === '' || signUpForm.passwordConfirm === '' || signUpForm.name === '' || signUpForm.nickname === '' || signUpForm.phoneNumber === '' || signUpForm.gender === ""){
@@ -53,17 +73,25 @@ function SignUpContainer() : JSX.Element  {
       alertTextError("비밀번호가 일치한지 확인해주세요");
       return;
     }
+    if(!idCheck){
+      alertTextError("아이디 중복확인을 해주세요")
+    }
+    if(!emailCheck){
+      alertTextError("이메일 중복확인을 해주세요")
+    }
     if(!emailReadOnly){
       alertTextError("이메일 인증을 해주세요");
       return;
     }
-    if(!idCheck){
-      alertTextError("아이디 중복확인")
-    }
+    
     else{
       delete signUpForm.passwordConfirm;
       delete signUpForm.authCode;
-      const { data, status, error } = await axiosSignUp({...signUpForm, phoneNumber: signUpForm.phoneNumber.replace(/-/g, "")});
+      const { data, status, error } = await axiosSignUp({
+        ...signUpForm, phoneNumber: signUpForm.phoneNumber.replace(/-/g, ""),
+        userSequence: 0,
+        imageSerial: ""
+      });
       if(status === 200){
         if(data.success === true){
           alertTextSucess("회원가입이 완료되었습니다.");
@@ -90,7 +118,6 @@ function SignUpContainer() : JSX.Element  {
     alertTextSucess("인증번호가 일치합니다.");
     setEmailReadOnly(true);
     setTimer(false);
-    // setTimerForm({...timerForm, timer: false});
   }
   else{
     alertTextError("인증번호가 일치하지 않습니다.");
@@ -99,7 +126,7 @@ function SignUpContainer() : JSX.Element  {
 
 //이메일 인증 번호 전송
 const EventEmailAuthCodeSend =async () =>{
-  
+  setEmailReadOnly(false);
   if(signUpForm.email === ''){
     alertTextError("이메일을 입력해주세요.");
     return;
@@ -116,6 +143,10 @@ const EventEmailAuthCodeSend =async () =>{
     alertTextError("인증번호 전송이 실패하였습니다. \n다시 시도해주세요.");
   }
 }
+
+
+
+
   return(
     <SignUpDiv>
       <Logo></Logo>
@@ -123,11 +154,13 @@ const EventEmailAuthCodeSend =async () =>{
         signUpForm={signUpForm}
         onChangehandler={onChangehandler}
         emailReadOnly={emailReadOnly}
+        idReadOnly={idReadOnly}
         validText={validText}
         isValid={isValid}
         displaySeconds={displaySeconds}
         displayMinutes={displayMinutes}
         timer={timer}
+        EventEmailDoubleCheck={EventEmailDoubleCheck}
         EventIdDoubleCheck={EventIdDoubleCheck}
         EventPostSignUp={EventPostSignUp}
         EventEmailAuthCodeCheck={EventEmailAuthCodeCheck}
