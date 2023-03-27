@@ -5,4 +5,8 @@ export const SearchSection = styled.section`
   min-height: 100%;
   flex-direction: column;
   margin: 50px 50px 50px 50px;
+
+  @media screen and (max-width: 700px) {
+    margin: 20px;
+  }
 `;

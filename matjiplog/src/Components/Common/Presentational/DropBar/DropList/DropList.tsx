@@ -8,7 +8,7 @@ function DropList({ dropBarShow, itemList, dropBarMenu, updateSelectItem }: Drop
         {dropBarShow && 
         <DropItems>
             {itemList.map((value: string, index: number): JSX.Element => {
-                return <DropItem key={index} onClick={updateSelectItem} className={dropBarMenu === value ? "select" : ""}>{value}</DropItem>
+                return <DropItem key={index} onClick={updateSelectItem} active={dropBarMenu === value ? 1 : 0}>{value}</DropItem>
             })}
         </DropItems>}
     </>

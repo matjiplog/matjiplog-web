@@ -19,6 +19,9 @@ export function navigateController(navigate: NavigateFunction): NavigateControll
       case "나만의 맛집":
         navigate("/mylog");
         break;
+      case "맛집 기록":
+        navigate("/createMyLog");
+        break;
       case "로그인":
         navigate("/login");
         break;

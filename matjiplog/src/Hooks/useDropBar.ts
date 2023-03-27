@@ -19,9 +19,13 @@ export function useDropBar(initMenu: string): useDropBarResult {
   };
 
   useEffect(() => {
-    initDropBar();
     setDropBarMenu(initMenu);
-  }, [initDropBar, initMenu, setDropBarMenu])
+
+    return () => {
+      initDropBar();
+    }
+  }, [])
+
 
   return { dropBarShow, dropBarMenu, toggleDropBar, updateSelectItem };
 }

@@ -4,7 +4,7 @@ import { MatjipCardProps } from '../../../../types/props/SearchMatjip/MatjipCard
 
 function MatjipCard({ imgUrl, category, title, scopeNumber, address }: MatjipCardProps): JSX.Element {
     let starArray: JSX.Element[]= [];
-    for(let i=1 ; i<=5 ; i++) starArray.push(<Star active={i<=scopeNumber ? "on" : "off"} key={i}/>);
+    for(let i=1 ; i<=5 ; i++) starArray.push(<Star active={i<=scopeNumber ? 1 : 0} key={i}/>);
     
     return (
         <MatjipCardDiv>

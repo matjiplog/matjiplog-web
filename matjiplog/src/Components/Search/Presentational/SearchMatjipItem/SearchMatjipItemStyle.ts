@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { StarIcon, LikeFullIcon } from '../../../../styles/icons';
-import { redFont, darkgrayFont, yellowFont, mainFont } from '../../../../styles/fontColor';
+import { redFont, darkgrayFont, yellowFont, mainFont, blackFont, hoverFont } from '../../../../styles/fontColor';
 import { CardBorderShaodw } from '../../../../styles/borderStyle';
 
 export const MatjipItem = styled(CardBorderShaodw)`
@@ -15,9 +15,16 @@ export const MatjipItem = styled(CardBorderShaodw)`
   }
 `;
 
+export const MatjipItemImgDiv = styled.div`
+    background-color: ${hoverFont};
+    border-radius: 6px;
+`
 export const MatjipItemImg = styled.img`
-  width: 100%;
-`;
+    object-fit: contain;
+    width: 100%;
+    height: 250px;
+    border-radius: 6px;
+`
 
 export const Like = styled(LikeFullIcon)`
   font-size: 20px;
@@ -37,9 +44,9 @@ export const TitleAndScope = styled.div`
   margin-top: 15px;
 `;
 
-export const Title = styled.div`
+export const Title = styled.p`
   flex: 1;
-  font-size: 15px;
+  font-size: 1.5rem;
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -57,7 +64,7 @@ export const ScopeNumber = styled.h3`
   font-size: 15px;
 `;
 
-export const Star = styled(StarIcon)<{ active: boolean }>`
+export const Star = styled(StarIcon)<{ active: number }>`
   font-size: 15px;
   cursor: pointer;
   color: ${(props) => props.active ? yellowFont : darkgrayFont};

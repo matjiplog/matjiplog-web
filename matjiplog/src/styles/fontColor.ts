@@ -6,3 +6,4 @@ export const darkgrayFont = "darkgray";
 export const yellowFont = "#ffd400";
 export const pupleFont = "#6750a4";
 export const hoverFont = "#f4f4f4";
+export const blueFont = "#0095f6";

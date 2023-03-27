@@ -1,4 +1,4 @@
-import { AccentP, LessP } from "../../../../styles/common/font";
+import { AccentP, LessP } from "../../../../styles/font";
 import { ArrowRightIcon, LikeFullIcon, PhoneIcon, StarIcon } from "../../../../styles/icons";
 import { MatjipDto } from "../../../../types/api/matjip";
 import { TopWrapDiv, TopImg, TopInfo, StarReviewDiv, TopIcon, IconDiv, CenterIconDiv } from "./style";

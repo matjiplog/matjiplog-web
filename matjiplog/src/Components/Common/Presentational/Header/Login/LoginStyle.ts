@@ -25,14 +25,14 @@ export const MenuBar = styled(MenuBarIcon)`
   }
 `;
 
-export const LoginDiv = styled.div<{ show: boolean }>`
+export const LoginDiv = styled.div<{ active: number }>`
 
     @media screen and (max-width: 700px) {
         width: 100%;
         text-align: center;
         display: none;
         border-radius: 5px;
-        display: ${(props) => props.show ? "none" : "block"};
+        display: ${(props) => props.active ? "block" : "none"};
 
         ${LoginBtn} {
             padding: 1.2em;

@@ -1,11 +1,13 @@
 import { useState } from "react";
 
-export function useScope(): useScopeType {
+import { useScopeResult } from '../types/hook/useScope';
+
+export function useScope(): useScopeResult {
   const [ tasteScope, setTasteScope] = useState<boolean[]>([true, false, false, false, false]);
   const [ manyScope, setManyScope] = useState<boolean[]>([true, false, false, false, false]);
   const [ serviceScope, setServiceScope] = useState<boolean[]>([true, false, false, false, false]);
 
-  const scopeClick = (index: number, order: string): void => {
+  const updateScope = (index: number, order: string): void => {
     let scopesArray: boolean[] = [];
 
     for (let i = 0; i < 5; i++) scopesArray[i] = i <= index ? true : false;
@@ -15,12 +17,6 @@ export function useScope(): useScopeType {
     if (order === "service") setServiceScope(scopesArray);
   };
 
-  return { tasteScope, manyScope, serviceScope, scopeClick };
+  return { tasteScope, manyScope, serviceScope, updateScope };
 }
 
-export interface useScopeType {
-  tasteScope: boolean[];
-  manyScope: boolean[];
-  serviceScope: boolean[];
-  scopeClick: (index: number, order: string) => void;
-}

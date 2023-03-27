@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-export function useImageSelect(): useImageSelectTypes {
+import { useImageSelectResult } from '../types/hook/common/useImageSelect';
+
+export function useImageSelect(): useImageSelectResult {
   const [images, setImages] = useState<string[]>([]);
   let saveImages: string[] = [];
 
@@ -21,8 +23,3 @@ export function useImageSelect(): useImageSelectTypes {
   return { images, selectImages, deleteImages };
 }
 
-export interface useImageSelectTypes {
-    images: string[];
-    selectImages: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    deleteImages: () => void;
-}

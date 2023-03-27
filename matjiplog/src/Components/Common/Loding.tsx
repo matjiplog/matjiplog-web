@@ -1,4 +1,4 @@
-import { Lodingdiv, LodingIcon } from "../../styles/common/loding";
+import { Lodingdiv, LodingIcon } from "../../styles/loding";
 
 function LodingSpinner(): JSX.Element {
   return (

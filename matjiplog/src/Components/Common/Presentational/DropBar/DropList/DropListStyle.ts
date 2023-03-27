@@ -1,3 +1,4 @@
+import { blackFont } from './../../../../../styles/fontColor';
 import styled from "styled-components";
 
 import { whiteFont, mainFont, darkgrayFont } from '../../../../../styles/fontColor';
@@ -8,18 +9,16 @@ export const DropItems = styled.ul`
   border: 1px solid ${darkgrayFont};
   border-radius: 5px;
   z-index: 999;
-
-  .select {
-    color: ${mainFont};
-  }
 `;
-export const DropItem = styled.li`
+
+export const DropItem = styled.li<{ active: number }>`
   width: 100%;
   padding: 3em 2em 3em 2em;
   height: 40px;
   display: flex;
   align-items: center;
   background-color: ${whiteFont};
+  color: ${(props => props.active ? mainFont : blackFont)}; 
   
   &:hover {
     color: ${mainFont};

@@ -6,8 +6,8 @@ export const HasTagUl = styled.ul`
   margin: 4em 0 4em 0;
   white-space : nowrap;
 
-  @media screen and (max-width: 800px) {
-      flex-wrap: nowrap;
+  @media screen and (max-width: 700px) {
+      height: 120px;
       overflow: auto;
 
       &::-webkit-scrollbar {

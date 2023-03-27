@@ -13,9 +13,11 @@ import { navigateController } from '../../../../utils/navigateController';
 
 function HeaderContainer(): JSX.Element {
   const [navShow, setNavShow] = useState<boolean>(false);
-  const navigate: NavigateFunction = useNavigate();
   const path: string = useLocation().pathname;
+
+  const navigate: NavigateFunction = useNavigate();
   const { navHandler }: NavigateControllerResult = navigateController(navigate);
+  
   const toggleNavShow = () => { setNavShow(!navShow); }
 
   return <HeaderSection>
