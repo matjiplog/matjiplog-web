@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { hoverFont, darkgrayFont, mainFont } from './../../../../styles/fontColor';
 import { ImogeIcon } from './../../../../styles/icons';
 
-export const DetailDiv = styled.article`
+export const DetailDiv = styled.div`
   flex: 1 1 20%;
   margin: 5em 0 5em 0;
   display: flex;

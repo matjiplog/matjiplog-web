@@ -1,5 +1,5 @@
-import { MyLogDto } from './../api/myLog';
-import { MatjipDto } from '../api/matjip';
+import { MyLogDto } from '../../api/myLog';
+import { MatjipDto } from '../../api/matjip';
 export interface useDrawMarkerResult {
     markers: any[],
     deleteMarkers: () => void,

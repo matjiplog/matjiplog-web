@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useDrawMarkerResult } from '../types/hook/useDrawMarker';
+import { useDrawMarkerResult } from '../types/hook/common/useDrawMarker';
 import { MatjipDto } from '../types/api/matjip';
 import { MyLogDto } from './../types/api/myLog';
 

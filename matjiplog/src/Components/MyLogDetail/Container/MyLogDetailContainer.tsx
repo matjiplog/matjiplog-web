@@ -14,7 +14,7 @@ import LodingSpinner from '../../Common/Loding';
 import { CommentArticle, ContentAndRating, ImgAndContent, InfoSection, UserAndContent } from './MyLogInfoContainerStyle';
 
 import { useImageSlideResult } from '../../../types/hook/common/useImageSlide';
-import { useInputResult } from '../../../types/hook/useInput';
+import { useInputResult } from '../../../types/hook/common/useInput';
 import { PutIsPublicRequest, PostCommentRequest, CommentDto } from '../../../types/api/myLog';
 
 import { useImageSlide } from '../../../Hooks/useImageSlide';
@@ -126,7 +126,6 @@ function MyLogDetailContainer(): JSX.Element {
                 submitPostComment={submitPostComment}
             />
         </InfoSection>
-        
     )
 }
 

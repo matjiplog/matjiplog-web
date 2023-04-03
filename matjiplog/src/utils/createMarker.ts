@@ -1,6 +1,6 @@
 export const createMarker = (locationLatitude: number, locationLongitude: number, name: string) => {
     // 마커의 위치 좌표를 생성합니다.
-    const latlng = new window.kakao.maps.LatLng(locationLatitude, locationLongitude);
+    const latlng = new window.kakao.maps.LatLng(locationLatitude + Math.random() * 0.001, locationLongitude + Math.random() * 0.001);
     
     // 마커 이미지를 생성합니다.
     const imageSize = new window.kakao.maps.Size(30, 30);

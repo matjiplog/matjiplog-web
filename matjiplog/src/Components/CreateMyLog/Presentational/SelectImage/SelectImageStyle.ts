@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 import { darkgrayFont, blueFont } from './../../../../styles/fontColor';
-import { ImageIcon } from '../../../../styles/icons';
+import { DeleteIcon, ImageIcon } from '../../../../styles/icons';
 import { FlexColumnCenterCenter } from './../../../../styles/flexStyle';
 
 export const IconAndFileBtn = styled(FlexColumnCenterCenter)`
-  flex: 1;
 `;
 
 export const NonSelectImage = styled(ImageIcon)`
@@ -13,7 +12,8 @@ export const NonSelectImage = styled(ImageIcon)`
   color: ${darkgrayFont};
 `;
 
-export const ImageLabel = styled.label`
+export const ImageLabel = styled.label<{ active: number }>`
+  display: ${(props) => props.active ? "block" : "none"};
   padding: 3em;
   color: white;
   background-color: ${blueFont};
@@ -25,19 +25,19 @@ export const ImageFileBtn = styled.input`
   display: none;
 `;
 
-export const ImagesSelectDiv = styled.div<{ slideIndex: number, length: number }>`
-  padding-left: 0.6px;
+export const ImagesSelectDiv = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  width: ${(props) => 100 * props.length}%;
-  max-height: calc(100% - 30px);
-  position: absolute;
-  left: 0px;
-  transition: all 500ms ease-in-out;
-  transform: translateX(${(props) => -1 * ((100 / props.length) * props.slideIndex)}%);
+  overflow: auto;
 `;
 
-export const SelectImageItem = styled.img<{ length: number }>`
-  width: ${(props) => 100 / props.length}%;
-  max-height: 100%;
+export const SelectImageItem = styled.img`
+  width: 20%;
+  border-radius: 10px;
+  margin: 0 1em 2em 0;
+  cursor: pointer;
 `;
+
+export const DeleteBtn = styled(DeleteIcon)`
+
+`

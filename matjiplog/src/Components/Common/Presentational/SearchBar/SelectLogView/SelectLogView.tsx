@@ -9,8 +9,18 @@ function SelectLogView(): JSX.Element {
 
     return(
         <MapAndGrid>
-            <IconBtn onClick={activeMapShow}><Map active={mapShow ? 1 : 0} /></IconBtn>
-            <IconBtn onClick={inActiveMapShow}><GridDot active={mapShow ? 1 : 0} /></IconBtn>
+            <IconBtn onClick={(e) => {
+                e.preventDefault();
+                activeMapShow();
+            }}>
+                <Map active={mapShow ? 1 : 0} />
+            </IconBtn>
+            <IconBtn onClick={(e) => {
+                e.preventDefault();
+                inActiveMapShow();
+            }}>
+                <GridDot active={mapShow ? 1 : 0} />
+            </IconBtn>
         </MapAndGrid>
     )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 import SearchBarContainer from '../../Common/Container/SearchBar/SearchBarContainer';
 import MyLogList from '../Presentational/MyLogList/MyLogList';
@@ -15,8 +15,8 @@ import { useMatjipListResult } from '../../../types/hook/common/useMatjipList';
 import { useHasTagResult } from '../../../types/hook/common/useHasTag';
 import { dropBarMenuState } from '../../../types/store/dropBar';
 import { MyLogDto } from '../../../types/api/myLog';
-import { useMyPlaceMapResult } from '../../../types/hook/useMyPlaceMap';
-import { useDrawMarkerResult } from '../../../types/hook/useDrawMarker';
+import { useMyPlaceMapResult } from '../../../types/hook/common/useMyPlaceMap';
+import { useDrawMarkerResult } from '../../../types/hook/common/useDrawMarker';
 
 import { mapShowStore } from '../../../stores/mapShow';
 import { dropBarMenuStore } from '../../../stores/dropBar';
@@ -32,7 +32,7 @@ import { useDrawMarker } from '../../../Hooks/useDrawMarker';
 import { deleteMyLogData, getMyLogData } from '../../../Services/LogAPi';
 
 function MyLogContainer(): JSX.Element {
-    const locationHref = useNavigate();
+    const urlHandler: NavigateFunction = useNavigate();
 
     const [viewList, setViewList] = useState<MyLogDto[]>([]);
     const [logId, setLogId] = useState<number>(0);
@@ -50,10 +50,10 @@ function MyLogContainer(): JSX.Element {
     const { data, isLoading } = useQuery(['myLogList', page], () => getMyLogData(22, page));
     
     const handleMyLogDetailPage = (logSequence: number) => {
-        locationHref(`/myLog/${logSequence}`)
+        urlHandler(`/myLog/${logSequence}`)
     }
     const handleMyLogConfigPage = (logSequence: number) => {
-        locationHref(`/createMyLog/${logSequence}`)
+        urlHandler(`/createMyLog/${logSequence}`)
     }
     const deleteMyLog = (e: React.MouseEvent<HTMLDivElement>, log_sequence: number) => {
         e.stopPropagation();

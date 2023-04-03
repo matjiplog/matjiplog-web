@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { useMyPlaceMapResult } from '../types/hook/useMyPlaceMap';
+import { useMyPlaceMapResult } from '../types/hook/common/useMyPlaceMap';
 
 declare global { interface Window { kakao: any;} }
 

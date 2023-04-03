@@ -8,11 +8,11 @@ import { UserDto } from '../../../../types/api/user';
 
 function UserInfo({ imgUrl, data, deleteMyLog, submitPutIsPublic }: UserInfoProps): JSX.Element {
     const [active, setActive] = useState<boolean>(false);
+    const { isPublic, user }: MyLogDto = data;
+    const { nickname }: UserDto = user;
     const toggleActive = () => {
         setActive(prev => !prev);
     }
-    const { isPublic, user }: MyLogDto = data;
-    const { nickname }: UserDto = user;
 
     return (
         <UserInfoDiv>

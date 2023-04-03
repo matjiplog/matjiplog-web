@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useInputResult } from '../types/hook/useInput';
+import { useInputResult } from '../types/hook/common/useInput';
 
 export const useInput = (initialForm: any): useInputResult => {
     const [form, setForm] = useState<any>(initialForm);

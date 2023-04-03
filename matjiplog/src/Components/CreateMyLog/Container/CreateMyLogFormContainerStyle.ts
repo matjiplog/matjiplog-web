@@ -14,16 +14,16 @@ export const CreateMyLogForm = styled.form`
     }
 `;
 
-export const ImageDiv = styled.article`
+export const InfoDiv = styled.div`
     flex: 1 1 50%;
     border: 1px solid ${darkgrayFont};
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    position: relative;
+    justify-content: space-around;
+    padding: 0 5em 0 5em;
 `;
 
-export const InfoDiv = styled.article`
+export const ReviewDiv = styled.div`
     flex: 1 1 50%;
     border: 1px solid ${darkgrayFont};
     display: flex;
@@ -34,7 +34,7 @@ export const InfoDiv = styled.article`
 
 export const ScopeAndOptions = styled.div``;
 
-export const ImgaeAndInfo = styled.div`
+export const InfoAndReview = styled.section`
     display: flex;
     flex: 1 1 75%;
 

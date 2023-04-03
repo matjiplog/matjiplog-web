@@ -20,3 +20,10 @@ export const logAPI = axios.create({
     'Content-Type': "application/json",
   },
 });
+
+export const kakaoApi = axios.create({
+  baseURL: process.env.REACT_APP_KAKAO_ADDRESS,
+  headers: {
+    Authorization : `KakaoAK ${process.env.REACT_APP_KAKAO_REST_API_KEY}`
+  }
+})

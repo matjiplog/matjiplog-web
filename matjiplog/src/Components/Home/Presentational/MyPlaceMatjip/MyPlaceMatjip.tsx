@@ -11,20 +11,15 @@ function MyPlaceMatjip({ matjipList, setLastCard }: MyPlaceMatjipProps): JSX.Ele
 
     return <>
         <MyPlaceMatjips>
-            {matjipList?.map((value: MatjipDto, index: number): JSX.Element => {
-                const {matjipSequence, name, ratingTaste, ratingPortion, ratingService, address, roadAddress, category } = value;
-                const scopeNumber = (ratingPortion + ratingService + ratingTaste) / 3;
+            {matjipList?.map((matjip: MatjipDto, index: number): JSX.Element => {
+                const { matjipSequence } = matjip;
                 const isLastCard = index === matjipList.length - 1;
 
                 return (
                     <Link to={`/search/${matjipSequence}`} key={matjipSequence}>
                         {isLastCard && <div ref={setLastCard} />}
                         <MatjipCard 
-                            imgUrl="/assets/images/Matjip.png"
-                            category={category}
-                            title={name}
-                            scopeNumber={scopeNumber}
-                            address={roadAddress}
+                            data={matjip}
                         />
                     </Link>
                 );

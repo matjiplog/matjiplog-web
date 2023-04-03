@@ -9,17 +9,44 @@ export interface MatjipDto {
     address: string,
     roadAddress: string,
     category: string,
-    locationLatitude: string,
-    locationLongitude: string,
+    locationLatitude: number,
+    locationLongitude: number,
     imageDetail: {}
 }
 
 export interface Matjip {
     matjipData: MatjipDto,
+    matjipLikeListData: [
+        {
+            matjipSequence: number,
+            userSequence: number,
+        }
+    ],
     success: boolean
 }
 
 export interface Matjips {
     matjipListData: MatjipDto[],
+    matjipLikeListData: [
+        {
+            matjipSequence: number,
+            userSequence: number,
+        }
+    ],
     success: boolean
+}
+
+export interface PostMatjipCustom {
+    name: string,
+    phoneNumber?: string,
+    zipcode?: string,
+    address?: string,
+    roadAddress?: string,
+    category?: string,
+    locationLatitude: number,
+    locationLongitude: number,
+    isActive?: boolean,
+    isApproval?: boolean,
+    requester: number,
+    managementSource?: string
 }

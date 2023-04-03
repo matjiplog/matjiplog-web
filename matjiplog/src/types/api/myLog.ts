@@ -47,7 +47,6 @@ export interface GetCommentResponse{
     success: boolean
 }
 
-// BODY DATA
 export interface PostCommentRequest {
     logSequence: number,
     userSequence: number,
@@ -57,5 +56,18 @@ export interface PostCommentRequest {
 export interface PutIsPublicRequest {
     logSequence: number,
     userSequence: number,
+    isPublic: boolean
+}
+
+export interface PostLogRequest{
+    logSequence?: number,
+    userSequence: number,
+    isCustom: boolean,
+    matjipSequence: number,
+    content: string,
+    ratingTaste: number,
+    ratingPortion: number,
+    ratingService: number,
+    orderingMethod?: string,
     isPublic: boolean
 }

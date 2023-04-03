@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-import { SearchSection } from './SearchMatjipContainerStyle'
+import { MatjipItem, SearchListGrid, SearchSection } from './SearchMatjipContainerStyle';
 
-import SearchBarContainer from '../../Common/Container/SearchBar/SearchBarContainer'
+import SearchBarContainer from '../../Common/Container/SearchBar/SearchBarContainer';
+import MatjipImage from '../Presentational/MatjipImage/MatjipImage';
+import MatjipInfo from '../Presentational/MatjipInfo/MatjipInfo';
+import LikeAndWrite from '../Presentational/LikeAndWrite/LikeAndWrite';
 import MyPlaceMap from '../../Common/Presentational/MyPlaceMap/MyPlaceMap';
 import LodingSpinner from '../../Common/Loding';
-import SearchMatjipList from '../Presentational/SearchMatjipList/SearchMatjipList';
 
 import { dropBarMenuState } from '../../../types/store/dropBar';
 import { useObserverPageResult } from '../../../types/hook/common/useObserverpage';
@@ -14,8 +17,8 @@ import { useHasTagResult } from '../../../types/hook/common/useHasTag';
 import { useMatjipListResult } from '../../../types/hook/common/useMatjipList';
 import { MatjipDto } from '../../../types/api/matjip';
 import { MapShowState } from '../../../types/store/mapShow';
-import { useMyPlaceMapResult } from '../../../types/hook/useMyPlaceMap';
-import { useDrawMarkerResult } from '../../../types/hook/useDrawMarker';
+import { useMyPlaceMapResult } from '../../../types/hook/common/useMyPlaceMap';
+import { useDrawMarkerResult } from '../../../types/hook/common/useDrawMarker';
 
 import { useMatjipList } from '../../../Hooks/useMatjipList';
 import { useObserverPage } from '../../../Hooks/useObserverPage';
@@ -31,6 +34,8 @@ import { mapShowStore } from '../../../stores/mapShow';
 import { getMatjipData, getMatjipSearch, getMatjipSearchAddress, getMatjipSearchName } from '../../../Services/matjipApi';
 
 function SearchMatjipContainer(): JSX.Element {
+    const urlHandler: NavigateFunction = useNavigate();
+
     const [searchKey, setSearchKey] = useState<"matjips" | "searchAll" | "searchName" | "searchAddress">("matjips");
     const [keyword, setKeyword] = useState<string>("");
     const [viewList, setViewList] = useState<MatjipDto[]>([]);
@@ -52,6 +57,10 @@ function SearchMatjipContainer(): JSX.Element {
     };
     const { data, isLoading, isError, error } = matjipQuery[searchKey];
     
+    const handleCreteMyLogPage = () => {
+        urlHandler(`/createMyLog`)
+    };
+
     const keywordSubmitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         const keyword: string = e.currentTarget.keyword.value;
@@ -103,10 +112,24 @@ function SearchMatjipContainer(): JSX.Element {
             {mapShow ? (
                 <MyPlaceMap mapRef={mapRef}/>
             ): (
-                <SearchMatjipList 
-                    viewList={viewList}
-                    setLastCardRef={setLastCardRef}
-                />
+                <SearchListGrid>
+                    {viewList.map((matjip: MatjipDto, index: number) => {
+                        const { matjipSequence } = matjip;
+                        const isLastCard = index === viewList.length - 1;
+
+                        return (
+                            <MatjipItem key={matjipSequence}>
+                                <MatjipImage imgUrl="/assets/images/Matjip.png" />
+                                <MatjipInfo data={matjip}/>
+                                <LikeAndWrite 
+                                    handleCreteMyLogPage={handleCreteMyLogPage}
+                                    data={matjip}    
+                                />
+                                {isLastCard && <div ref={setLastCardRef} />}
+                            </MatjipItem>
+                        );
+                    })}
+                </SearchListGrid>
             )}
             {isLoading && <LodingSpinner />}
         </SearchSection>

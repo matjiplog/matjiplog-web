@@ -7,7 +7,7 @@ function SelectImageHeader({ images, leftClick, deleteImages, rightClick }: Sele
     return (
         <ImageTitleAndBtnDiv>
             {!images[0] ? 
-            <ImageTitle>새 게시물 만들기</ImageTitle> : 
+            <ImageTitle>사진 추가</ImageTitle> : 
             <>
                 {images.length > 1 ? 
                 <>

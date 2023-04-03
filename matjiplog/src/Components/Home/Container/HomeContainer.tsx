@@ -12,11 +12,11 @@ import LodingSpinner from '../../Common/Loding';
 import { IntroSection, MapAndInfo, MyPlaceMatjipInfo } from './HomeContainerStyle';
 
 import { useImageSlideResult } from '../../../types/hook/common/useImageSlide';
-import { useMyPlaceMapResult } from '../../../types/hook/useMyPlaceMap';
+import { useMyPlaceMapResult } from '../../../types/hook/common/useMyPlaceMap';
 import { useObserverPageResult } from '../../../types/hook/common/useObserverpage';
 import { useRadiusResult } from '../../../types/hook/useRadius';
 import { useMatjipListResult } from '../../../types/hook/common/useMatjipList';
-import { useDrawMarkerResult } from '../../../types/hook/useDrawMarker';
+import { useDrawMarkerResult } from '../../../types/hook/common/useDrawMarker';
 
 import { useImageSlide } from '../../../Hooks/useImageSlide';
 import { useMyPlaceMap } from '../../../Hooks/useMyPlaceMap';

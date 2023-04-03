@@ -1,5 +1,5 @@
 export interface SelectImageProps {
     images: string[],
     selectImages: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    slideIndex: number,
+    deleteImage: (e: React.MouseEvent<HTMLImageElement>) => void,
 }

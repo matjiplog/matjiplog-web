@@ -4,9 +4,9 @@ import { useImageSelectResult } from '../types/hook/common/useImageSelect';
 
 export function useImageSelect(): useImageSelectResult {
   const [images, setImages] = useState<string[]>([]);
-  let saveImages: string[] = [];
 
   const selectImages = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    let saveImages: string[] = [];
     const { target, currentTarget } = e;
     const imageLists = currentTarget.files;
 
@@ -17,9 +17,14 @@ export function useImageSelect(): useImageSelectResult {
     setImages(saveImages);
   };
 
-  const deleteImages = () => { setImages([]) };
+  const deleteImage = (e: React.MouseEvent<HTMLImageElement>) => { 
+    const target = e.target as HTMLImageElement;
+    const { src } = target;
+
+    setImages((prev) => prev.filter(value => value !== src)); 
+  };
 
 
-  return { images, selectImages, deleteImages };
+  return { images, selectImages, deleteImage };
 }
 

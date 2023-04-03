@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaPen } from "react-icons/fa";
 import { ImStarFull } from "react-icons/im";
 import { TbMenu2 } from "react-icons/tb";
 import { BiSearch } from "react-icons/bi";
@@ -55,3 +55,5 @@ export const GridDotIcon = styled(TbGridDots)`
 `
 export const TrashIcon = styled(FaRegTrashAlt)`
 `
+export const WriteIcon = styled(FaPen)`
+`;
