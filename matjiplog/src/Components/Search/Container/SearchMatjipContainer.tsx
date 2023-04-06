@@ -25,6 +25,7 @@ import { useObserverPage } from '../../../Hooks/useObserverPage';
 import { useHasTagList } from '../../../Hooks/useHasTagList';
 import { useMyPlaceMap } from '../../../Hooks/useMyPlaceMap';
 import { useDrawMarker } from '../../../Hooks/useDrawMarker';
+import { useNavigateUrl } from '../../../Hooks/useNavigateUrl';
 
 import { handlerContext } from '../../../Contexts/handler';
 
@@ -34,8 +35,6 @@ import { mapShowStore } from '../../../stores/mapShow';
 import { getMatjipData, getMatjipSearch, getMatjipSearchAddress, getMatjipSearchName } from '../../../Services/matjipApi';
 
 function SearchMatjipContainer(): JSX.Element {
-    const urlHandler: NavigateFunction = useNavigate();
-
     const [searchKey, setSearchKey] = useState<"matjips" | "searchAll" | "searchName" | "searchAddress">("matjips");
     const [keyword, setKeyword] = useState<string>("");
     const [viewList, setViewList] = useState<MatjipDto[]>([]);
@@ -43,6 +42,7 @@ function SearchMatjipContainer(): JSX.Element {
     const { mapShow, inActiveMapShow }: MapShowState = mapShowStore();
     const { dropBarMenu }: dropBarMenuState = dropBarMenuStore();
 
+    const { handleUrl } = useNavigateUrl();
     const { mapRef, map }: useMyPlaceMapResult = useMyPlaceMap(10);
     const { markers, deleteMarkers, drawMatjipMakers }: useDrawMarkerResult = useDrawMarker();
     const { page, initPage, setLastCardRef }: useObserverPageResult = useObserverPage();
@@ -57,10 +57,6 @@ function SearchMatjipContainer(): JSX.Element {
     };
     const { data, isLoading, isError, error } = matjipQuery[searchKey];
     
-    const handleCreteMyLogPage = () => {
-        urlHandler(`/createMyLog`)
-    };
-
     const keywordSubmitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         const keyword: string = e.currentTarget.keyword.value;
@@ -118,13 +114,10 @@ function SearchMatjipContainer(): JSX.Element {
                         const isLastCard = index === viewList.length - 1;
 
                         return (
-                            <MatjipItem key={matjipSequence}>
+                            <MatjipItem key={matjipSequence} onClick={() => {handleUrl(`/search/${matjipSequence}`)}}>
                                 <MatjipImage imgUrl="/assets/images/Matjip.png" />
-                                <MatjipInfo data={matjip}/>
-                                <LikeAndWrite 
-                                    handleCreteMyLogPage={handleCreteMyLogPage}
-                                    data={matjip}    
-                                />
+                                <MatjipInfo data={matjip} />
+                                <LikeAndWrite data={matjip} />
                                 {isLastCard && <div ref={setLastCardRef} />}
                             </MatjipItem>
                         );

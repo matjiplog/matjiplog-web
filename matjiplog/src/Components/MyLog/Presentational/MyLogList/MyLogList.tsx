@@ -5,7 +5,7 @@ import MyLogItem from '../MyLogItem/MyLogItem';
 import { MyLogListProps } from '../../../../types/props/MyLog/MyLogList';
 import { MyLogDto } from '../../../../types/api/myLog';
 
-function MyLogList({ viewList, setLastCardRef, handleMyLogDetailPage, deleteMyLog }: MyLogListProps): JSX.Element {
+function MyLogList({ viewList, setLastCardRef, deleteMyLog }: MyLogListProps): JSX.Element {
     
     return (
         <MyLogListGrid>
@@ -17,7 +17,6 @@ function MyLogList({ viewList, setLastCardRef, handleMyLogDetailPage, deleteMyLo
                     <div key={logSequence}>
                         <MyLogItem 
                             myLog={myLog}
-                            handleMyLogDetailPage={handleMyLogDetailPage}
                             deleteMyLog={deleteMyLog}
                         />
                         {isLastCard && <div ref={setLastCardRef} />}

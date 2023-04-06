@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
-import { StarIcon } from '../../../../styles/icons';
-import { hoverFont, darkgrayFont, yellowFont, mainFont } from '../../../../styles/fontColor';
+import { LikeIcon, StarIcon, WriteIcon } from '../../../../styles/icons';
+import { hoverFont, darkgrayFont, yellowFont, mainFont, redFont } from '../../../../styles/fontColor';
 import { CardBorderShaodw } from '../../../../styles/borderStyle';
 
 export const MatjipCardDiv = styled(CardBorderShaodw)`
+  position: relative;
   padding: 3em 5em 3em 5em;
   margin: 0 0 5em 0;
   
@@ -66,3 +67,29 @@ export const Star = styled(StarIcon)<{ active: number }>`
   cursor: pointer;
   color: ${(props) => props.active ? yellowFont : darkgrayFont};
 `;
+
+export const Button = styled.button`
+  font-size: 1.5rem;
+`
+const IconStyle = `
+  position: absolute;
+  top: 10px;
+`
+
+export const Like = styled(LikeIcon)`
+  ${IconStyle};
+  right: 30px;
+  :hover{
+    color: ${redFont};
+    transform: scale(1.2);
+  }
+  
+`
+export const Wrtie = styled(WriteIcon)`
+  ${IconStyle};
+  right: 5px;
+  :hover{
+    color: ${mainFont};
+    transform: scale(1.2);
+  }
+`

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 import SearchBarContainer from '../../Common/Container/SearchBar/SearchBarContainer';
 import MyLogList from '../Presentational/MyLogList/MyLogList';
@@ -32,14 +31,14 @@ import { useDrawMarker } from '../../../Hooks/useDrawMarker';
 import { deleteMyLogData, getMyLogData } from '../../../Services/LogAPi';
 
 function MyLogContainer(): JSX.Element {
-    const urlHandler: NavigateFunction = useNavigate();
+    const queryClient = useQueryClient(); // QueryClient 인스턴스를 가져옴
 
     const [viewList, setViewList] = useState<MyLogDto[]>([]);
     const [logId, setLogId] = useState<number>(0);
 
     const { mapShow, inActiveMapShow }: MapShowState = mapShowStore();
     const { dropBarMenu }: dropBarMenuState = dropBarMenuStore();
-
+    
     const { mapRef, map }: useMyPlaceMapResult = useMyPlaceMap(12);
     const { markers, deleteMarkers, drawMyLogMakers }: useDrawMarkerResult = useDrawMarker();
     const { page, initPage, setLastCardRef }: useObserverPageResult = useObserverPage();
@@ -47,14 +46,8 @@ function MyLogContainer(): JSX.Element {
     const { hasTags, hastagMyLogList, addHasTag, deleteHasTag, filterMyLogHasTag }: useHasTagResult = useHasTagList();
 
     const { mutate, isSuccess } = useMutation((log_sequence: number) => deleteMyLogData(22, log_sequence));
-    const { data, isLoading } = useQuery(['myLogList', page], () => getMyLogData(22, page));
-    
-    const handleMyLogDetailPage = (logSequence: number) => {
-        urlHandler(`/myLog/${logSequence}`)
-    }
-    const handleMyLogConfigPage = (logSequence: number) => {
-        urlHandler(`/createMyLog/${logSequence}`)
-    }
+    const { data, isLoading, isRefetching } = useQuery(['myLogList', page], () => getMyLogData(22, page));
+
     const deleteMyLog = (e: React.MouseEvent<HTMLDivElement>, log_sequence: number) => {
         e.stopPropagation();
         if(log_sequence){
@@ -74,11 +67,12 @@ function MyLogContainer(): JSX.Element {
     }, [])
 
     useEffect(() => {
+        if(isRefetching) return;
         if (data?.data) {
             if(page === 0) newMyLogList(data.data);
             else pushMyLogList(data.data);
         }
-    }, [data])
+    }, [data, isRefetching])
 
     useEffect(() => {
         if(markers) deleteMarkers();
@@ -108,7 +102,6 @@ function MyLogContainer(): JSX.Element {
                 <MyLogList 
                     viewList={viewList} 
                     setLastCardRef={setLastCardRef}
-                    handleMyLogDetailPage={handleMyLogDetailPage} 
                     deleteMyLog={deleteMyLog}
                 />
             )}

@@ -1,6 +1,6 @@
 import { logAPI } from '../Api/axios';
 import { handleError } from '../utils/handleError';
-import { GetMyLogResponse, GetMyLogsResponse, PostCommentRequest, PostCommentResponse, PutIsPublicRequest, GetCommentResponse, PostLogRequest } from './../types/api/myLog';
+import { GetMyLogResponse, GetMyLogsResponse, PostCommentRequest, PostCommentResponse, PutIsPublicRequest, GetCommentResponse, PostLogRequest, PutLogInfoRequest, PostLogResponse, PutLogIsPublicResponse, PutLogInfoResponse } from './../types/api/myLog';
 
 export const getMyLogData = async (user_sequence: number, page: number): Promise<GetMyLogsResponse | null> => {
     try{
@@ -51,11 +51,11 @@ export const postLogComment = async (commentData: PostCommentRequest): Promise<P
     }
 }
 
-export const postLog = async (logData: PostLogRequest) => {
+export const postLog = async (logData: PostLogRequest): Promise<PostLogResponse | null> => {
     try{
         const res = await logAPI.post("/log", logData);
 
-        if(!res?.data || res?.status !== 200) return null;
+        if(!res?.data?.success || res?.status !== 200) return null;
         return res.data;
     }
     catch(error: unknown){
@@ -64,11 +64,24 @@ export const postLog = async (logData: PostLogRequest) => {
     }
 }
 
-export const putLogIsPublic = async (logPublicData: PutIsPublicRequest) => {
+export const putLogIsPublic = async (logPublicData: PutIsPublicRequest): Promise<PutLogIsPublicResponse | null> => {
     try{
         const res = await logAPI.put("log/change/public" , logPublicData);
         
-        if(!res?.data || res?.status !== 200) return null;
+        if(!res?.data?.success || res?.status !== 200) return null;
+        return res.data;
+    }
+    catch(error: unknown){
+        handleError(error);
+        throw error;
+    }
+}
+
+export const putLogInfo = async (modifiedLogInfo: PutLogInfoRequest): Promise<PutLogInfoResponse | null> => {
+    try{
+        const res = await logAPI.put("log", modifiedLogInfo);
+        
+        if(!res?.data?.success || res?.status !== 200) return null;
         return res.data;
     }
     catch(error: unknown){
@@ -102,24 +115,3 @@ export const deleteCommentData = async (comment_sequence: number, user_sequence:
         throw error;
     }
 }
-
-
-
-
-
-
-
-
-
-// {
-//     "userSequence": 0,
-//     "isCustom": true,// 사용자가 새로 등록하는지
-//     "matjipSequence": 0,
-//     "content": "string",
-//     "ratingTaste": 0,
-//     "ratingPortion": 0,
-//     "ratingService": 0,
-//     "orderingMethod": "string",
-//     "isPublic": true,
-// }    post log
-

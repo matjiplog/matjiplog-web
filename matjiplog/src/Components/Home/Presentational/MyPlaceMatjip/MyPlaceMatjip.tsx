@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
 
 import { MyPlaceMatjips } from './MyPlaceMatjipStyle';
+import MatjipCard from '../MatjipCard/MatjipCard';
 
 import { MyPlaceMatjipProps } from '../../../../types/props/MyPlaceMatjip/MyPlaceMatjip';
 import { MatjipDto } from '../../../../types/api/matjip';
-import MatjipCard from '../MatjipCard/MatjipCard';
+
+import { useNavigateUrl } from '../../../../Hooks/useNavigateUrl';
 
 function MyPlaceMatjip({ matjipList, setLastCard }: MyPlaceMatjipProps): JSX.Element {
+    const { handleUrl } = useNavigateUrl();
 
     return <>
         <MyPlaceMatjips>
@@ -16,12 +18,10 @@ function MyPlaceMatjip({ matjipList, setLastCard }: MyPlaceMatjipProps): JSX.Ele
                 const isLastCard = index === matjipList.length - 1;
 
                 return (
-                    <Link to={`/search/${matjipSequence}`} key={matjipSequence}>
+                    <div key={matjipSequence} onClick={() => {handleUrl(`/search/${matjipSequence}`)}}>
                         {isLastCard && <div ref={setLastCard} />}
-                        <MatjipCard 
-                            data={matjip}
-                        />
-                    </Link>
+                        <MatjipCard data={matjip}/>
+                    </div>
                 );
             })}
         </MyPlaceMatjips>

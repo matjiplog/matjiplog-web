@@ -1,12 +1,11 @@
 import { FindMap, Write, FindMapTitle, FindMapIcon, WriteAndMap } from './InputMapStyle';
 
-import { WriteLogState } from '../../../../types/store/writeLog';
-import { InputMapProps } from '../../../../types/props/CreateMyLog/InputMap';
+import { useLogResult } from '../../../../types/hook/common/useLog';
 
-import { writeLogStore } from '../../../../stores/writeLog';
+import { useLog } from '../../../../Hooks/useLog';
 
-function InputMap({ searchMatjipInfo }: InputMapProps): JSX.Element {
-    const { matjip, initWriteLogStore }: WriteLogState = writeLogStore();
+function InputMap(): JSX.Element {
+    const { matjip, initWriteLogStore, searchMatjip }: useLogResult = useLog();
 
     return (
         <FindMap>
@@ -18,7 +17,7 @@ function InputMap({ searchMatjipInfo }: InputMapProps): JSX.Element {
                 />
                 <FindMapIcon 
                     active={matjip.matjipSequence ? 1 : 0}
-                    onClick={searchMatjipInfo}
+                    onClick={searchMatjip}
                 />
             </WriteAndMap>
         </FindMap>

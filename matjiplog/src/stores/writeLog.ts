@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { WriteLogState } from './../types/store/writeLog';
+import { WriteLogState, logStore } from './../types/store/writeLog';
 import { MatjipDto } from './../types/api/matjip';
 
 export const writeLogStore = create<WriteLogState>((set) => ({
@@ -19,29 +19,42 @@ export const writeLogStore = create<WriteLogState>((set) => ({
         locationLongitude: 0,
         imageDetail: {}
     },
-    content: "",
-    isCustom: true,
-    order: "",
+    log: {
+        logSequence: 0,
+        content: "",
+        isCustom: true,
+        orderingMethod: "",
+        isPublic: false,
+    },
+    order: "post",
 
     setMatjip : (data: MatjipDto) => {
         set(() => ({ matjip: {...data} }));
     },
 
-    setContent : (data: string) => {
-        set(() => ({ content: data }));
+    setLog : (data: logStore) => {
+        set(() => ({ log: {...data} }));
     },
     
-    setIsCustom : (isCustom: boolean) => {
-        set(() => ({ isCustom: isCustom }));
+    setOrder : (order: "post" | "put") => {
+        set(() => ({ order }));
     },
 
-    setOrder : (order: "post" | "put") => {
-        set(() => ({ order: order }));
+    initLogStore : () => {
+        set(() => ({  
+            log: {
+                logSequence: 0,
+                content: "",
+                isCustom: true,
+                orderingMethod: "",
+                isPublic: false,
+            },
+        }))
     },
 
     initWriteLogStore : () => {
         set(() => ({  
-            matjip : {
+            matjip: {
                 matjipSequence: 0,
                 name: '',
                 phonenumber: '',
@@ -56,9 +69,14 @@ export const writeLogStore = create<WriteLogState>((set) => ({
                 locationLongitude: 0,
                 imageDetail: {}
             },
-            content: "",
-            isCustom: true,
-            order: ""
+            log: {
+                logSequence: 0,
+                content: "",
+                isCustom: true,
+                orderingMethod: "",
+                isPublic: false,
+            },
+            order: "post",
         }))
     }
 }));

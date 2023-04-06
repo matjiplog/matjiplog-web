@@ -1,4 +1,4 @@
-import { PostMatjipCustom } from './../types/api/matjip';
+import { PostMatjipCustomRequest } from './../types/api/matjip';
 import { matjipAPI } from '../Api/axios';
 import { Matjips } from '../types/api/matjip';
 import { handleError } from '../utils/handleError';
@@ -68,10 +68,10 @@ export const getMatjipMyPlace = async (lat: number, lng: number, radius: number,
   }
 }
 
-export const postMatjipCustom = async (data: PostMatjipCustom) => {
+export const postMatjipCustom = async (data: PostMatjipCustomRequest) => {
   try{
     const res = await matjipAPI.post("matjip/custom/add", data);
-
+    
     if(!res?.data?.success || res?.status !== 200) return null;
     return res.data;
   }
@@ -80,17 +80,3 @@ export const postMatjipCustom = async (data: PostMatjipCustom) => {
     throw error;
   }
 }
-// {
-//     @"name": "string",// 맛집이름
-//     "phoneNumber": "string",
-//     "zipcode": "string",
-//     "address": "string",
-//     "roadAddress": "string",
-//     "category": "string",
-//     @"locationLatitude": 0,
-//     @"locationLongitude": 0,
-//     "isActive": true,
-//     "isApproval": true,
-//     @"requester": 0,// 신청자
-//     "managementSource": "string"
-//   } custum add

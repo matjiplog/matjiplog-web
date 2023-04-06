@@ -1,5 +1,4 @@
 import { useMutation } from 'react-query';
-import { useEffect } from 'react';
 
 import SelectImage from '../Presentational/SelectImage/SelectImage';
 import InputMap from '../Presentational/InputMap/InputMap';
@@ -12,98 +11,106 @@ import Info from '../Presentational/Info/Info';
 import { CreateMyLogForm, InfoDiv, InfoAndReview, ReviewDiv, ScopeAndOptions } from './CreateMyLogFormContainerStyle';
 
 import { useImageSelectResult } from '../../../types/hook/common/useImageSelect';
-import { useDisclosureResult } from '../../../types/hook/common/useDisclosure';
-import { PostLogRequest } from '../../../types/api/myLog';
-import { WriteLogState } from '../../../types/store/writeLog';
-import { PostMatjipCustom } from '../../../types/api/matjip';
+import { PostLogRequest, PutLogInfoRequest } from '../../../types/api/myLog';
+import { MatjipDto, PostMatjipCustomRequest } from '../../../types/api/matjip';
 import { dropBarMenuState } from '../../../types/store/dropBar';
+import { useLogResult } from '../../../types/hook/common/useLog';
 
 import { useImageSelect } from '../../../Hooks/useImageSelect';
-import { useDisclosure } from '../../../Hooks/useDisclosure';
 import { useNavigateUrl } from '../../../Hooks/useNavigateUrl';
+import { useLog } from '../../../Hooks/useLog';
 
-import { writeLogStore } from '../../../stores/writeLog';
 import { dropBarMenuStore } from '../../../stores/dropBar';
 
-import { postLog } from '../../../Services/LogAPi';
+import { postLog, putLogInfo } from '../../../Services/LogAPi';
 import { postMatjipCustom } from '../../../Services/matjipApi';
+import { logStore } from '../../../types/store/writeLog';
 
 function CreateMyLogFormContainer(): JSX.Element {
     const userSequence = 22;
 
-    const { matjip, isCustom, order, content, initWriteLogStore, setIsCustom, setMatjip, setContent }: WriteLogState = writeLogStore();
+    // dropBarMenuStore()에서 dropBarMenu, initDropBarMenu 추출
     const { dropBarMenu, initDropBarMenu }: dropBarMenuState = dropBarMenuStore();
 
+    // useNavigateUrl()에서 handleUrl 추출
     const { handleUrl } = useNavigateUrl();
-    const { images, selectImages, deleteImage }: useImageSelectResult = useImageSelect();
-    const { disclosure, toggleDisclosure }: useDisclosureResult = useDisclosure(false);
 
-    const logPostMutation = useMutation(["log"], (logData: PostLogRequest) => postLog(logData), {
-        onSuccess() {
+    // useLog()에서 matjip, log, order, initWriteLogStore 추출
+    const { matjip, log, order, initWriteLogStore }: useLogResult = useLog();
+    // useImageSelectResult에서 images, selectImages, deleteImage 추출
+    const { images, selectImages, deleteImage }: useImageSelectResult = useImageSelect();
+
+    // log 등록에 사용되는 logPostMutation
+    const logPostMutation = useMutation(["postLog"], (logData: PostLogRequest) => postLog(logData), {
+        onSuccess(response) {
             handleUrl("/mylog");
         },
         onError(error) {
-            console.log(error);
-            alert('로그 등록에 실패했습니다.');
+            alert('로그 등록 에러.');
         }
     });
-    const matjipPostMutation = useMutation(["matjip"], (matjipData: PostMatjipCustom) => postMatjipCustom(matjipData), {
-        onSuccess(data) {
-            const { matjipSequence } = data.matjipData;
-            doPostLog(matjipSequence);
+    // 맛집 등록에 사용되는 matjipPostMutation
+    const matjipPostMutation = useMutation(["postMatjip"], (matjipData: PostMatjipCustomRequest) => postMatjipCustom(matjipData), {
+        onSuccess(response) {
+            doPostLog(response.matjipData.matjipSequence, matjip, log);
         },
         onError(error) {
             initWriteLogStore();
             initDropBarMenu();
-            console.log(error);
-            alert('맛집 등록에 실패했습니다.');
+            alert('맛집 등록 에러.');
         }
     });
 
+    // 맛집 수정에 사용되는 logPutMutation
+    const logPutMutatjion = useMutation(["putLog"], (modifiedLogInfo: PutLogInfoRequest) => putLogInfo(modifiedLogInfo), {
+        onSuccess(response) {
+            if(response?.success) handleUrl("/mylog");
+            else alert('맛집 수정에 실패했습니다.');
+        },
+        onError(error) {
+            alert('맛집 수정 에러.');
+        }
+    });
+
+    // 로그 등록 폼 제출 시 실행되는 함수
     const submitPostLog = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const { matjipSequence } = matjip;
-
-        if(!isCustom) doPostLog(matjipSequence);
-        if(isCustom) doPostCustumMatjip();
+        if(order === "put") return doPutLog(matjip, log);
+        if(!log.isCustom && order === "post") return doPostLog(matjip.matjipSequence, matjip, log);
+        if(log.isCustom && order === "post") return doPostCustumMatjip(matjip);
     }
-    const doPostLog = (matjipSequence: number) => {
-        const { name, address, ratingPortion, ratingService, ratingTaste } = matjip;
+
+    // 맛집 로그 등록 함수
+    const doPostLog = (matjipSequence: number, matjipInfo: MatjipDto, logIfno: logStore) => {
+        const { ratingPortion, ratingService, ratingTaste } = matjipInfo;
+        const { content, isCustom, isPublic } = logIfno;
         const orderingMethod = dropBarMenu === "선택 없음" ? undefined : dropBarMenu;
 
-        if(!name || !address || !content || !userSequence) return alert("실패");
-        logPostMutation.mutate({ userSequence, isCustom, matjipSequence, content, ratingTaste, ratingPortion, ratingService, orderingMethod, isPublic: disclosure });
+        if(!content || !userSequence || !ratingPortion || !ratingService || !ratingTaste) return alert("실패");
+        logPostMutation.mutate({ userSequence, isCustom, matjipSequence, content, ratingTaste, ratingPortion, ratingService, orderingMethod, isPublic });
     }
-    const doPostCustumMatjip = () => {
-        const { phonenumber: phoneNumber, zipcode, category, name, locationLatitude, locationLongitude, address, roadAddress, imageDetail } = matjip;
+    // 사용자 정의 맛집 로그 등록 함수
+    const doPostCustumMatjip = (matjipInfo: MatjipDto) => {
+        const { phonenumber, zipcode, category, name, locationLatitude, locationLongitude, address, roadAddress, imageDetail } = matjipInfo;
 
         if(!name || !locationLatitude || !locationLongitude || !address || !userSequence) return alert("실패");
-        matjipPostMutation.mutate({ name, phoneNumber, zipcode, address, roadAddress, category, locationLatitude, locationLongitude, requester: userSequence });
+        matjipPostMutation.mutate({ name, phoneNumber: phonenumber, zipcode, address, roadAddress, category, locationLatitude, locationLongitude, requester: userSequence });
+    }
+    // 맛집 로그 수정 함수
+    const doPutLog = (matjipInfo: MatjipDto, logInfo: logStore) => {
+        const { matjipSequence, ratingPortion, ratingService, ratingTaste } = matjipInfo;
+        const { logSequence, isCustom, content, isPublic } = logInfo;
+        const orderingMethod = dropBarMenu === "선택 없음" ? undefined : dropBarMenu;
+
+        if(!matjipSequence || !ratingPortion || !ratingService || !ratingTaste || !logSequence || !content) return alert("실패");
+        logPutMutatjion.mutate({ logSequence, userSequence, isCustom, matjipSequence, content, ratingTaste, ratingPortion, ratingService, orderingMethod, isPublic, isActive: true });
     }
 
-    const setMatjipStore = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setMatjip({ ...matjip, [name]: value });
-    }
-    const setContentStore = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setContent(value);
-    }
-
-    const searchMatjipInfo = () => {
-        handleUrl("/search")
-    }
-
-    useEffect(() => {
-        if(!matjip?.matjipSequence) setIsCustom(true);
-        else setIsCustom(false);
-    }, [])
-    
     return (
         <CreateMyLogForm onSubmit={submitPostLog}>
             <InfoAndReview>
                 <InfoDiv>
-                    <Info setMatjipStore={setMatjipStore} />
+                    <Info />
                     <SelectImage 
                         images={images}
                         selectImages={selectImages}
@@ -111,20 +118,15 @@ function CreateMyLogFormContainer(): JSX.Element {
                     />
                 </InfoDiv>
                 <ReviewDiv>
-                    <InputMap 
-                        searchMatjipInfo={searchMatjipInfo}
-                    />
-                    <InputDisclosure 
-                        disclosure={disclosure}
-                        toggleDisclosure={toggleDisclosure}
-                    />
+                    {order === "post" && <InputMap />}
+                    <InputDisclosure />
                     <ScopeAndOptions>
                         <InputScope />
                         <InputOtion />
                     </ScopeAndOptions>
                 </ReviewDiv>
             </InfoAndReview>
-            <InputDetail setContentStore={setContentStore} />
+            <InputDetail />
         </CreateMyLogForm>
     )
 }

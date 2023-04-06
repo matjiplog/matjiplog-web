@@ -1,13 +1,14 @@
 import { IconAndFileBtn, SelectImageItem, NonSelectImage, ImageLabel, ImageFileBtn, ImagesSelectDiv } from './SelectImageStyle';
 
 import { SelectImageProps } from '../../../../types/props/CreateMyLog/SelectImage';
-import { WriteLogState } from '../../../../types/store/writeLog';
+import { useLogResult } from '../../../../types/hook/common/useLog';
 
-import { writeLogStore } from '../../../../stores/writeLog';
+import { useLog } from '../../../../Hooks/useLog';
 
 function SelectImage({ images, selectImages, deleteImage }: SelectImageProps): JSX.Element {
-    const { matjip, isCustom }: WriteLogState = writeLogStore();
+    const { matjip, log, order }: useLogResult = useLog();
     const { matjipSequence, imageDetail } = matjip;
+    const { isCustom } = log;
 
     return (
         <IconAndFileBtn>

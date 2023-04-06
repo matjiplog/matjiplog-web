@@ -70,15 +70,27 @@ function HomeContainer(): JSX.Element {
     return (
         <>
             <IntroSection>
-                <IntroButton leftClick={leftClick} rightClick={rightClick} />
-                <IntroImage slideIndex={slideIndex} introImageUrl={introImageUrl}/>
+                <IntroButton 
+                    leftClick={leftClick} 
+                    rightClick={rightClick} 
+                />
+                <IntroImage 
+                    slideIndex={slideIndex} 
+                    introImageUrl={introImageUrl}
+                />
                 <IntroTitle />
             </IntroSection>
             <MapAndInfo>
                 <MyPlaceMap mapRef={mapRef}/>
                 <MyPlaceMatjipInfo>
-                    <RadiusForm radius={radius} submitHandler={inquireRadiusHandler} />
-                    <MyPlaceMatjip matjipList={matjipList} setLastCard={setLastCardRef}/>
+                    <RadiusForm 
+                        radius={radius} 
+                        submitHandler={inquireRadiusHandler} 
+                    />
+                    <MyPlaceMatjip 
+                        matjipList={matjipList} 
+                        setLastCard={setLastCardRef}
+                    />
                     {isLoading && <LodingSpinner />}
                 </MyPlaceMatjipInfo>
             </MapAndInfo>

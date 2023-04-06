@@ -1,8 +1,13 @@
-import { Name, Category, MatjipCardDiv, NameAndCategory, Address, NumberAndStar, ScopeNumber, Star, ImageDiv, Image } from './MatjipCardStyle';
+import { Name, Category, MatjipCardDiv, NameAndCategory, Address, NumberAndStar, ScopeNumber, Star, ImageDiv, Image, Button, Like, Wrtie } from './MatjipCardStyle';
 
 import { MatjipCardProps } from '../../../../types/props/Home/MatjipCard';
+import { useLogResult } from '../../../../types/hook/common/useLog';
+
+import { useLog } from '../../../../Hooks/useLog';
 
 function MatjipCard({ data }: MatjipCardProps): JSX.Element {
+    const { writeLog }: useLogResult = useLog();
+
     const { name, ratingTaste, ratingPortion, ratingService, address, roadAddress, category } = data;
     const scopeNumber = (ratingPortion + ratingService + ratingTaste) / 3;
     let starArray: JSX.Element[]= [];
@@ -11,6 +16,8 @@ function MatjipCard({ data }: MatjipCardProps): JSX.Element {
     
     return (
         <MatjipCardDiv>
+            <Button><Like /></Button>
+            <Button onClick={(e) => {writeLog(e, data)}}><Wrtie/></Button>
             <NameAndCategory>
                 <Name>{name}</Name>
                 <Category>{category}</Category>

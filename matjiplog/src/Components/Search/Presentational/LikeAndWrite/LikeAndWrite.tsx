@@ -1,25 +1,19 @@
 import { Button, Like, Write, LikeAndWrtieButton } from './LikeAndWriteStlye';
 
 import { LikeAndWriteProps } from '../../../../types/props/SearchMatjip/LikeAndWrite';
-import { WriteLogState } from '../../../../types/store/writeLog';
+import { useLogResult } from '../../../../types/hook/common/useLog';
 
-import { writeLogStore } from '../../../../stores/writeLog';
+import { useLog } from '../../../../Hooks/useLog';
 
-function LikeAndWrite({ handleCreteMyLogPage, data }: LikeAndWriteProps): JSX.Element {
-    const { setMatjip, setIsCustom, setOrder }: WriteLogState = writeLogStore();
-
-    const ClickWriteButton = () => {
-        setMatjip({...data});
-        setOrder("post");
-        handleCreteMyLogPage();
-    }
+function LikeAndWrite({ data }: LikeAndWriteProps): JSX.Element {
+    const { writeLog }: useLogResult = useLog();
 
     return (
         <LikeAndWrtieButton>
             <Button>
                 <Like /> 
             </Button>
-            <Button onClick={ClickWriteButton}>
+            <Button onClick={(e) => {writeLog(e, data)}}>
                 <Write />
             </Button>
         </LikeAndWrtieButton>

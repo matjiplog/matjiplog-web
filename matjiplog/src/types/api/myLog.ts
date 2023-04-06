@@ -22,17 +22,21 @@ export interface MyLogDto {
     ratingTaste: number,
     userSequence: number,
     user: UserDto,
-    imageDetail: []
+    imageDetail: [],
     likeCount: number,
+    likeByUser: boolean,
     comments: CommentDto[]
 }
-
-export interface GetMyLogsResponse{
+export interface GetMyLogsResponse {
     data: MyLogDto[],
     success: boolean
 }
-export interface GetMyLogResponse{
+export interface GetMyLogResponse {
     data: MyLogDto,
+    success: boolean
+}
+export interface GetCommentResponse{
+    data: CommentDto[],
     success: boolean
 }
 export interface PostCommentResponse {
@@ -41,24 +45,40 @@ export interface PostCommentResponse {
     userSequence: number,
     content: string
 }
-
-export interface GetCommentResponse{
-    data: CommentDto[],
+export interface PostLogResponse {
+    data: MyLogDto,
+    success: boolean,
+    totalPages: number,
+}
+export interface PutLogIsPublicResponse {
     success: boolean
 }
-
+export interface PutLogInfoResponse {
+    totalPages: number,
+    data: {
+        logSequence: number,
+        userSequence: number,
+        isCustom: boolean,
+        matjipSequence: number,
+        content: string,
+        ratingTaste: number,
+        ratingPortion: number,
+        ratingService: number,
+        orderingMethod: string,
+        isPublic: boolean
+    },
+    success: boolean,
+}
 export interface PostCommentRequest {
     logSequence: number,
     userSequence: number,
     content: string
 }
-
 export interface PutIsPublicRequest {
     logSequence: number,
     userSequence: number,
     isPublic: boolean
 }
-
 export interface PostLogRequest{
     logSequence?: number,
     userSequence: number,
@@ -70,4 +90,18 @@ export interface PostLogRequest{
     ratingService: number,
     orderingMethod?: string,
     isPublic: boolean
+}
+
+export interface PutLogInfoRequest {
+    logSequence: number,
+    userSequence: number,
+    isCustom: boolean,
+    matjipSequence: number,
+    content: string,
+    ratingTaste: number,
+    ratingPortion: number,
+    ratingService: number,
+    orderingMethod?: string,
+    isPublic: boolean,
+    isActive: boolean
 }

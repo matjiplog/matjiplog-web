@@ -1,13 +1,17 @@
 import { Disclosure, DisclosureTitle, DisclosureCheckDiv, DisclosureCheck } from './InputDisclosureStyle';
 
-import { InputDisclosureProps } from '../../../../types/props/CreateMyLog/InputDisclosure';
+import { useLogResult } from '../../../../types/hook/common/useLog';
 
-function InputDisclosure({ disclosure, toggleDisclosure }: InputDisclosureProps): JSX.Element {
+import { useLog } from '../../../../Hooks/useLog';
+
+function InputDisclosure(): JSX.Element {
+    const { log, setLog }: useLogResult = useLog();
+    const { isPublic } = log;
 
     return (
         <Disclosure>
                 <DisclosureTitle>공개</DisclosureTitle>
-                <DisclosureCheckDiv active={disclosure ? 1 : 0} onClick={toggleDisclosure}>
+                <DisclosureCheckDiv active={isPublic ? 1 : 0} onClick={() => {setLog({...log, isPublic: !isPublic})}}>
                     <DisclosureCheck  />
                 </DisclosureCheckDiv>
         </Disclosure>

@@ -1,16 +1,12 @@
 import { Gnv, GnvItem, GnvBtn } from './GlobalNavStyle';
 
 import { GlobalNavProps } from '../../../../../types/props/Header/GlobalNav';
-import { WriteLogState } from '../../../../../types/store/writeLog';
-import { writeLogStore } from '../../../../../stores/writeLog';
+import { useLogResult } from '../../../../../types/hook/common/useLog';
+
+import { useLog } from '../../../../../Hooks/useLog';
 
 function GlobalNav({ navShow, path, navHandler }: GlobalNavProps): JSX.Element {
-    const { initWriteLogStore }: WriteLogState = writeLogStore();
-
-    const onClickCreateMyLogNav = (e: React.MouseEvent<HTMLImageElement | HTMLButtonElement, MouseEvent>) => {
-        initWriteLogStore();
-        navHandler(e);
-    }
+    const { writeCustumMatjip }: useLogResult = useLog();
 
     return(
         <Gnv active={navShow}>
@@ -24,7 +20,7 @@ function GlobalNav({ navShow, path, navHandler }: GlobalNavProps): JSX.Element {
                 <GnvBtn active={path === "/mylog" ? 1 : 0} onClick={navHandler}>나만의 맛집</GnvBtn>
             </GnvItem>
             <GnvItem>
-                <GnvBtn active={path === "/createMyLog" ? 1 : 0} onClick={onClickCreateMyLogNav}>맛집 기록</GnvBtn>
+                <GnvBtn active={path === "/createMyLog" ? 1 : 0} onClick={writeCustumMatjip}>맛집 기록</GnvBtn>
             </GnvItem>
         </Gnv>
     ) 

@@ -1,13 +1,22 @@
 import { MatjipDto } from './../api/matjip';
 
-export interface WriteLogState {
-    matjip: MatjipDto,
+export interface logStore {
+    logSequence: number,
     content: string,
     isCustom: boolean,
-    order: "post" | "put" | "",
+    orderingMethod: string,
+    isPublic: boolean,
+}
+
+export interface WriteLogState {
+    matjip: MatjipDto,
+    log: logStore,
+    order: "post" | "put",
+
     setMatjip: (data: MatjipDto) => void,
-    setContent: (data: string) => void,
-    setIsCustom: (isCustom: boolean) => void,
+    setLog : (data: logStore) => void,
     setOrder: (order: "post" | "put") => void,
     initWriteLogStore: () => void,
+    initLogStore: () => void,
+
 }

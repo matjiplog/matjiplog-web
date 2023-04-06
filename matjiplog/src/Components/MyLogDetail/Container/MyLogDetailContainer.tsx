@@ -60,26 +60,22 @@ function MyLogDetailContainer(): JSX.Element {
     const submitPostComment = (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!logSequence || !userSequence || !form?.comment) return alert("실패");
-
         commentPostMutaion.mutate({ logSequence, userSequence, content: form.comment });
         e.currentTarget.comment.value = "";
     };
 
     const deleteMyLog = () => {
         if (!logSequence) return alert("실패");
-
         myLogDeleteMutation.mutate(logSequence);
     };
 
     const deleteCommnet = (comment_sequence: number) => {
         if(!comment_sequence) return alert("실패");
-
         commentDeleteMutation.mutate(comment_sequence);
     }
 
     const submitPutIsPublic = (isPublic: boolean) => {
         if (!logSequence || !userSequence) return alert("실패");
-
         isPublicPutMutation.mutate({ logSequence, userSequence, isPublic: !isPublic });
     };
 

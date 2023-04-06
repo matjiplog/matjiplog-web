@@ -2,6 +2,7 @@ export interface MatjipDto {
     matjipSequence: number,
     name: string,
     phonenumber: string,
+    phoneNumber?: string,
     ratingTaste: number,
     ratingPortion: number,
     ratingService: number,
@@ -36,7 +37,7 @@ export interface Matjips {
     success: boolean
 }
 
-export interface PostMatjipCustom {
+export interface PostMatjipCustomRequest {
     name: string,
     phoneNumber?: string,
     zipcode?: string,

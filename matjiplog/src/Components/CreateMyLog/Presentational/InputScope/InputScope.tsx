@@ -1,11 +1,11 @@
 import { Scope, ScopeItems, ScopeItemTitle, ScopeItemTitleDiv, ScopeStars, ScopeTitle, ScopteItem, Star } from './InputScopeStyle';
 
-import { WriteLogState } from '../../../../types/store/writeLog';
+import { useLogResult } from '../../../../types/hook/common/useLog';
 
-import { writeLogStore } from '../../../../stores/writeLog';
+import { useLog } from '../../../../Hooks/useLog';
 
 function InputScope(): JSX.Element {
-    const { matjip, setMatjip }: WriteLogState = writeLogStore();
+    const { matjip, setMatjip }: useLogResult = useLog();
     const { ratingTaste, ratingPortion, ratingService } = matjip;
     const scopeArray: number[] = [0, 1, 2, 3, 4];
 
