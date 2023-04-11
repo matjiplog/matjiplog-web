@@ -1,5 +1,5 @@
 import { CommentIcon, LikeFullIcon, LikeIcon } from "../../../../styles/icons";
-import { logDto } from "../../../../types/logDto";
+import { logData } from "../../../../types/logDto";
 import LogBodyBlackout from "../LogBodyBlackout/LogBodyBlackout";
 import LogCardModal from "../LogCardModal/LogCardModal";
 import useModal from "../useModal";
@@ -12,7 +12,7 @@ function LogCard( {
   EventCommentCreate,
 
 } : {
-  cardInfo : logDto;
+  cardInfo : logData;
   comment : string,
   onChangeComment : React.ChangeEventHandler<HTMLInputElement>,
   EventCommentCreate : (logSequence: number, userSequence: number) => void
