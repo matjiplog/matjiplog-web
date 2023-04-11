@@ -1,31 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import MatjipTab from "../Presentational/MatjipTab/MatjipTab";
 import { TabContent, TabWrap } from "../Presentational/MatjipTab/style";
 import TabHome from "../Presentational/TabHome/TabHome";
 import TabMenu from "../Presentational/TabMenu/TabMenu";
 import TabReview from "../Presentational/TabReview/TabReview";
+import { useMatjipDetail } from "../Presentational/useMatjipDetail";
+import { useMatjipReview } from "../Presentational/useMatjipReview";
 
 function TabContainer() {
+  const parm = useParams();
+
   const tabList : string[] = ["홈" , "메뉴", "리뷰"];
   const [tabindex, setTabindex] = useState<number>(0);
   const TabClick = (index : number) : void => {
     setTabindex(index);
   }
-  const [nextId, setNextId] = useState<number>(3);
+
+  const [page, setPage] = useState<number>(0);
   const seeMoreClick = ()=>{
-    setNextId(nextId+3);
+    setPage(page+1);
+
   };
   
-  return (
-    <TabWrap>
-      <MatjipTab tabList={tabList} tabindex={tabindex} TabClick={TabClick}></MatjipTab>
-      <TabContent>
-        {tabindex === 0 && <TabHome/>}
-        {tabindex === 1 && <TabMenu/>}
-        {tabindex === 2 && <TabReview reviewList={reviewList} nextId={nextId} seeMoreClick={seeMoreClick}></TabReview>}
-      </TabContent>
-    </TabWrap>
-  )
+  
+  const { data : matjipData, isLoading, isError, isFetching } = useMatjipDetail(parm);
+  const { reviewList, initReviewData} = useMatjipReview()
+
+  useEffect(() =>{
+    if(matjipData) {
+      initReviewData(matjipData.name, page);
+    }
+  }, [matjipData, page]);
+  
+  if(matjipData){
+    return (
+      <TabWrap>
+        <MatjipTab tabList={tabList} tabindex={tabindex} TabClick={TabClick}></MatjipTab>
+        <TabContent>
+          {tabindex === 0 && <TabHome matjipData={matjipData}></TabHome>}
+          {tabindex === 1 && <TabMenu/>}
+          {tabindex === 2 && <TabReview reviewList={reviewList} page={page} seeMoreClick={seeMoreClick}></TabReview>}
+        </TabContent>
+      </TabWrap>
+    )
+  }
+  else return <div>error</div>
+  
 }
 
 export const reviewList : reviewType[] = [

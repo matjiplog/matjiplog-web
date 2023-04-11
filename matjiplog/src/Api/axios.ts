@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// withCredentials = true;
+
 export const userAPI = axios.create({
   baseURL: process.env.REACT_APP_USER_URL,
   headers: {

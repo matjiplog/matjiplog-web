@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { icons } from "react-icons/lib";
 import { MapMarker, useMap } from "react-kakao-maps-sdk";
 import styled from "styled-components";
@@ -39,6 +39,11 @@ function Marker( {index, name, lat , lng, onClick, isClicked} :positionType) : J
   const location = "대구 중구 명덕로 93";
   const phone = "053-255-0742";
   const imgsrc = "/assets/images/onlyLogo.png";
+
+  useEffect(() =>{
+    console.log(lat);
+    console.log(lng);
+  },[])
 
   return(
     <MapMarker

@@ -7,17 +7,14 @@ import MatjipTop from "../Presentational/MatjipTop/MatjipTop";
 function TopContainer() {
   const parm = useParams();
   const { data, isLoading, isError, isFetching } = useMatjipDetail(parm);
-  const [ matjipInfo , setMatjipInfo] = useState<MatjipDto>();
   
-  useEffect(() => {
-    if(data && !isLoading){
-      setMatjipInfo(data);
-    }
-  }, [data, isLoading, parm]);
-  
-  if(matjipInfo)
+  const windowOpenKakaoLoadFind = () =>{
+    window.open(`https://map.kakao.com/link/to/${data?.name},${data?.locationLatitude},${data?.locationLongitude}`, "_blank");
+  }
+
+  if(data)
     return (
-      <MatjipTop matjipInfo={matjipInfo}></MatjipTop>
+      <MatjipTop matjipInfo={data} windowOpenKakaoLoadFind={windowOpenKakaoLoadFind}></MatjipTop>
     )
   else return <div>error</div>
 

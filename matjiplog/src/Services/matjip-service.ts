@@ -1,8 +1,8 @@
 import { AxiosError } from "axios";
 import { matjipAPI } from "../Api/axios";
-import { Matjip, MatjipDto } from "../types/api/matjip";
+import { matjipDto } from "../types/matjipDto";
 
-export const axiosMatjipDetail = async (matjipSequence : string | undefined) : Promise<MatjipDto | null> =>{
+export const axiosMatjipDetail = async (matjipSequence : string | undefined) : Promise<matjipDto | null> =>{
   try {
     const res = await matjipAPI.get(`matjip/${matjipSequence}`);
     if(!res.data?.success || res?.status !== 200) return null;

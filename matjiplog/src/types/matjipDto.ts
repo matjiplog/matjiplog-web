@@ -11,4 +11,10 @@ export interface matjipDto {
   category: string,
   locationLatitude: string,
   locationLongitude: string,
+  imageDetail : {}
+}
+
+export interface matjipLikeData {
+  matjipSequence : number,
+  userSequence : number,
 }
