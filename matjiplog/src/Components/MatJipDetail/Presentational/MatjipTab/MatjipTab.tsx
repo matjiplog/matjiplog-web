@@ -13,7 +13,7 @@ function MatjipTab({
   return (
     <>
       <TabDiv>
-        {tabList.map((value : string, index) : JSX.Element =>{
+        {tabList.map((value : string, index: number) : JSX.Element =>{
           return <TabLi key={index} focus={tabindex === index ? "isactive" : ""}  onClick={() => TabClick(index)}>{value}</TabLi>
         })}
       </TabDiv>

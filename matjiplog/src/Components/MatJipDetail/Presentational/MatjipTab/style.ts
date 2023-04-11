@@ -19,9 +19,10 @@ export const TabWrap = styled.div`
 
 export const TabDiv = styled(FlexRow)`
   font-weight: 700;
+  font-size: 16px;
   position: absolute;
-  top: -34px;
-  left: -5px;
+  top: -42px;
+  left: -6px;
   margin: 0 5px 0 5px;
   width: 100%;
 `;

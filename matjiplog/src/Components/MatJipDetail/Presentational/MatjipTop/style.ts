@@ -24,8 +24,8 @@ export const TopInfo = styled(FlexColumnCenterCenter)`
 `;
 
 export const TopImg = styled(BackgroundImgDiv)`
-  width: 300px;
-  height: 200px;
+  width: 400px;
+  height: 300px;
   border-radius: 1px;
   margin: 0 auto;
 `;
@@ -37,6 +37,7 @@ export const TopWrapDiv = styled.div`
   border: 1px solid rgb(219,219,219);
   border-radius: 1px;
 
+  font-size: 16px;
   @media screen and (max-width: 900px) {
     margin : 20px 20px 50px 20px;
   }

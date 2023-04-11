@@ -5,6 +5,7 @@ import { MatjipDto } from '../types/api/matjip';
 import { MyLogDto } from './../types/api/myLog';
 
 import { createMarker } from './../utils/createMarker';
+import { createMarkerInfoWindow } from '../Components/MatJipDetail/Presentational/createMarkerInfoWindow';
 
 export const useDrawMarker = (): useDrawMarkerResult => {
     const [markers , setMarkers] = useState<any[]>([]);
@@ -38,6 +39,12 @@ export const useDrawMarker = (): useDrawMarkerResult => {
             
             marker.setMap(map);
             markerArr.push(marker);
+
+            const infoWidnow = createMarkerInfoWindow(value);
+            window.kakao.maps.event.addListener(marker, 'click', function(){
+                infoWidnow.open(map, marker);
+            });
+
         })
         setMarkers((prev) => [...prev, ...markerArr]);
     }
