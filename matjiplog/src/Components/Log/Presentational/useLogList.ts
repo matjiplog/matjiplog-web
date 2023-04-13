@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { commentDto, logData } from "../../types/logDto";
+import { commentDto, logData } from "../../../types/logDto";
 
 export const useLogList = () =>{
   const [logList, setLogList] = useState<logData[]>([]);
@@ -19,7 +19,6 @@ export const useLogList = () =>{
   const commentModifyList = (comment : commentDto) => {
     const updatedLogList = [...logList]; 
     const logIndex = updatedLogList.findIndex(log => log.logSequence === comment.logSequence);
-    
     if (logIndex !== -1) {
       const logData = updatedLogList[logIndex];
       const updatedComments = [...logData.comments, comment];

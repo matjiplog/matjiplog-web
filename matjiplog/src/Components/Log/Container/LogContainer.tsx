@@ -1,73 +1,107 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useQueryClient } from "react-query";
-import { axiosLogCommentCreate } from "../../../Services/log-service";
+import { useQuery, useQueryClient } from "react-query";
+import { axiosLogCommentCreate, axiosLogSearchContent, axiosLogSearchMatjipAddress, axiosLogSearchMatjipName, axiosPublicLogList } from "../../../Services/log-service";
 import { logData, requestCommentDto } from "../../../types/logDto";
-import { EmptyCard } from "../../Common/EmptyCard";
 import DropDown from "../Presentational/DropDown/DropDown";
 import LogCard from "../Presentational/LogCard/LogCard";
 import LogSearch from "../Presentational/LogSearch/LogSearch";
 import { SearchForm } from "../Presentational/LogSearch/style";
-import { LogGrid, Section } from "./style";
-import { useSelectList } from "../Presentational/useSelectList";
+import { LogGrid, NonSearchDiv, Section } from "./style";
 import LodingSpinner from "../../Common/Loding";
-import { useLogList } from "../useLogList";
-import { axiosUserInfo } from "../../../Services/user-service";
+import { useLogList } from "../Presentational/useLogList";
+import { useScrollObserver } from "../Presentational/useScrollObserver";
 
 function LogContainer() {
-  const queryClient = useQueryClient();
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [comment, setComment] = useState<string>("");
+  // const queryClient = useQueryClient();
+  const gridRef = useRef<HTMLDivElement>(null); // Observer 그리드 아이템 추적할 ref
+  const scrollRef = useRef<number>(0); //스크롤 지정을 위한 ref
+  const [comment, setComment] = useState<string>(""); // 댓글
 
-  const items : string[] = [ "없음", "제목", "지역" , "맛집이름"];
+  const items : string[] = [ "전체", "제목", "지역" , "맛집이름"];
   const [dropdown , setDropdown] = useState<boolean>(false); 
   const [category, setCategory] = useState<string>(items[0]); // 현재 선택된 카테고리
   
-  const [select, setSelect] = useState<string>("없음"); // 쿼리를 고르기 위한 state
-  const [searchKeyWord, setSearchKeyWord] = useState<string>("");
+  const [select, setSelect] = useState<"publicList" | "contentList" | "addressList" | "nameList">("publicList"); // 쿼리를 고르기 위한 state
+  const [queryKeyWord, setqueryKeyWord] = useState<string>("");
+  const [page, setPage] = useState<number>(0);
+  const [keyword, setKeword] = useState<string>("");
 
-  // const [isEnable, setIsEnable] = useState<boolean>(true);
-
-  const { query , page, setPage, keyword, setKeword } = useSelectList(select);
   const { logList, initList, firstList, addList, commentModifyList } = useLogList();
+  const  { setLastItem } = useScrollObserver(() => {setPage(page+1);});
 
+  const logQuery = {
+    publicList : useQuery(["loglist", "전체", page], () => axiosPublicLogList(page),{
+      enabled: select=="publicList",
+      keepPreviousData: true 
+    }), // 공개된 로그 조회  
+    contentList : useQuery(["loglist", "제목", queryKeyWord, page], () => axiosLogSearchContent(queryKeyWord, page),{ 
+      enabled: select=="contentList" && queryKeyWord!=="",
+      keepPreviousData: true 
+    }), // content로 로그 조회 
+    addressList : useQuery(["loglist", "지역", queryKeyWord, page], () => axiosLogSearchMatjipAddress(queryKeyWord, page),{
+      enabled: select=="addressList" && queryKeyWord!=="",
+      keepPreviousData: true 
+    }), // 주소로 로그 조회
+    nameList : useQuery(["loglist", "맛집이름", queryKeyWord, page], () => axiosLogSearchMatjipName(queryKeyWord, page),{  
+      enabled: select=="nameList" && queryKeyWord!=="",
+      keepPreviousData: true
+    }), // 맛집이름으로 로그 조회
+  }
+  const { data, isLoading, isError, error } = logQuery[select];
+  
+  useEffect(() =>{
+    window.scrollTo(0, scrollRef.current);
+    if(gridRef.current){
+      const last = gridRef.current.lastElementChild as HTMLDivElement;
+      setLastItem(last);
+    }
+  },[logList])
+  
   useEffect(()=>{
-    if(category === "없음"){
-      initList();
-      setSearchKeyWord("");
-      setKeword("");
-      setIndex(0);
+    if(category === "전체"){
+      setSelect("publicList");
       setPage(0);
+      setKeword("");
+      setqueryKeyWord("");
     }
   },[category, select])
 
+  useEffect(() =>{
+    if(!isLoading && data?.data){
+      if(page === 0){
+        firstList(data.data);
+      }
+      else{
+        scrollRef.current = window.pageYOffset;
+        addList(data.data);
+      }
+    }
+  },[data]);
+
   //키워드로 검색
   const EventLogKeywordSearch = () =>{
-    setKeword(searchKeyWord);
-    if(searchKeyWord === "") return alert("키워드를 입력해주세요");
+    if(keyword === "") return  alert("키워드를 입력해주세요");
     else {
+      setqueryKeyWord(keyword);
       switch(category) {
         case "제목" :
-          // contentList.refetch();
-          setSelect("제목");
+          logQuery.contentList.refetch();
+          setSelect("contentList");
           break;
         case "지역" :
-          // addressList.refetch();
-          setSelect("지역");
+          logQuery.addressList.refetch();
+          setSelect("addressList");
           break;
         case "맛집이름" :
-          // nameList.refetch();
-          setSelect("맛집이름");
+          logQuery.nameList.refetch();
+          setSelect("nameList");
           break;
       }
       initList();
       setPage(0);
-      setIndex(0);
-      // setIsEnable(true);
     }
   };
 
-  
-  
   //로그 좋아요 or 좋아요 취소
   const EventLogLikeChange = () =>{
 
@@ -79,8 +113,8 @@ function LogContainer() {
 
   // 검색 keyword창
   const onChangeKeyword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchKeyWord(e.target.value);
-  }, [searchKeyWord]);
+    setKeword(e.target.value);
+  }, [keyword]);
 
   // 카테고리 클릭시
   const EventCategoryClick = () =>{
@@ -91,9 +125,6 @@ function LogContainer() {
   const EventDropdownItemClick = (index : number) => {
     setCategory(items[index]);
     setDropdown(!dropdown);
-    if(index === 0){
-      setSelect("없음");
-    }
   }
 
   /* 댓글 달기 */
@@ -105,20 +136,9 @@ function LogContainer() {
     }; 
 
     axiosLogCommentCreate(logCommentData).then(res =>{
-      if(res.status == 200 && res.data.success == true) {
-        console.log("성공");
         setComment("");
-
-        commentModifyList(res.data);
-        // filterList(res.data.commentSequence , res.data);
-        // queryClient.invalidateQueries(["loglist"]).then(res => {
-        //   console.log(res);
-        //   // setSelect(category);
-        //   // setIsEnable(true);  
-        
-        // });
-        
-      } 
+        commentModifyList(res);
+        // queryClient.invalidateQueries(["loglist"])
     });
   };
 
@@ -126,79 +146,28 @@ function LogContainer() {
   const onChangeComment = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
   }, [comment]);
-
-  useEffect(() => {
-    async function handleScroll() {
-      const element = scrollRef.current;
-      if (element && element.scrollTop + element.clientHeight >= element.scrollHeight) {
-        console.log("in");
-        setPage(page+1);
-        
-      }
-      
-    }
-    const element = scrollRef.current;
-    console.log(element?.scrollTop);
-      console.log(element?.clientHeight);
-      console.log(element?.scrollHeight);
-    element?.addEventListener('scroll', handleScroll);
-    return () => element?.removeEventListener('scroll', handleScroll);
-  }, [scrollRef]);
-
-  // const [logList, setLogList] = useState<logData[]>([]);
-  const [index, setIndex] = useState<number>(0);
-
-  useEffect(() =>{
-    console.log(query.data);
-    if(query.data){
-      if(page === index){
-        firstList(query.data.data);
-      }
-      else{
-        addList(query.data.data);
-        setIndex(index+1);
-      }
-    }
-  },[query.data]);
-
-  useEffect(() =>{
-    console.log(logList);
-  },[logList])
-
-  useEffect(() =>{
-    console.log(page);
-  },[page])
-
-  // // 더보기 클릭시 페이지 +1
-  const EventSeeMoreLog = () =>{
-  //   setPage(page+1);
-  };
-
+  
   return(
-    <Section >
+    <Section>
       <SearchForm>
         <DropDown items={items} category={category} dropdown={dropdown} EventCategoryClick={EventCategoryClick} EventDropdownItemClick={EventDropdownItemClick}></DropDown>
-        <LogSearch category={category} keyword={searchKeyWord} onChangehandler={onChangeKeyword} EventKeywordSearchLog={EventLogKeywordSearch}></LogSearch>
+        <LogSearch category={category} keyword={keyword} onChangehandler={onChangeKeyword} EventKeywordSearchLog={EventLogKeywordSearch}></LogSearch>
       </SearchForm>
-      <LogGrid ref={scrollRef}>
-        {
-          logList.map((value : logData): JSX.Element =>{
+      {!isLoading && logList.length === 0  && <NonSearchDiv>검색결과가 없습니다. 다시 검색해주세요!</NonSearchDiv>}
+      <LogGrid ref={gridRef}> 
+      {
+        logList.map((value : logData): JSX.Element =>{
           return <LogCard 
-            cardInfo={value} key={`${value.logSequence}-${value.userSequence}`} 
+            key={`${value.logSequence}`} 
+            cardInfo={value} 
             comment={comment}
             onChangeComment={onChangeComment}
             EventCommentCreate={EventCommentCreate}
           ></LogCard>
           })
-        }
-        {/* {EmptyCard(query?.data.data, "375")} */}
-      </LogGrid>
-      { query && query.isLoading && <LodingSpinner/>}
-      { query && !query.isLoading && logList.length === 0 && <div>검색결과가 업습니다</div>}
-      { ( query.data && query.data.totalPages > 1 && page < query.data.totalPages-1) &&
-          <div onClick={EventSeeMoreLog}   style={{ borderTop:"1px solid #b4b4b4", paddingTop: "20px",marginTop : "50px",  height: "30px",fontSize: "17px", fontWeight: "bold", textAlign: "center", cursor: "pointer"}}>로그 더보기</div>
       }
-      {/* <div style={{ width: "100%", height : "200px" , fontSize : "16px"}}>해당 검색 결과가 존재 하지 않습니다.</div> */}
+      </LogGrid>
+      { isLoading && <><div style={{height:"200px"}}></div><LodingSpinner/></>}
     </Section>
   );
 }

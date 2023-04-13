@@ -24,7 +24,7 @@ function LogSearch( {
         placeholder="키워드로 검색해보세요"
         onChange={onChangehandler}
         onKeyDown={(e) => handleKeyDownLogSearch(e)}
-        disabled={category==="없음"}
+        disabled={category==="전체"}
       ></LogInputSearch>
       <IconDiv 
         ref={buttonRef}

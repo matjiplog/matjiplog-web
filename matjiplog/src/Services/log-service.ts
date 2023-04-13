@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { logAPI } from "../Api/axios";
-import { requestCommentDto, responseLogDto } from "../types/logDto";
+import { commentDto, requestCommentDto, responseLogDto } from "../types/logDto";
 
 
 /* 공개된 로그 조회 */
@@ -22,18 +22,20 @@ export const axiosPublicLogList = async (page : number) : Promise<responseLogDto
 }
 
 /* 로그 댓글 생성 */
-export const axiosLogCommentCreate = async (logCommentData : requestCommentDto) => { 
+export const axiosLogCommentCreate = async (logCommentData : requestCommentDto): Promise<commentDto>  => { 
   try {
     const { data, status } = await logAPI.post("log/comment", logCommentData);
-    return { data, status, error: null};
+    return data.data
   } catch (e) {
-    console.log("failed");
     const { message, response, code } = e as unknown as AxiosError;
-    return { data: message, status: response?.status, error : code};
+    console.log(message);
+    console.log(response);
+    console.log(code);
+    throw e;
   }
 }
 
-export const axiosLogSearchContent = async (keyword : string , page: number) =>{
+export const axiosLogSearchContent = async (keyword : string , page: number) : Promise<responseLogDto>  =>{
   try {
     const { data, status} = await logAPI.get("log/search" , {
       params : {
@@ -53,7 +55,7 @@ export const axiosLogSearchContent = async (keyword : string , page: number) =>{
 }
 
 
-export const axiosLogSearchMatjipName = async (keyword : string , page: number) =>{
+export const axiosLogSearchMatjipName = async (keyword : string , page: number) : Promise<responseLogDto>  =>{
   try {
     const { data, status} = await logAPI.get("log/search/matjipname" , {
       params : {
@@ -73,7 +75,7 @@ export const axiosLogSearchMatjipName = async (keyword : string , page: number) 
 }
 
 
-export const axiosLogSearchMatjipAddress = async (keyword : string , page: number) =>{
+export const axiosLogSearchMatjipAddress = async (keyword : string , page: number) : Promise<responseLogDto>  =>{
   try {
     const { data, status} = await logAPI.get("log/search/matjipaddress" , {
       params : {
