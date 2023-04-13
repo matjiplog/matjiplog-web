@@ -1,7 +1,13 @@
 import { matjipDto } from "./matjipDto";
 import { imageDetailDto, ResponseLogUserDto } from "./userDto";
 
-export interface logDto {
+export interface responseLogDto {
+  totalPages : number,
+  totalElements : number,
+  data : logData[],
+}
+
+export interface logData {
   logSequence : number,
   userSequence : number,
   user : ResponseLogUserDto,

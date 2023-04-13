@@ -9,17 +9,11 @@ export const useModal = (initialState : boolean,) => {
     if(isModalOpen) {
       lockScroll();
     }
-
     else openScroll()
-    
-
   },[isModalOpen]);
 
   return {isModalOpen, setIsModalOpen};
 };
-
-
-
 
 
 export default useModal;

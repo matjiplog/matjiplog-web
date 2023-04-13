@@ -17,6 +17,7 @@ export const IconDiv = styled.div`
   position: absolute;
   top: 13px;
   left: 600px;
+  cursor:pointer;
 `;
 export const SearchForm = styled(FlexRow)`
   position: relative;
@@ -32,7 +33,6 @@ export const LogInputSearch = styled.input`
   border-radius: 0.25rem;
   outline: none;
   appearance: none;
-  
   ::placeholder {
   color: ${darkgrayFont};
 }
