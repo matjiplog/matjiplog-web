@@ -9,7 +9,7 @@ import SwiperCore, { Navigation, Pagination } from "swiper";
 import "swiper/swiper.min.css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { commentDto, logDto } from "../../../../types/logDto";
+import { commentDto, logData } from "../../../../types/logDto";
 
 //스크롤 항상 제일 밑으로 유지하기
 function LogCardModal( {
@@ -20,7 +20,7 @@ function LogCardModal( {
   EventCommentCreate,
 } : {
   isModalOpen : boolean,
-  modalData : logDto,
+  modalData : logData,
   comment : string,
   onChangeComment : React.ChangeEventHandler<HTMLInputElement>,
   EventCommentCreate : (logSequence: number, userSequence: number) => void
@@ -32,7 +32,7 @@ function LogCardModal( {
   const dotitem  : string[] = ["신고하기", "취소"];
 
   const { isOpen, ref, removeHandler } : useDetectCloseTypes = useDetectClose(false);
-  const { buttonRef, handleKeyDown} = useBtnWithEnter(EventCommentCreate);
+  const { buttonRef, handleKeyDownComment} = useBtnWithEnter(EventCommentCreate);
 
   
   return(
@@ -114,7 +114,7 @@ function LogCardModal( {
             name="comment" 
             value={comment}
             onChange={onChangeComment}
-            onKeyDown={(e) => handleKeyDown(e, modalData.logSequence, 22)}
+            onKeyDown={(e) => handleKeyDownComment(e, modalData.logSequence, 22)}
           ></ComentInput>
           <ComentSendBtn 
             ref={buttonRef}
