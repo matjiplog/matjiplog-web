@@ -1,15 +1,37 @@
 import { LoginDiv, LoginBtn, MenuBar } from './LoginStyle';
 
 import { LoginProps } from '../../../../../types/props/Header/Login';
+import { UserState } from '../../../../../types/store/user';
 
-function Login({ navShow, navHandler, toggleNavShow }: LoginProps): JSX.Element {
+import { userStore } from '../../../../../stores/user';
 
-  return <>
-    <LoginDiv active={navShow ? 1 : 0}>
-        <LoginBtn onClick={navHandler}>로그인</LoginBtn>
-    </LoginDiv>
-    <MenuBar size={40} onClick={toggleNavShow}/>
-  </>
+import { useNavigateUrl } from '../../../../../Hooks/useNavigateUrl';
+
+function Login({ navShow, toggleNavShow }: LoginProps): JSX.Element {
+  const { handleUrl } = useNavigateUrl();
+  const { isLogin, initUserStore }: UserState = userStore();
+
+  return (
+    <>
+      <LoginDiv active={navShow ? 1 : 0}>
+        {isLogin ? (
+          <LoginBtn
+            onClick={() => {
+              initUserStore();
+              handleUrl("/");
+            }}
+          >
+            로그아웃
+          </LoginBtn>
+        ) : (
+          <LoginBtn onClick={() => {
+            handleUrl("/login");
+          }}>로그인</LoginBtn>
+        )}
+      </LoginDiv>
+      <MenuBar size={40} onClick={toggleNavShow} />
+    </>
+  );
 }
 
 export default Login;

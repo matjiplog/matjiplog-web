@@ -18,9 +18,9 @@ function MyPlaceMatjip({ matjipList, setLastCard }: MyPlaceMatjipProps): JSX.Ele
                 const isLastCard = index === matjipList.length - 1;
 
                 return (
-                    <div key={matjipSequence} onClick={() => {handleUrl(`/search/${matjipSequence}`)}}>
+                    <div key={matjipSequence} onClick={() => { handleUrl(`/search/${matjipSequence}`) }}>
                         {isLastCard && <div ref={setLastCard} />}
-                        <MatjipCard data={matjip}/>
+                        <MatjipCard data={matjip} />
                     </div>
                 );
             })}

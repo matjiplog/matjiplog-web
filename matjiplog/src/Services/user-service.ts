@@ -1,8 +1,25 @@
+import { handleError } from './../utils/handleError';
 import axios, { AxiosError, AxiosResponse } from "axios";
 import {userAPI} from "../Api/axios";
 import { useSwal } from "../Components/SignUp/Presentational/useSwal";
 import { userDto } from "../types/userDto";
 import qs from 'qs';
+
+export const postLoginData = async (loginData: {id: string, password: string}): Promise<{ accessToken: string, userSequence: number } | null> => {
+  try{
+    const response = await userAPI.post("login", loginData);
+    const accessToken = response.headers["token"];
+    const userSequence = response.headers["userseq"];
+    
+    if(response?.status !== 200 || !accessToken || !userSequence) return null;
+
+    return { accessToken, userSequence };
+  }
+  catch(error: unknown){
+    handleError(error);
+    throw(error);
+  }
+}
 
 export const axiosIdCheck = async (userId : string) =>{
   try {

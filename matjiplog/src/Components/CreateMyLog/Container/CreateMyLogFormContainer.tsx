@@ -1,4 +1,5 @@
 import { useMutation } from 'react-query';
+import { useEffect, useState } from 'react';
 
 import SelectImage from '../Presentational/SelectImage/SelectImage';
 import InputMap from '../Presentational/InputMap/InputMap';
@@ -15,32 +16,27 @@ import { PostLogRequest, PutLogInfoRequest } from '../../../types/api/myLog';
 import { MatjipDto, PostMatjipCustomRequest } from '../../../types/api/matjip';
 import { dropBarMenuState } from '../../../types/store/dropBar';
 import { useLogResult } from '../../../types/hook/common/useLog';
+import { logStore } from '../../../types/store/writeLog';
+import { UserState } from '../../../types/store/user';
 
 import { useImageSelect } from '../../../Hooks/useImageSelect';
 import { useNavigateUrl } from '../../../Hooks/useNavigateUrl';
 import { useLog } from '../../../Hooks/useLog';
 
 import { dropBarMenuStore } from '../../../stores/dropBar';
+import { userStore } from '../../../stores/user';
 
 import { postLog, putLogInfo } from '../../../Services/LogAPi';
 import { postMatjipCustom } from '../../../Services/matjipApi';
-import { logStore } from '../../../types/store/writeLog';
 
 function CreateMyLogFormContainer(): JSX.Element {
-    const userSequence = 22;
-
-    // dropBarMenuStore()에서 dropBarMenu, initDropBarMenu 추출
     const { dropBarMenu, initDropBarMenu }: dropBarMenuState = dropBarMenuStore();
+    const { isLogin, userSequence }: UserState = userStore();
 
-    // useNavigateUrl()에서 handleUrl 추출
     const { handleUrl } = useNavigateUrl();
-
-    // useLog()에서 matjip, log, order, initWriteLogStore 추출
     const { matjip, log, order, initWriteLogStore }: useLogResult = useLog();
-    // useImageSelectResult에서 images, selectImages, deleteImage 추출
     const { images, selectImages, deleteImage }: useImageSelectResult = useImageSelect();
 
-    // log 등록에 사용되는 logPostMutation
     const logPostMutation = useMutation(["postLog"], (logData: PostLogRequest) => postLog(logData), {
         onSuccess(response) {
             handleUrl("/mylog");
@@ -49,7 +45,6 @@ function CreateMyLogFormContainer(): JSX.Element {
             alert('로그 등록 에러.');
         }
     });
-    // 맛집 등록에 사용되는 matjipPostMutation
     const matjipPostMutation = useMutation(["postMatjip"], (matjipData: PostMatjipCustomRequest) => postMatjipCustom(matjipData), {
         onSuccess(response) {
             doPostLog(response.matjipData.matjipSequence, matjip, log);
@@ -60,8 +55,6 @@ function CreateMyLogFormContainer(): JSX.Element {
             alert('맛집 등록 에러.');
         }
     });
-
-    // 맛집 수정에 사용되는 logPutMutation
     const logPutMutatjion = useMutation(["putLog"], (modifiedLogInfo: PutLogInfoRequest) => putLogInfo(modifiedLogInfo), {
         onSuccess(response) {
             if(response?.success) handleUrl("/mylog");
@@ -102,9 +95,13 @@ function CreateMyLogFormContainer(): JSX.Element {
         const { logSequence, isCustom, content, isPublic } = logInfo;
         const orderingMethod = dropBarMenu === "선택 없음" ? undefined : dropBarMenu;
 
-        if(!matjipSequence || !ratingPortion || !ratingService || !ratingTaste || !logSequence || !content) return alert("실패");
+        if(!matjipSequence || !ratingPortion || !ratingService || !ratingTaste || !logSequence || !content || !userSequence) return alert("실패");
         logPutMutatjion.mutate({ logSequence, userSequence, isCustom, matjipSequence, content, ratingTaste, ratingPortion, ratingService, orderingMethod, isPublic, isActive: true });
     }
+
+    useEffect(() => {
+        if(!isLogin || !userSequence) return handleUrl("/login");
+    }, [])
 
     return (
         <CreateMyLogForm onSubmit={submitPostLog}>

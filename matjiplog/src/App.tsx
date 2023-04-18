@@ -15,8 +15,15 @@ import GlobalStyle from "./styles/global";
 import SearchDetail from "./Pages/SearchDetail";
 
 function App(): JSX.Element {
-  const queryClient = new QueryClient({ defaultOptions: {} })
-  
+        
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    }
+  });
+
   return (
     <>
       <GlobalStyle />

@@ -6,7 +6,8 @@ export interface useLogResult {
     matjip: MatjipDto,
     log: logStore,
     order: "post" | "put",
-    
+    emojiActive: boolean,
+
     searchMatjip: () => void,
     writeLog: (e: React.MouseEvent<HTMLButtonElement>, matjipInfo: MatjipDto) => void,
     writeCustumMatjip: () => void,
@@ -16,4 +17,6 @@ export interface useLogResult {
     initWriteLogStore: () => void,
     setMatjip: (data: MatjipDto) => void,
     setLog: (data: logStore) => void,
+    handleEmogiSelect: (emoji: any) => void,
+    toggleEmogiActive: () => void,
 }

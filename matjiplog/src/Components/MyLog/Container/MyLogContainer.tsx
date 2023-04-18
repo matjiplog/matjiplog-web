@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
 import SearchBarContainer from '../../Common/Container/SearchBar/SearchBarContainer';
 import MyLogList from '../Presentational/MyLogList/MyLogList';
@@ -16,9 +16,11 @@ import { dropBarMenuState } from '../../../types/store/dropBar';
 import { MyLogDto } from '../../../types/api/myLog';
 import { useMyPlaceMapResult } from '../../../types/hook/common/useMyPlaceMap';
 import { useDrawMarkerResult } from '../../../types/hook/common/useDrawMarker';
+import { UserState } from '../../../types/store/user';
 
 import { mapShowStore } from '../../../stores/mapShow';
 import { dropBarMenuStore } from '../../../stores/dropBar';
+import { userStore } from '../../../stores/user';
 
 import { handlerContext } from '../../../Contexts/handler';
 
@@ -27,26 +29,36 @@ import { useMatjipList } from '../../../Hooks/useMatjipList';
 import { useHasTagList } from '../../../Hooks/useHasTagList';
 import { useMyPlaceMap } from '../../../Hooks/useMyPlaceMap';
 import { useDrawMarker } from '../../../Hooks/useDrawMarker';
+import { useNavigateUrl } from '../../../Hooks/useNavigateUrl';
 
-import { deleteMyLogData, getMyLogData } from '../../../Services/LogAPi';
+import { deleteMyLogData, getMyLogData, getMyLogSearchAddress, getMyLogSearchAll, getMyLogSearchName } from '../../../Services/LogAPi';
 
 function MyLogContainer(): JSX.Element {
-    const queryClient = useQueryClient(); // QueryClient 인스턴스를 가져옴
-
+    const [searchKey, setSearchKey] = useState<"myLogs" | "searchAll" | "searchName" | "searchAddress">("myLogs");
+    const [keyword, setKeyword] = useState<string>("");
     const [viewList, setViewList] = useState<MyLogDto[]>([]);
     const [logId, setLogId] = useState<number>(0);
 
+    const { isLogin, userSequence }: UserState = userStore();
     const { mapShow, inActiveMapShow }: MapShowState = mapShowStore();
     const { dropBarMenu }: dropBarMenuState = dropBarMenuStore();
     
+    const { handleUrl } = useNavigateUrl();
     const { mapRef, map }: useMyPlaceMapResult = useMyPlaceMap(12);
     const { markers, deleteMarkers, drawMyLogMakers }: useDrawMarkerResult = useDrawMarker();
     const { page, initPage, setLastCardRef }: useObserverPageResult = useObserverPage();
     const { myLogList, pushMyLogList, newMyLogList, filterMyLogList }: useMatjipListResult = useMatjipList();
     const { hasTags, hastagMyLogList, addHasTag, deleteHasTag, filterMyLogHasTag }: useHasTagResult = useHasTagList();
 
-    const { mutate, isSuccess } = useMutation((log_sequence: number) => deleteMyLogData(22, log_sequence));
-    const { data, isLoading, isRefetching } = useQuery(['myLogList', page], () => getMyLogData(22, page));
+    const { mutate, isSuccess } = useMutation((log_sequence: number) => deleteMyLogData(userSequence, log_sequence));
+
+    const myLogQuery = {
+        myLogs: useQuery(['myLogs', page], () => getMyLogData(userSequence, page), { enabled: searchKey === "myLogs" && !keyword }),
+        searchAll: useQuery(['matjipsSearch', page, keyword], () => getMyLogSearchAll({ user_sequence: userSequence, keyword, page }), { enabled: searchKey === "searchAll" && !!keyword }),
+        searchName: useQuery(['matjipsSearchName', page, keyword], () => getMyLogSearchName({ user_sequence: userSequence, keyword, page }), { enabled: searchKey === "searchName" && !!keyword }),
+        searchAddress: useQuery(['matjipsSearchAddress', page, keyword], () => getMyLogSearchAddress({ user_sequence: userSequence, keyword, page }), { enabled: searchKey === "searchAddress" && !!keyword }),
+    };
+    const { data, isLoading, isRefetching ,isError, error } = myLogQuery[searchKey];
 
     const deleteMyLog = (e: React.MouseEvent<HTMLDivElement>, log_sequence: number) => {
         e.stopPropagation();
@@ -58,11 +70,24 @@ function MyLogContainer(): JSX.Element {
     const keywordSubmitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         const keyword: string = e.currentTarget.keyword.value;
+    
+        if (!keyword) {
+            setSearchKey("myLogs");
+            setKeyword("");
+            initPage();
+            return;
+        }
+        
+        if (dropBarMenu === "전체") setSearchKey("searchAll");
+        else if (dropBarMenu === "지역") setSearchKey("searchAddress");
+        else if (dropBarMenu === "이름") setSearchKey("searchName");
 
-        if(!keyword) return;
+        setKeyword(keyword);
+        initPage();
     }
     
     useEffect(() => {
+        if(!isLogin || !userSequence) return handleUrl("/login");
         inActiveMapShow();
     }, [])
 
@@ -106,6 +131,7 @@ function MyLogContainer(): JSX.Element {
                 />
             )}
             {isLoading && <LodingSpinner />}
+            {isRefetching && <LodingSpinner />}
         </MyLogSection>
     )
 }

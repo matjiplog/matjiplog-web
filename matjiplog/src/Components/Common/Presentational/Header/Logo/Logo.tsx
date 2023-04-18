@@ -1,9 +1,16 @@
 import { LogoImg } from './LogoStyle';
 
-import { LogoProps } from '../../../../../types/props/Header/Logo';
+import { useNavigateUrl } from '../../../../../Hooks/useNavigateUrl';
 
-function Logo({ navHandler }: LogoProps): JSX.Element {
-  return <LogoImg onClick={navHandler} src="/assets/common/mainLogo.png"/>
+function Logo(): JSX.Element {
+  const { handleUrl } = useNavigateUrl();
+
+  return (
+    <LogoImg 
+      onClick={() => {handleUrl("/"); }} 
+      src="/assets/common/mainLogo.png"
+    />
+  )
 }
 
 export default Logo;

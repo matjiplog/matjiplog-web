@@ -1,6 +1,14 @@
 import { UserDto } from './user';
 import { MatjipDto } from './matjip';
 
+export interface LogImageDetailDto {
+    registerDate: string,
+    imageSerial: string,
+    name: string,
+    path: string,
+    type: string,
+    registerId: number
+}
 export interface CommentDto{
     commentSequence: number,
     logSequence: number,
@@ -22,7 +30,7 @@ export interface MyLogDto {
     ratingTaste: number,
     userSequence: number,
     user: UserDto,
-    imageDetail: [],
+    imageDetail: LogImageDetailDto[],
     likeCount: number,
     likeByUser: boolean,
     comments: CommentDto[]
@@ -91,7 +99,6 @@ export interface PostLogRequest{
     orderingMethod?: string,
     isPublic: boolean
 }
-
 export interface PutLogInfoRequest {
     logSequence: number,
     userSequence: number,
@@ -104,4 +111,9 @@ export interface PutLogInfoRequest {
     orderingMethod?: string,
     isPublic: boolean,
     isActive: boolean
+}
+export interface GetMyLogSearchRequest {
+    user_sequence: number,
+    keyword: string,
+    page: number,
 }

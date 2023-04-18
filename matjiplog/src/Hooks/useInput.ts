@@ -11,5 +11,9 @@ export const useInput = (initialForm: any): useInputResult => {
         setForm((prev: any) => ({ ...prev, [name]: value }));
     }
 
-    return { form, onChangeHandler };
+    const selectEmogi = (emoji: any) => {
+        setForm((prev: any) => ({ ...prev, comment: prev.comment + emoji.emoji }));
+    }
+
+    return { form, onChangeHandler, selectEmogi };
 }

@@ -14,7 +14,8 @@ export interface WriteLogState {
     order: "post" | "put",
 
     setMatjip: (data: MatjipDto) => void,
-    setLog : (data: logStore) => void,
+    setLog: (data: logStore) => void,
+    setEmoji: (emoji: any) => void,
     setOrder: (order: "post" | "put") => void,
     initWriteLogStore: () => void,
     initLogStore: () => void,

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ImogeIcon } from './../../../../styles/icons';
 
 export const Form = styled.form`
+    position: relative;
     height: 100px;
     display: flex;
 `;

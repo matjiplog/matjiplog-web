@@ -29,7 +29,7 @@ export const ContentAndRating = styled.div`
     overflow: auto;
 `
 
-export const CommentArticle = styled.article`
+export const CommentItems = styled.div<{ emojiActive: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -38,9 +38,11 @@ export const CommentArticle = styled.article`
     overflow: auto;
     border-bottom: 1px solid darkgray;
     border-top: 1px solid darkgray;
+    margin-left: ${(props) => props.emojiActive ? 250 : 0}px;
 
     @media screen and (max-width: 800px) {
         height: 300px;
+        margin-left: 0px;
     }
 `;
 

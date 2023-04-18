@@ -1,3 +1,5 @@
+import EmogiPicker from '../../../Common/Presentational/EmogiPicker/EmogiPicker';
+
 import { DetailDiv, DetailImogeDiv, DetailImoge, DetailInput, SubmitBtn } from './InputDetailStyle';
 
 import { useLogResult } from '../../../../types/hook/common/useLog';
@@ -5,13 +7,14 @@ import { useLogResult } from '../../../../types/hook/common/useLog';
 import { useLog } from '../../../../Hooks/useLog';
 
 function InputDetail(): JSX.Element {
-    const { log, setLogStore }: useLogResult = useLog();
+    const { log, emojiActive, setLogStore, handleEmogiSelect,toggleEmogiActive }: useLogResult = useLog();
     const { content } = log;
     
     return (
         <DetailDiv>
+            {emojiActive && <EmogiPicker handleEmogiSelect={handleEmogiSelect} />}
             <DetailImogeDiv>
-                <DetailImoge size={30} />
+                <DetailImoge size={30} onClick={toggleEmogiActive}/>
             </DetailImogeDiv>
             <DetailInput 
                 name='content'

@@ -40,6 +40,13 @@ export const writeLogStore = create<WriteLogState>((set) => ({
         set(() => ({ order }));
     },
 
+    setEmoji : (emoji: any) => {
+        set((state) => ({log: {
+            ...state.log,
+            content: state.log.content + emoji.emoji
+        }}));
+    },
+
     initLogStore : () => {
         set(() => ({  
             log: {

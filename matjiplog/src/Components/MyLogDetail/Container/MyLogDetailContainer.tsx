@@ -1,6 +1,6 @@
-import { NavigateFunction, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from 'react';
 
 import ImageInfo from '../Presentational/ImageInfo/ImageInfo';
 import UserInfo from '../Presentational/UserInfo/UserInfo';
@@ -11,44 +11,56 @@ import CommentForm from '../Presentational/CommentForm/CommentForm';
 import Rating from '../Presentational/Rating/Rating';
 import LodingSpinner from '../../Common/Loding';
 
-import { CommentArticle, ContentAndRating, ImgAndContent, InfoSection, UserAndContent } from './MyLogInfoContainerStyle';
+import { CommentItems, ContentAndRating, ImgAndContent, InfoSection, UserAndContent } from './MyLogInfoContainerStyle';
 
 import { useImageSlideResult } from '../../../types/hook/common/useImageSlide';
 import { useInputResult } from '../../../types/hook/common/useInput';
 import { PutIsPublicRequest, PostCommentRequest, CommentDto } from '../../../types/api/myLog';
+import { useObserverPageResult } from '../../../types/hook/common/useObserverpage';
+import { UserState } from '../../../types/store/user';
 
 import { useImageSlide } from '../../../Hooks/useImageSlide';
 import { useInput } from '../../../Hooks/useInput';
+import { useObserverPage } from '../../../Hooks/useObserverPage';
+import { useNavigateUrl } from '../../../Hooks/useNavigateUrl';
 
 import { deleteMyLogData, getMyLogDetailData, putLogIsPublic, postLogComment, getLogCommentData, deleteCommentData } from '../../../Services/LogAPi';
 
+import { userStore } from '../../../stores/user';
+
 function MyLogDetailContainer(): JSX.Element {
-    const { log_sequence }: any = useParams();
-    const urlHandler: NavigateFunction = useNavigate();
     const queryClient: QueryClient = useQueryClient();
-    const logSequence = Number(log_sequence);
-    const userSequence = 22;
 
     const imageUrl = ["/assets/Home/introbg1.png", "/assets/Home/introbg1.png"];
-    const { slideIndex, leftClick, rightClick }: useImageSlideResult = useImageSlide(imageUrl.length - 1);
-    const { form, onChangeHandler }: useInputResult = useInput({ comment: "" });
+    const commentRef = useRef<HTMLDivElement>(null);
+    const { log_sequence }: any = useParams();
+    const logSequence = Number(log_sequence);
+    const [emojiActive, setEmogiActive] = useState<boolean>(false);
 
-    const myLogDetail = useQuery(["myLogDetail", logSequence], () => getMyLogDetailData(logSequence), { enabled: !!logSequence, });
-    const logComment = useQuery(["logComment", logSequence], () => getLogCommentData(logSequence), { enabled: !!logSequence, });
+    const { isLogin, userSequence }: UserState = userStore();
+    const { handleUrl } = useNavigateUrl();    
+    const { page, initPage, setLastCardRef }: useObserverPageResult = useObserverPage();
+    const { slideIndex, leftClick, rightClick }: useImageSlideResult = useImageSlide(imageUrl.length - 1);
+    const { form, onChangeHandler, selectEmogi }: useInputResult = useInput({ comment: "" });
+
+    const myLogDetail = useQuery(["myLogDetail", logSequence], () => getMyLogDetailData(logSequence), { enabled: !!logSequence });
+    const logComment = useQuery(["logComment", logSequence], () => getLogCommentData(logSequence, page), { enabled: !!logSequence });
     
     const commentPostMutaion = useMutation((commentData: PostCommentRequest) => postLogComment(commentData), {
         onSuccess() {
             queryClient.invalidateQueries(["logComment", logSequence]);
+            queryClient.invalidateQueries(["myLogDetail", logSequence]);
         }
     });
     const myLogDeleteMutation = useMutation((logSequence: number) => deleteMyLogData(userSequence, logSequence), {
         onSuccess() {
-            urlHandler("/mylog");
+            handleUrl("/mylog");
         }
     });
     const commentDeleteMutation = useMutation((comment_sequence: number) => deleteCommentData(comment_sequence, userSequence), {
         onSuccess() {
             queryClient.invalidateQueries(["logComment", logSequence]);
+            queryClient.invalidateQueries(["myLogDetail", logSequence]);
         }
     });
     const isPublicPutMutation = useMutation((logPublicData: PutIsPublicRequest) => putLogIsPublic(logPublicData), {
@@ -79,6 +91,14 @@ function MyLogDetailContainer(): JSX.Element {
         isPublicPutMutation.mutate({ logSequence, userSequence, isPublic: !isPublic });
     };
 
+    useEffect(() => {
+        if(!isLogin || !userSequence) return handleUrl("/login");
+    }, [])
+
+    useEffect(() => {
+        if(commentRef?.current) commentRef.current.scrollTop = commentRef.current.scrollHeight;
+    }, [logComment?.data?.data])
+
     if (myLogDetail?.isLoading || !myLogDetail?.data?.data ) return <LodingSpinner />;
 
     return (
@@ -103,26 +123,43 @@ function MyLogDetailContainer(): JSX.Element {
                 </UserAndContent>
             </ImgAndContent>
             <LikeCommentCount data={myLogDetail.data.data} />
-            <CommentArticle>
-                {logComment?.data?.data.map((comment: CommentDto) => {
-                    const { commentSequence }: CommentDto = comment
+            <CommentItems ref={commentRef} emojiActive={emojiActive}>
+                {logComment?.data?.data.map((comment: CommentDto, index: number) => {
+                    const { commentSequence }: CommentDto = comment;
+                    const isLastCard = logComment?.data?.data?.length === index + 1;
+
                     return (
-                        <CommentItem 
-                            key={commentSequence}
-                            imgUrl='/assets/images/google.png'
-                            userSequence={userSequence}
-                            data={comment}
-                            deleteCommnet={deleteCommnet}
-                        />
+                        <div key={commentSequence}>
+                            <CommentItem 
+                                imgUrl='/assets/images/google.png'
+                                userSequence={userSequence}
+                                data={comment}
+                                deleteCommnet={deleteCommnet}
+                            />
+                            {isLastCard && <div ref={setLastCardRef} />}
+                        </div>
                     )
                 })}
-            </CommentArticle>
+            </CommentItems>
             <CommentForm
+                emojiActive={emojiActive}
+                handleEmogiSelect={handleEmogiSelect}
+                toggleEmogiActive={toggleEmogiActive}
+                comment={form}
                 onChangeHandler={onChangeHandler}
                 submitPostComment={submitPostComment}
             />
         </InfoSection>
     )
+
+    function handleEmogiSelect(emoji: any) {
+        selectEmogi(emoji);
+        toggleEmogiActive();
+    }
+
+    function toggleEmogiActive() {
+        setEmogiActive((prev) => !prev);
+    }
 }
 
 export default MyLogDetailContainer;

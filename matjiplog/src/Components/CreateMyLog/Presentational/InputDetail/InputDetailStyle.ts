@@ -4,6 +4,7 @@ import { hoverFont, darkgrayFont, mainFont } from './../../../../styles/fontColo
 import { ImogeIcon } from './../../../../styles/icons';
 
 export const DetailDiv = styled.div`
+  position: relative;
   flex: 1 1 20%;
   margin: 5em 0 5em 0;
   display: flex;
