@@ -1,7 +1,7 @@
 import { InputProps } from "../../../../types/props/login/InputProps";
 import { IdDiv, InputForm, InputLogin, LineDiv, PwDiv, SocialDiv, SocialIcon, LoginBtn, SignUpBtn } from "./style";
 
-function LoginInput({ clickHandler } : InputProps) : JSX.Element {
+function LoginInput({ clickHandler, clickKakaoHandler } : InputProps) : JSX.Element {
   return(
     <InputForm>
       <IdDiv>
@@ -20,7 +20,7 @@ function LoginInput({ clickHandler } : InputProps) : JSX.Element {
         <hr style={{ color: "#b4b4b4", border: "1px solid", width: "100px" }}></hr>
       </LineDiv>
       <SocialDiv>
-        <SocialIcon url="/assets/images/kakao.png" ></SocialIcon>
+        <SocialIcon onClick={clickKakaoHandler} url="/assets/images/kakao.png" ></SocialIcon>
         <SocialIcon url="/assets/images/google.png" ></SocialIcon>
         <SocialIcon url="/assets/images/naver.png" ></SocialIcon>
       </SocialDiv>

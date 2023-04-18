@@ -89,7 +89,6 @@ function SignUpContainer() : JSX.Element  {
       delete signUpForm.authCode;
       const { data, status, error } = await axiosSignUp({
         ...signUpForm, phoneNumber: signUpForm.phoneNumber.replace(/-/g, ""),
-        userSequence: 0,
         imageSerial: ""
       });
       if(status === 200){

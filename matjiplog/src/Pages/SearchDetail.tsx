@@ -1,24 +1,15 @@
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
 import HeaderContainer from '../Components/Common/Container/Header/HeaderContainer';
 import Footer from "../Components/Common/Footer";
-// import MatjipTop from "../Components/MatJipDetail/MatjipTop";
-// import MatjipTab from "../Components/MatJipDetail/MatjipTab";
-import { useMatjipDetail } from "../Components/MatJipDetail/Presentational/useMatjipDetail";
-import TopContainer from "../Components/MatJipDetail/Container/TopContainer";
-import TabContainer from "../Components/MatJipDetail/Container/TabContainer";
-
+import MatJipDetailContainer from "../Components/MatJipDetail/Container/MatJipDetailContainer";
 
 function SearchDetail() {
-  const parm = useParams();
-  const { data, isLoading, isError, isFetching } = useMatjipDetail(parm);
   
   return(
     <>
       <SearchDetailWrap>
         <HeaderContainer></HeaderContainer>
-        <TopContainer></TopContainer>
-        <TabContainer></TabContainer>
+        <MatJipDetailContainer></MatJipDetailContainer>
       </SearchDetailWrap>
       <Footer></Footer>
     </>
