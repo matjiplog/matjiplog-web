@@ -58,7 +58,10 @@ function LoginContainer() : JSX.Element{
       <Logo />
       <ContentDiv>
         <SideImage />
-        <Input onChangeHandler={onChangeHandler} doLogin={doLogin}/>
+        <Input 
+          onChangeHandler={onChangeHandler} 
+          doLogin={doLogin}
+        />
       </ContentDiv>
       <Find />
     </LoginDiv>
