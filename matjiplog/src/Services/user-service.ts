@@ -122,5 +122,21 @@ export const axiosUserInfo = async (userSeq : number) : Promise<userDto> =>{
   }
 }
 
-
+export const axiosLogin = async (userId : string, password: string) =>{
+  try{
+    const data = { 'userId': userId , 'password' : password};
+    console.log(data)
+    const res = await userAPI.post("/login", data);
+    console.log(res);
+    console.log(res.headers["token"]);
+    console.log(res.headers["userseq"]);
+    return res;
+  } catch (e) {
+    const { message, response, code } = e as unknown as AxiosError;
+    console.log(message);
+    console.log(response);
+    console.log(code);
+    throw e;
+  }
+}
 

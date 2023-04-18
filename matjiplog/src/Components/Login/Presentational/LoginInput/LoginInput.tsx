@@ -4,7 +4,7 @@ import { useNavigateUrl } from '../../../../Hooks/useNavigateUrl';
 
 import { LoginInputProps } from '../../../../types/props/login/LoginInput';
 
-function LoginInput({ onChangeHandler, doLogin }: LoginInputProps): JSX.Element {
+function LoginInput({ onChangeHandler, clickKakaoHandler, doLogin }: LoginInputProps): JSX.Element {
   const { handleUrl } = useNavigateUrl();
 
   return(
@@ -25,7 +25,7 @@ function LoginInput({ onChangeHandler, doLogin }: LoginInputProps): JSX.Element 
         <hr style={{ color: "#b4b4b4", border: "1px solid", width: "100px" }}></hr>
       </LineDiv>
       <SocialDiv>
-        <SocialIcon url="/assets/images/kakao.png" ></SocialIcon>
+        <SocialIcon onClick={clickKakaoHandler} url="/assets/images/kakao.png" ></SocialIcon>
         <SocialIcon url="/assets/images/google.png" ></SocialIcon>
         <SocialIcon url="/assets/images/naver.png" ></SocialIcon>
       </SocialDiv>

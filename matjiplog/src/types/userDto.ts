@@ -1,5 +1,4 @@
 export interface userDto {
-  userSequence : number,
   id : string,
   email : string,
   password : string,

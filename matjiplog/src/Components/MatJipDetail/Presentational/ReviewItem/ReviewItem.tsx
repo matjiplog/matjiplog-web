@@ -10,7 +10,6 @@ function ReviewItem({
   item: logData;
 }):JSX.Element {
   const starpoint : number = (item.matjip.ratingPortion + item.matjip.ratingService + item.matjip.ratingTaste)/3;
-  console.log(item)
   return (
     <Wrap>
       <ReviewTop>

@@ -48,6 +48,15 @@ function LoginContainer() : JSX.Element{
     if(!userId || !password) return alert("정보를 입력해주세요");
     postLoginMutation.mutate(userData);
   }
+  
+  const clickKakaoHandler = () =>{
+    const CLIENT_ID = process.env.REACT_APP_KAKAO_REST_API_KEY;
+    const REDIRECT_URI = "http://localhost:3000/kakaologin";
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    
+    window.location.href = KAKAO_AUTH_URL;
+    // return navigate("/kakaologin");
+  }
 
   useEffect(() => {
     if(isLogin) handleUrl("/");
@@ -57,8 +66,13 @@ function LoginContainer() : JSX.Element{
     <LoginDiv>
       <Logo />
       <ContentDiv>
+<<<<<<< HEAD
         <SideImage />
         <Input onChangeHandler={onChangeHandler} doLogin={doLogin}/>
+=======
+        <SideImage></SideImage>
+        <Input clickHandler={clickSignUpHandler} clickKakaoHandler={clickKakaoHandler}></Input>
+>>>>>>> feature/QIPC_118_SocialLogin_Kakao
       </ContentDiv>
       <Find />
     </LoginDiv>

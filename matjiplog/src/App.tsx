@@ -13,6 +13,7 @@ import MyLogDetail from './Pages/MyLogDetail';
 
 import GlobalStyle from "./styles/global";
 import SearchDetail from "./Pages/SearchDetail";
+import KakaoLogin from "./Components/Login/KakaoLogin";
 
 function App(): JSX.Element {
         
@@ -40,6 +41,7 @@ function App(): JSX.Element {
           <Route path="/mylog" element={<MyLog />}></Route>
           <Route path='/mylog/:log_sequence' element={<MyLogDetail />}/>
           <Route path="*" element={<NotFound />}></Route>
+          <Route path="/kakaologin" element={<KakaoLogin />}></Route>
         </Routes>
       </QueryClientProvider>
       </BrowserRouter>

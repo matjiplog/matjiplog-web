@@ -1,13 +1,13 @@
 import { AccentP, LessP } from "../../../../styles/font";
 import { ArrowRightIcon, LikeFullIcon, PhoneIcon, StarIcon } from "../../../../styles/icons";
-import { MatjipDto } from "../../../../types/api/matjip";
+import { matjipDto } from "../../../../types/matjipDto";
 import { TopWrapDiv, TopImg, TopInfo, StarReviewDiv, TopIcon, IconDiv, CenterIconDiv } from "./style";
 
 function MatjipTop({
   matjipInfo,
   windowOpenKakaoLoadFind,
 } : {
-  matjipInfo : MatjipDto,
+  matjipInfo : matjipDto,
   windowOpenKakaoLoadFind : () => void;
 }
 ) {
