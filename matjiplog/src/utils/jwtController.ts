@@ -8,6 +8,10 @@ export const setAccessTokenInHeader = (accessToken: string) => {
     }
 }
 
+export const removeAccessTokenFromHeader = () => {
+    delete axios.defaults.headers.common['Authorization'];
+}
+
 export const reloginWithRefreshToken = (refreschToken: string) => {
     if(refreschToken){
 

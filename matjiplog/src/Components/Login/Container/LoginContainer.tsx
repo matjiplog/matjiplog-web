@@ -20,6 +20,7 @@ import { JWT_EXPIRY_TIME, reloginWithRefreshToken, setAccessTokenInHeader } from
 
 import { userStore } from '../../../stores/user';
 
+
 function LoginContainer() : JSX.Element{
   const { isLogin, setUserSequence, setIsLogin }: UserState = userStore();
 
@@ -48,33 +49,32 @@ function LoginContainer() : JSX.Element{
     if(!userId || !password) return alert("정보를 입력해주세요");
     postLoginMutation.mutate(userData);
   }
-  
-  const clickKakaoHandler = () =>{
-    const CLIENT_ID = process.env.REACT_APP_KAKAO_REST_API_KEY;
-    const REDIRECT_URI = "http://localhost:3000/kakaologin";
-    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-    
-    window.location.href = KAKAO_AUTH_URL;
-    // return navigate("/kakaologin");
-  }
 
   useEffect(() => {
     if(isLogin) handleUrl("/");
   }, [])
 
+  
+  const clickKakaoHandler = () =>{
+    const CLIENT_ID = process.env.REACT_APP_KAKAO_REST_API_KEY;
+    const REDIRECT_URI = "http://localhost:3000/kakaologin";
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+    window.location.href = KAKAO_AUTH_URL;
+  }
+
   return(
     <LoginDiv>
-      <Logo />
+      <Logo></Logo>
       <ContentDiv>
-<<<<<<< HEAD
-        <SideImage />
-        <Input onChangeHandler={onChangeHandler} doLogin={doLogin}/>
-=======
         <SideImage></SideImage>
-        <Input clickHandler={clickSignUpHandler} clickKakaoHandler={clickKakaoHandler}></Input>
->>>>>>> feature/QIPC_118_SocialLogin_Kakao
+        <Input 
+          onChangeHandler={onChangeHandler} 
+          doLogin={doLogin}
+          clickKakaoHandler={clickKakaoHandler}
+        />
       </ContentDiv>
-      <Find />
+      <Find></Find>
     </LoginDiv>
   );
 }
