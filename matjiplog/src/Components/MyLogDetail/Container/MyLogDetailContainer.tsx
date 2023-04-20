@@ -11,7 +11,7 @@ import CommentForm from '../Presentational/CommentForm/CommentForm';
 import Rating from '../Presentational/Rating/Rating';
 import LodingSpinner from '../../Common/Loding';
 
-import { CommentItems, ContentAndRating, ImgAndContent, InfoSection, UserAndContent } from './MyLogInfoContainerStyle';
+import { CommentItems, ContentAndRating, ImgAndContent, InfoSection, NonSearchDiv, UserAndContent } from './MyLogInfoContainerStyle';
 
 import { useImageSlideResult } from '../../../types/hook/common/useImageSlide';
 import { useInputResult } from '../../../types/hook/common/useInput';
@@ -140,6 +140,7 @@ function MyLogDetailContainer(): JSX.Element {
                         </div>
                     )
                 })}
+                {!logComment?.data?.data.length && !logComment.isLoading && <NonSearchDiv>댓글이 없습니다.<br></br>댓을을 작성해보세요!</NonSearchDiv>}
             </CommentItems>
             <CommentForm
                 emojiActive={emojiActive}

@@ -6,7 +6,7 @@ import MyLogList from '../Presentational/MyLogList/MyLogList';
 import LodingSpinner from '../../Common/Loding';
 import MyPlaceMap from '../../Common/Presentational/MyPlaceMap/MyPlaceMap';
 
-import { MyLogSection } from './MyLogStyle';
+import { MyLogSection, NonSearchDiv } from './MyLogStyle';
 
 import { MapShowState } from '../../../types/store/mapShow';
 import { useObserverPageResult } from '../../../types/hook/common/useObserverpage';
@@ -130,6 +130,7 @@ function MyLogContainer(): JSX.Element {
                     deleteMyLog={deleteMyLog}
                 />
             )}
+            {!viewList.length && !isLoading && <NonSearchDiv>검색결과가 없습니다.<br></br> 다시 검색하거나 추가해주세요!</NonSearchDiv>}
             {isLoading && <LodingSpinner />}
             {isRefetching && <LodingSpinner />}
         </MyLogSection>

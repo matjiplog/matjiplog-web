@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-import { MatjipItem, SearchListGrid, SearchSection } from './SearchMatjipContainerStyle';
+import { MatjipItem, NonSearchDiv, SearchListGrid, SearchSection } from './SearchMatjipContainerStyle';
 
 import SearchBarContainer from '../../Common/Container/SearchBar/SearchBarContainer';
 import MatjipImage from '../Presentational/MatjipImage/MatjipImage';
@@ -56,7 +56,7 @@ function SearchMatjipContainer(): JSX.Element {
         searchAddress: useQuery(['matjipsSearchAddress', page, keyword], () => getMatjipSearchAddress(keyword, page), { enabled: searchKey === "searchAddress" && !!keyword }),
     };
     const { data, isLoading, isError, error } = matjipQuery[searchKey];
-    
+
     const keywordSubmitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         const keyword: string = e.currentTarget.keyword.value;
@@ -85,9 +85,9 @@ function SearchMatjipContainer(): JSX.Element {
     }, [hasTags, hastagMatjipList, matjipList]);
 
     useEffect(() => {
-        if (data?.matjipListData) {
-            if(page === 0) newMatjipList(data.matjipListData);
-            else pushMatjipList(data.matjipListData);
+        if (data?.data) {
+            if(page === 0) newMatjipList(data.data);
+            else pushMatjipList(data.data);
         }
     }, [data])
 
@@ -106,7 +106,7 @@ function SearchMatjipContainer(): JSX.Element {
                 <SearchBarContainer />
             </handlerContext.Provider>
             {mapShow ? (
-                <MyPlaceMap mapRef={mapRef}/>
+                <MyPlaceMap mapRef={mapRef} />
             ): (
                 <SearchListGrid>
                     {viewList.map((matjip: MatjipDto, index: number) => {
@@ -124,6 +124,7 @@ function SearchMatjipContainer(): JSX.Element {
                     })}
                 </SearchListGrid>
             )}
+            {!viewList.length && !isLoading && <NonSearchDiv>검색결과가 없습니다.<br></br>다시 검색해주세요!</NonSearchDiv>}
             {isLoading && <LodingSpinner />}
         </SearchSection>
     )

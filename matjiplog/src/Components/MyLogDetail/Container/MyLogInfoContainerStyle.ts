@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FlexRowCenterCenter } from '../../../styles/flexStyle';
 
 
 export const ImgAndContent = styled.div`
@@ -49,3 +50,12 @@ export const CommentItems = styled.div<{ emojiActive: boolean }>`
 export const InfoSection = styled.section`
     margin: 0em 5em 0 5em;
 `;
+
+export const NonSearchDiv = styled(FlexRowCenterCenter)`
+    margin: 0 auto;
+    line-height: 6rem;
+    text-align: center;
+    height: 100%;
+    font-size: 22px;
+    font-weight: 700;
+`
