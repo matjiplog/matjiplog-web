@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FlexRowCenterCenter } from '../../../styles/flexStyle';
 
 export const MyLogSection = styled.section`
     display: flex;
@@ -10,3 +11,11 @@ export const MyLogSection = styled.section`
         margin: 20px;
     }
 `;
+
+export const NonSearchDiv = styled(FlexRowCenterCenter)`
+    line-height: 6rem;
+    text-align: center;
+    height: 550px;
+    font-size: 22px;
+    font-weight: 700;
+`

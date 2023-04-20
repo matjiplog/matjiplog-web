@@ -55,7 +55,7 @@ export const getMatjipSearchAddress = async (keyword: string, page: number): Pro
   }
 };
 
-export const getMatjipMyPlace = async (lat: number, lng: number, radius: number, page: number) => {
+export const getMatjipMyPlace = async (lat: number, lng: number, radius: number, page: number): Promise<Matjips | null> => {
   try{
     const res = await matjipAPI.get(`matjip/myplace`, {params: { lat: lat, lng: lng, radius: radius, page: page}})
     

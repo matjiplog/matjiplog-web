@@ -43,7 +43,7 @@ function HomeContainer(): JSX.Element {
         ["myPlace", myPlace.latitude, myPlace.longitude, radius, page], 
         () => getMatjipMyPlace(myPlace.latitude, myPlace.longitude, radius, page)
     );
-
+    
     useEffect(() => {
         if(page) initPage();
     }, [radius]);
@@ -57,14 +57,14 @@ function HomeContainer(): JSX.Element {
     }, [radius]);
 
     useEffect(() => {
-        if (data?.matjipListData) {
-            if(page === 0) newMatjipList(data.matjipListData);
-            else pushMatjipList(data.matjipListData);
+        if (data?.data) {
+            if(page === 0) newMatjipList(data.data);
+            else pushMatjipList(data.data);
         }
     }, [data]);
 
     useEffect(() => {
-        if(data?.matjipListData) drawMatjipMakers(map, data.matjipListData); 
+        if(data?.data) drawMatjipMakers(map, data.data); 
     }, [data]);
 
     return (

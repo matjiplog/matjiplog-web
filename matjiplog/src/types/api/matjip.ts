@@ -17,24 +17,16 @@ export interface MatjipDto {
 
 export interface Matjip {
     matjipData: MatjipDto,
-    matjipLikeListData: [
-        {
-            matjipSequence: number,
-            userSequence: number,
-        }
-    ],
-    success: boolean
+    totalElements: number,
+    totalPages: number,
+    success: boolean,
 }
 
 export interface Matjips {
-    matjipListData: MatjipDto[],
-    matjipLikeListData: [
-        {
-            matjipSequence: number,
-            userSequence: number,
-        }
-    ],
-    success: boolean
+    data: MatjipDto[],
+    totalElements?: number,
+    totalPages: number,
+    success: boolean,
 }
 
 export interface PostMatjipCustomRequest {

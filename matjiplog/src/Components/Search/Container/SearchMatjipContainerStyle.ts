@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { CardBorderShaodw } from '../../../styles/borderStyle';
+import { FlexRowCenterCenter } from '../../../styles/flexStyle';
 
 export const SearchListGrid = styled.section`
   display: grid;
@@ -31,3 +32,11 @@ export const SearchSection = styled.section`
     }
   }
 `;
+
+export const NonSearchDiv = styled(FlexRowCenterCenter)`
+  line-height: 6rem;
+  text-align: center;
+  height: 550px;
+  font-size: 22px;
+  font-weight: 700;
+`
