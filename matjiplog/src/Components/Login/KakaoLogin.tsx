@@ -2,11 +2,15 @@ import axios from "axios";
 import { useEffect } from "react";
 import { axiosEmailCheck, axiosLogin, axiosSignUp } from "../../Services/user-service";
 import LodingSpinner from "../Common/Loding";
-import { useNavigate } from "react-router-dom";
+import { setAccessTokenInHeader } from "../../utils/jwtController";
+import { UserState } from "../../types/store/user";
+import { userStore } from "../../stores/user";
+import { useNavigateUrl } from "../../Hooks/useNavigateUrl";
 
 function KakaoLogin() { 
-  const navigate = useNavigate();
-
+  const { isLogin, setUserSequence, setIsLogin }: UserState = userStore();
+  const { handleUrl } = useNavigateUrl();
+  
   let params = new URL(window.location.href).searchParams;
   let code = params.get("code");
   const grant_type = "authorization_code";
@@ -20,8 +24,13 @@ function KakaoLogin() {
         const kakaoInfo = res.data;
         if(await axiosEmailCheck(kakaoInfo.kakao_account.email)){
           //로그인
-          const res = await axiosLogin(kakaoInfo.kakao_account.email, kakaoInfo.id);
-          if(res.status===200) return navigate("/");
+          const { res, accessToken, userSequence } = await axiosLogin(kakaoInfo.kakao_account.email, kakaoInfo.id);
+          if(res.status===200) {
+            setAccessTokenInHeader(accessToken);
+            setUserSequence(userSequence);
+            setIsLogin(true);
+            handleUrl("/");        
+          };
           
         }
         else{
@@ -41,9 +50,13 @@ function KakaoLogin() {
           
           if(status === 200 && data.success){
             //로그인
-            const res = await axiosLogin(userData.id, userData.password)
-            console.log(res);
-            if(res.status===200) return navigate("/");
+            const { res, accessToken, userSequence } = await axiosLogin(kakaoInfo.kakao_account.email, kakaoInfo.id);
+            if(res.status===200) {
+              setAccessTokenInHeader(accessToken);
+              setUserSequence(userSequence);
+              setIsLogin(true);
+              handleUrl("/");        
+            };
           }
         }
       })
@@ -81,4 +94,5 @@ function KakaoLogin() {
 }
 
 export default KakaoLogin;
+
 

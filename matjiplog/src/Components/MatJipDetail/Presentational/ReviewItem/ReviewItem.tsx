@@ -1,15 +1,16 @@
-import styled from "styled-components";
+
 import { logData } from "../../../../types/logDto";
 import { StarMake } from "../../../Common/StarMake";
 import { Wrap, ReviewTop, UserDiv, UserImg, UserP, StarItem, ReviewContent } from "./style";
 
-
 function ReviewItem({
   item,
+  matjipname,
 } : { 
   item: logData;
+  matjipname: string,
 }):JSX.Element {
-  const starpoint : number = (item.matjip.ratingPortion + item.matjip.ratingService + item.matjip.ratingTaste)/3;
+  const starpoint = (item.ratingPortion + item.ratingService + item.ratingTaste)/3;
   return (
     <Wrap>
       <ReviewTop>
@@ -23,7 +24,7 @@ function ReviewItem({
         </StarItem>
       </ReviewTop>
       <ReviewContent>
-        <div style={{fontWeight:"bold", fontSize:"12px"}}>{item.matjip.name}</div>
+        <div style={{fontWeight:"bold", fontSize:"12px"}}>{matjipname}</div>
         <div style={ {marginTop:"10px"} }>{item.content}</div>
         <div>{item.content}</div>
       </ReviewContent>

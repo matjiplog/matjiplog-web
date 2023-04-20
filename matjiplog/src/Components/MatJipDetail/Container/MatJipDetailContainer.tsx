@@ -7,14 +7,11 @@ import { TabWrap, TabContent } from "../Presentational/MatjipTab/style";
 import TabHome from "../Presentational/TabHome/TabHome";
 import TabMenu from "../Presentational/TabMenu/TabMenu";
 import TabReview from "../Presentational/TabReview/TabReview";
-import { useMatjipReview } from "../Presentational/useMatjipReview";
 import { useEffect, useState } from "react";
 
 function TopContainer() {
   const parm = useParams();
-
   const { data, isLoading, isError, isFetching } = useMatjipDetail(parm);
-  const { page, setPage, reviewList, initReviewData} = useMatjipReview()
   
   const windowOpenKakaoLoadFind = () =>{
     window.open(`https://map.kakao.com/link/to/${data?.name},${data?.locationLatitude},${data?.locationLongitude}`, "_blank");
@@ -26,16 +23,6 @@ function TopContainer() {
   const TabClick = (index : number) : void => {
     setTabindex(index);
   }
-  
-  const seeMoreClick = ()=>{
-    setPage(page+1);
-  };
-
-  useEffect(() =>{
-    if(data) {
-      initReviewData(data.name, page);
-    }
-  }, [data, page]);
 
   if(data)
   return (
@@ -46,7 +33,7 @@ function TopContainer() {
         <TabContent>
           {tabindex === 0 && <TabHome matjipData={data}></TabHome>}
           {tabindex === 1 && <TabMenu/>}
-          {tabindex === 2 && <TabReview reviewList={reviewList} page={page} seeMoreClick={seeMoreClick}></TabReview>}
+          {tabindex === 2 && <TabReview matjipData={data}></TabReview>}
         </TabContent>
       </TabWrap>
     </>

@@ -1,24 +1,19 @@
 import { logData, responseLogDto } from "../../../../types/logDto";
+import { matjipDto } from "../../../../types/matjipDto";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import { ReviewSeeMore } from "../ReviewItem/style";
 import { ReviewWrap } from "./style";
 
 function TabReview( {
-  reviewList,
-  page,
-  seeMoreClick
+  matjipData,
 } : {
-  reviewList: responseLogDto,
-  page:number,
-  seeMoreClick : () => void
+  matjipData: matjipDto,
 })  {
-  console.log(reviewList);
   return(
     <ReviewWrap>
-    {reviewList.data.map((value : logData, index:number) : JSX.Element =>{
-        return <ReviewItem key={index} item={value} ></ReviewItem>
+    {matjipData.logs.map((value : logData, index:number) : JSX.Element =>{
+        return <ReviewItem key={index} item={value} matjipname={matjipData.name} ></ReviewItem>
     })}
-    {reviewList.totalPages-page > 1 && <ReviewSeeMore onClick={seeMoreClick}>리뷰 더보기</ReviewSeeMore>}
   </ReviewWrap>
   );
 }

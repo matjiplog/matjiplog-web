@@ -146,7 +146,7 @@ function LogContainer() {
   const onChangeComment = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
   }, [comment]);
-  console.log("dd");
+  
   return(
     <Section>
       <SearchForm>

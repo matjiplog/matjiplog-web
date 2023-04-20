@@ -1,17 +1,29 @@
+import { logData } from "./logDto";
+import { imageDetailDto } from "./userDto";
+
+export interface responseMatjip {
+  totalPage: number,
+  data : matjipDto,
+  success : boolean,
+}
+
 export interface matjipDto {
   matjipSequence: number,
   name: string,
   phonenumber: string,
-  ratingTaste: number,
   ratingPortion: number,
   ratingService: number,
+  ratingTaste: number,
   zipcode: string,
   address: string,
   roadAddress: string,
   category: string,
   locationLatitude: string,
   locationLongitude: string,
-  imageDetail : {}
+  likeCountOfMatjip : number
+  logs : logData[],
+  imageDetail : imageDetailDto[],
+
 }
 
 export interface matjipLikeData {

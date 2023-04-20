@@ -1,7 +1,6 @@
 import { handleError } from './../utils/handleError';
 import axios, { AxiosError, AxiosResponse } from "axios";
 import {userAPI} from "../Api/axios";
-import { useSwal } from "../Components/SignUp/Presentational/useSwal";
 import { userDto } from "../types/userDto";
 import qs from 'qs';
 
@@ -128,9 +127,9 @@ export const axiosLogin = async (userId : string, password: string) =>{
     console.log(data)
     const res = await userAPI.post("/login", data);
     console.log(res);
-    console.log(res.headers["token"]);
-    console.log(res.headers["userseq"]);
-    return res;
+    const accessToken = res.headers["token"]
+    const userSequence = res.headers["userseq"]
+    return { res, accessToken, userSequence };
   } catch (e) {
     const { message, response, code } = e as unknown as AxiosError;
     console.log(message);
