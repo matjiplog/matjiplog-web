@@ -39,7 +39,7 @@ function HomeContainer(): JSX.Element {
     const { matjipList, pushMatjipList, newMatjipList, initMatjipList }: useMatjipListResult = useMatjipList();
     const { markers, deleteMarkers, drawMatjipMakers }: useDrawMarkerResult = useDrawMarker();
 
-    const { data, isLoading } = useQuery(
+    const { data, isLoading, isRefetching } = useQuery(
         ["myPlace", myPlace.latitude, myPlace.longitude, radius, page], 
         () => getMatjipMyPlace(myPlace.latitude, myPlace.longitude, radius, page)
     );
@@ -57,15 +57,17 @@ function HomeContainer(): JSX.Element {
     }, [radius]);
 
     useEffect(() => {
+        if(isRefetching) return;
         if (data?.data) {
             if(page === 0) newMatjipList(data.data);
             else pushMatjipList(data.data);
         }
-    }, [data]);
-
+    }, [data, isRefetching]);
+    
     useEffect(() => {
+        if(isRefetching) return;
         if(data?.data) drawMatjipMakers(map, data.data); 
-    }, [data]);
+    }, [data, isRefetching]);
 
     return (
         <>
@@ -91,7 +93,7 @@ function HomeContainer(): JSX.Element {
                         matjipList={matjipList} 
                         setLastCard={setLastCardRef}
                     />
-                    {isLoading && <LodingSpinner />}
+                    {isLoading || isRefetching && <LodingSpinner />}
                 </MyPlaceMatjipInfo>
             </MapAndInfo>
         </>

@@ -6,12 +6,7 @@ import { matjipDto } from "../../types/matjipDto";
 import { StarMake } from "./StarMake";
 
 
-function MarkerClick( {
-  matjipData,
-} :{
-  matjipData : matjipDto
-}) {
-
+function MarkerClick( { matjipData }: { matjipData : matjipDto }) {
   const starPoint = (matjipData.ratingPortion + matjipData.ratingService + matjipData.ratingTaste)/3;
 
   // const [isVisible, setIsVisible] = useState<boolean>(false); // Marker 클릭 visible
@@ -57,7 +52,6 @@ function MarkerClick( {
         <DetailNav onClick={windowOpenKakaoLoadFind}   style={{backgroundColor:"#FF6701" , color:"white"}}>길찾기</DetailNav>
       </FlexBetween>
     </DetailMarker>
-    // }
   );
 }
 
