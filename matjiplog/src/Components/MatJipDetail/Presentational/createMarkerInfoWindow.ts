@@ -8,14 +8,20 @@ export const createMarkerInfoWindow = (logData : MyLogDto) =>{
   
   const starPoint = (logData.matjip.ratingPortion + logData.matjip.ratingService + logData.matjip.ratingTaste)/3;
 
-  const logDetailNav = () =>{
-    
-  }
-
   const windowOpenKakaoLoadFind = () =>{
     window.open(`https://map.kakao.com/link/to/${logData.matjip.name},${logData.matjip.locationLatitude},${logData.matjip.locationLongitude}`, "_blank");
   }
 
+  const logClick = () =>{
+    
+  };
+
+  const matjipClick = (e: any) =>{
+    console.log(e);
+    e.preventDefault();
+    
+    
+  };
 
   var iwContentdiv = document.createElement("div");
   
@@ -57,10 +63,12 @@ export const createMarkerInfoWindow = (logData : MyLogDto) =>{
     logNav.style.alignItems = "center";
     logNav.style.cursor = "pointer";
     logNav.style.fontWeight = "700";
-    logNav.innerHTML = "로그";
-  
+    logNav.innerHTML = "맛집보기";
+    logNav.onclick = matjipClick;
+    
 
   const detailNav = document.createElement("a");
+    // detailNav.onclick = logClick;
     detailNav.href = `/search/${logData.matjip.matjipSequence}`;
     detailNav.style.border = "1px solid #b4b4b4";
     detailNav.style.borderRadius = "2px";

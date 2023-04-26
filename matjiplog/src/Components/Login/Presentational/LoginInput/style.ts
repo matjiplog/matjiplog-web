@@ -11,6 +11,7 @@ export const SocialDiv = styled(FlexRowBetweenCenter)`
 `;
 
 export const SocialIcon = styled(BackgroundImgDiv)`
+  cursor: pointer;
   width: 38px;
   height: 40px;
 `;

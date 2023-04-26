@@ -1,10 +1,8 @@
-import { IdDiv, InputForm, InputLogin, LineDiv, PwDiv, SocialDiv, SocialIcon, LoginBtn, SignUpBtn } from "./style";
-
+import { IdDiv, InputForm, InputLogin, LineDiv, PwDiv, SocialDiv, SocialIcon, LoginBtn, SignUpBtn } from "./style"
 import { useNavigateUrl } from '../../../../Hooks/useNavigateUrl';
-
 import { LoginInputProps } from '../../../../types/props/login/LoginInput';
 
-function LoginInput({ onChangeHandler, clickKakaoHandler, doLogin }: LoginInputProps): JSX.Element {
+function LoginInput({ onChangeHandler, clickKakaoHandler, clickGoogleHandler, doLogin }: LoginInputProps): JSX.Element {
   const { handleUrl } = useNavigateUrl();
 
   return(
@@ -26,7 +24,7 @@ function LoginInput({ onChangeHandler, clickKakaoHandler, doLogin }: LoginInputP
       </LineDiv>
       <SocialDiv>
         <SocialIcon onClick={clickKakaoHandler} url="/assets/images/kakao.png" ></SocialIcon>
-        <SocialIcon url="/assets/images/google.png" ></SocialIcon>
+        <SocialIcon onClick={clickGoogleHandler} url="/assets/images/google.png" style={{border : "2px solid rgb(219,219,219)"}}></SocialIcon>
         <SocialIcon url="/assets/images/naver.png" ></SocialIcon>
       </SocialDiv>
     </InputForm>

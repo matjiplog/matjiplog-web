@@ -1,6 +1,5 @@
 import { matjipDto } from "../../../../types/matjipDto";
 import { StarMake } from "../../../Common/StarMake";
-import { createMarkerInfoWindow } from "../createMarkerInfoWindow";
 import { useKakaoMap } from "../useKakaoMap";
 import { HomeWrap, MatjipInfoDiv, MatjipHomeTitle, InfoItem, StarItem, StarP, StarDiv, MapWrap } from "./style";
 
@@ -10,7 +9,6 @@ function TabHome({
 } : {
   matjipData : matjipDto,
 }) {
-  // const infowindow = createMarkerInfoWindow(matjipData);
 
   const { mapRef, map } = useKakaoMap(Number(matjipData.locationLatitude), Number(matjipData.locationLongitude), matjipData.name);
   
