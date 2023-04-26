@@ -100,6 +100,9 @@ export const axiosSignUp = async (userData : userDto) => {
   } catch (e) {
     console.log("failed");
     const { message, response, code } = e as unknown as AxiosError;
+    console.log(message);
+    console.log(response);
+    console.log(code);
     return { data: message, status: response?.status, error : code};
   }
 }

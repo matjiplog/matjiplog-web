@@ -30,9 +30,7 @@ function MarkerClick( { matjipData }: { matjipData : matjipDto }) {
     <DetailMarker>
       <FlexBetween style={{marginBottom: "5px"}}>
         <DetailMarkerName>{matjipData.name}</DetailMarkerName>
-        <GoX size={16} style={{border: "1px solid #b4b4b4" ,cursor: "pointer"}} color="black" 
-          
-        ></GoX>
+        <GoX size={16} style={{border: "1px solid #b4b4b4" ,cursor: "pointer"}} color="black"></GoX>
       </FlexBetween>
       <FlexBetween>
         <FlexColumn>
