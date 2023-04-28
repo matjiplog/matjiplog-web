@@ -93,12 +93,9 @@ export const axiosEmailauthCodeCheck = async (email : string, authCode : string|
 
 export const axiosSignUp = async (userData : userDto) => { 
   try {
-    console.log(userData);
     const { data, status } = await userAPI.post("user", userData);
-    console.log("success");
     return { data, status, error: null};
   } catch (e) {
-    console.log("failed");
     const { message, response, code } = e as unknown as AxiosError;
     console.log(message);
     console.log(response);
@@ -127,9 +124,7 @@ export const axiosUserInfo = async (userSeq : number) : Promise<userDto> =>{
 export const axiosLogin = async (userId : string, password: string) =>{
   try{
     const data = { 'userId': userId , 'password' : password};
-    console.log(data)
     const res = await userAPI.post("/login", data);
-    console.log(res);
     const accessToken = res.headers["token"]
     const userSequence = res.headers["userseq"]
     return { res, accessToken, userSequence };

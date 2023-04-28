@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { useNavigateUrl } from "../../Hooks/useNavigateUrl";
-import { userStore } from "../../stores/user";
-import { UserState } from "../../types/store/user";
-import LodingSpinner from "../Common/Loding";
+import { useNavigateUrl } from "../Hooks/useNavigateUrl";
+import { userStore } from "../stores/user";
+import { UserState } from "../types/store/user";
+import LodingSpinner from "../Components/Common/Loding";
 import axios from "axios";
-import { axiosEmailCheck, axiosLogin, axiosSignUp } from "../../Services/user-service";
-import { setAccessTokenInHeader } from "../../utils/jwtController";
+import { axiosEmailCheck, axiosLogin, axiosSignUp } from "../Services/user-service";
+import { setAccessTokenInHeader } from "../utils/jwtController";
 
 function GoogleLogin() {
   const { isLogin, setUserSequence, setIsLogin }: UserState = userStore();

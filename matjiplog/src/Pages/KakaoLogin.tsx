@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { axiosEmailCheck, axiosLogin, axiosSignUp } from "../../Services/user-service";
-import LodingSpinner from "../Common/Loding";
-import { setAccessTokenInHeader } from "../../utils/jwtController";
-import { UserState } from "../../types/store/user";
-import { userStore } from "../../stores/user";
-import { useNavigateUrl } from "../../Hooks/useNavigateUrl";
+import { axiosEmailCheck, axiosLogin, axiosSignUp } from '../Services/user-service';
+import LodingSpinner from '../Components/Common/Loding';
+import { setAccessTokenInHeader } from "../utils/jwtController";
+import { UserState } from "../types/store/user";
+import { userStore } from "../stores/user";
+import { useNavigateUrl } from "../Hooks/useNavigateUrl";
 
 function KakaoLogin() { 
   const { isLogin, setUserSequence, setIsLogin }: UserState = userStore();

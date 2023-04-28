@@ -10,11 +10,14 @@ import Search from "./Pages/Search";
 import Log from "./Pages/Log";
 import MyLog from "./Pages/MyLog";
 import MyLogDetail from './Pages/MyLogDetail';
+import SearchDetail from "./Pages/SearchDetail";
+import KakaoLogin from './Pages/KakaoLogin';
+import GoogleLogin from './Pages/GoogleLogin';
+import NaverLogin from './Pages/NaverLogin';
 
 import GlobalStyle from "./styles/global";
-import SearchDetail from "./Pages/SearchDetail";
-import KakaoLogin from "./Components/Login/KakaoLogin";
-import GoogleLogin from "./Components/Login/GoogleLogin";
+
+declare global { interface Window { naver: any; } }
 
 function App(): JSX.Element {
         
@@ -41,9 +44,10 @@ function App(): JSX.Element {
           <Route path="/search/:matjipSequence" element={<SearchDetail/>}></Route>
           <Route path="/mylog" element={<MyLog />}></Route>
           <Route path='/mylog/:log_sequence' element={<MyLogDetail />}/>
-          <Route path="*" element={<NotFound />}></Route>
           <Route path="/kakaologin" element={<KakaoLogin />}></Route>
           <Route path="/googlelogin" element={<GoogleLogin />}></Route>
+          <Route path="/naverlogin/" element={<NaverLogin />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </QueryClientProvider>
       </BrowserRouter>
