@@ -60,7 +60,7 @@ function LoginContainer() : JSX.Element{
 
   
   const clickKakaoHandler = () =>{
-    const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+    const CLIENT_ID = process.env.REACT_APP_KAKAO_REST_API_KEY;
     const REDIRECT_URI = "http://localhost:3000/kakaologin";
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
@@ -68,13 +68,13 @@ function LoginContainer() : JSX.Element{
   }
 
   const clickGoogleHandler = () =>{
-    const CLIENT_ID = "342265387464-l63hoeittmlehh04f2efoaohenn8gphp.apps.googleusercontent.com";
+    const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
     const REDIRECT_URI = "http://localhost:3000/googlelogin";
     const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=email profile`;
 
     window.location.href = GOOGLE_AUTH_URL;
   }
-  // const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  
   
   return(
     <LoginDiv>
