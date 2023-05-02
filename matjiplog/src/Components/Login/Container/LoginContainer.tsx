@@ -1,5 +1,6 @@
 import { useMutation } from 'react-query';
 import { useEffect } from 'react';
+import { CredentialResponse } from '@react-oauth/google';
 
 import { ContentDiv, LoginDiv } from "./style";
 
@@ -19,10 +20,6 @@ import { postLoginData } from '../../../Services/user-service';
 import { JWT_EXPIRY_TIME, reloginWithRefreshToken, setAccessTokenInHeader } from '../../../utils/jwtController';
 
 import { userStore } from '../../../stores/user';
-import { CredentialResponse } from '@react-oauth/google';
-import axios from 'axios';
-
-
 
 function LoginContainer() : JSX.Element{
   const clientid = "342265387464-l63hoeittmlehh04f2efoaohenn8gphp.apps.googleusercontent.com";
@@ -74,20 +71,17 @@ function LoginContainer() : JSX.Element{
 
     window.location.href = GOOGLE_AUTH_URL;
   }
-  
-  
   return(
     <LoginDiv>
       <Logo></Logo>
       <ContentDiv>
-        <SideImage></SideImage>
+        <SideImage />
         <Input 
           onChangeHandler={onChangeHandler} 
           doLogin={doLogin}
           clickKakaoHandler={clickKakaoHandler}
           clickGoogleHandler={clickGoogleHandler}
         />
-       
       </ContentDiv>
       <Find></Find>
     </LoginDiv>

@@ -1,30 +1,31 @@
-import axios from "axios";
 import { useEffect } from "react";
-import { axiosEmailCheck, axiosLogin, axiosSignUp } from "../../Services/user-service";
-import LodingSpinner from "../Common/Loding";
-import { setAccessTokenInHeader } from "../../utils/jwtController";
-import { UserState } from "../../types/store/user";
-import { userStore } from "../../stores/user";
-import { useNavigateUrl } from "../../Hooks/useNavigateUrl";
+import { useNavigateUrl } from "../Hooks/useNavigateUrl";
+import { userStore } from "../stores/user";
+import { UserState } from "../types/store/user";
+import LodingSpinner from "../Components/Common/Loding";
+import axios from "axios";
+import { axiosEmailCheck, axiosLogin, axiosSignUp } from "../Services/user-service";
+import { setAccessTokenInHeader } from "../utils/jwtController";
 
-function KakaoLogin() { 
+function GoogleLogin() {
   const { isLogin, setUserSequence, setIsLogin }: UserState = userStore();
   const { handleUrl } = useNavigateUrl();
   
   let params = new URL(window.location.href).searchParams;
   let code = params.get("code");
   const grant_type = "authorization_code";
-  const client_id = process.env.REACT_APP_KAKAO_REST_API_KEY;
-  const REDIRECT_URI = "http://localhost:3000/kakaologin";
-
+  const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  const REDIRECT_URI = "http://localhost:3000/googlelogin";
+  const CLIENT_SECRET = process.env.REACT_APP_GOOGLE_CLIENT_SECRET;
+  
   useEffect(()=> {
     getToken().then((res)=>{
-      getUserData(res.access_token).then(async res =>{
-        console.log(res.data);
-        const kakaoInfo = res.data;
-        if(await axiosEmailCheck(kakaoInfo.kakao_account.email)){
+      getUserData(res.access_token).then(async (res) =>{
+        console.log(res);
+        const googleInfo = res.data;
+        if(await axiosEmailCheck(googleInfo.email)){
           //로그인
-          const { res, accessToken, userSequence } = await axiosLogin(kakaoInfo.kakao_account.email, kakaoInfo.id);
+          const { res, accessToken, userSequence } = await axiosLogin(googleInfo.email, googleInfo.id);
           if(res.status===200) {
             setAccessTokenInHeader(accessToken);
             setUserSequence(userSequence);
@@ -36,21 +37,21 @@ function KakaoLogin() {
         else{
           //회원가입
           const userData= {
-            id : kakaoInfo.kakao_account.email,
-            email : kakaoInfo.kakao_account.email,
-            password : kakaoInfo.id,
-            gender : kakaoInfo.kakao_account.gender === "male" ? "M" : "F",
-            name : kakaoInfo.kakao_account.profile.nickname,
+            id : googleInfo.email,
+            email : googleInfo.email,
+            password : googleInfo.id,
+            gender : "",
+            name : googleInfo.name,
             phoneNumber : "",
-            nickname : kakaoInfo.kakao_account.profile.nickname,
-            isSnsAccount : "K",
+            nickname : googleInfo.name,
+            isSnsAccount : "G",
             imageSerial: "",
           }
           const {data, status, error} =  await axiosSignUp(userData)
           
           if(status === 200 && data.success){
             //로그인
-            const { res, accessToken, userSequence } = await axiosLogin(kakaoInfo.kakao_account.email, kakaoInfo.id);
+            const { res, accessToken, userSequence } = await axiosLogin(googleInfo.email, googleInfo.id);
             if(res.status===200) {
               setAccessTokenInHeader(accessToken);
               setUserSequence(userSequence);
@@ -60,22 +61,22 @@ function KakaoLogin() {
           }
         }
       })
-    });
+      })
   }, []);
 
   const getUserData = async (ACCESS_TOKEN : string) => {
-    const kakaoUser = await axios.get(`https://kapi.kakao.com/v2/user/me`, {
+    const GoogleUser = await axios.get(`https://www.googleapis.com/userinfo/v2/me`, {
         headers: {
           Authorization: `Bearer ${ACCESS_TOKEN}`,
         },
     })
-    return kakaoUser;
+    return GoogleUser;
   }
   
   const getToken = async () => {
     console.log("in")
     try{
-      const res = await axios.post(`https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${REDIRECT_URI}&code=${code}`, {
+      const res = await axios.post(`https://oauth2.googleapis.com/token?code=${code}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&redirect_uri=${REDIRECT_URI}&grant_type=${grant_type}`, {
         headers: {
           'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
       }})
@@ -93,6 +94,4 @@ function KakaoLogin() {
   );
 }
 
-export default KakaoLogin;
-
-
+export default GoogleLogin;
