@@ -32,7 +32,7 @@ export const useDrawMarker = (): useDrawMarkerResult => {
             const { iwContentdiv, navDiv, detailNav, kakaolodaNav } = createMarkerInfoWindow(value);
 
             detailNav.addEventListener("click", (e) => {
-                handleUrl(`/search/${matjipSequence}`)
+                handleUrl(`/matjip/${matjipSequence}`)
             });
 
             navDiv.append(detailNav, kakaolodaNav);
@@ -66,7 +66,7 @@ export const useDrawMarker = (): useDrawMarkerResult => {
                 handleUrl(`/myLog/${value.logSequence}`)
             });
             detailNav.addEventListener("click", (e) => {
-                handleUrl(`/search/${matjipSequence}`)
+                handleUrl(`/matjip/${matjipSequence}`)
             });
             
             navDiv.append(logNav, detailNav, kakaolodaNav);

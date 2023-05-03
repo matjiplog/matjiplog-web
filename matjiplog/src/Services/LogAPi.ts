@@ -17,7 +17,7 @@ export const getMyLogData = async (user_sequence: number, page: number): Promise
 
 export const getMyLogSearchAll = async (request: GetMyLogSearchRequest): Promise<GetMyLogsResponse | null> => {
     try{
-        const response = await logAPI.get("/log/user/search", { params: { ...request }});
+        const response = await logAPI.get("/log/user/fullsearch", { params: { ...request }});
 
         if(!response?.data?.success || response?.status !== 200) return null;
         return response.data;

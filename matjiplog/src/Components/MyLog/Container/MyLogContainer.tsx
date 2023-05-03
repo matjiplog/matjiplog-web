@@ -32,6 +32,7 @@ import { useDrawMarker } from '../../../Hooks/useDrawMarker';
 import { useNavigateUrl } from '../../../Hooks/useNavigateUrl';
 
 import { deleteMyLogData, getMyLogData, getMyLogSearchAddress, getMyLogSearchAll, getMyLogSearchName } from '../../../Services/LogAPi';
+import Meta from '../../Common/Presentational/Meta/Meta';
 
 function MyLogContainer(): JSX.Element {
     const [searchKey, setSearchKey] = useState<"myLogs" | "searchAll" | "searchName" | "searchAddress">("myLogs");
@@ -118,6 +119,7 @@ function MyLogContainer(): JSX.Element {
 
     return (
         <MyLogSection>
+            <Meta title={"나만의 로그"} description={"내가 기록한 로그 목록을 관리하세요"}/>
             <handlerContext.Provider value={{ keywordSubmitHandler, addHasTag, deleteHasTag }}>
                 <SearchBarContainer />
             </handlerContext.Provider>

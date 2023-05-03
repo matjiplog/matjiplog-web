@@ -8,9 +8,9 @@ function SignUp() {
   return (
     <>
       <SignUpWrap>
-        <SignUpContainer></SignUpContainer>
+        <SignUpContainer />
       </SignUpWrap>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

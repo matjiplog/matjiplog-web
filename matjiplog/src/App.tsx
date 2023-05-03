@@ -39,11 +39,11 @@ function App(): JSX.Element {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/log" element={<Log />}></Route>
-          <Route path="/createMyLog" element={<CreateMyLogPage />}></Route>
-          <Route path="/search/*" element={<Search />}></Route>
-          <Route path="/search/:matjipSequence" element={<SearchDetail/>}></Route>
-          <Route path="/mylog" element={<MyLog />}></Route>
-          <Route path='/mylog/:log_sequence' element={<MyLogDetail />}/>
+          <Route path="/myLogWork" element={<CreateMyLogPage />}></Route>
+          <Route path="/matjip" element={<Search />}></Route>
+          <Route path="/matjip/:matjipSequence" element={<SearchDetail/>}></Route>
+          <Route path="/myLog" element={<MyLog />}></Route>
+          <Route path='/myLog/:log_sequence' element={<MyLogDetail />}/>
           <Route path="/kakaologin" element={<KakaoLogin />}></Route>
           <Route path="/googlelogin" element={<GoogleLogin />}></Route>
           <Route path="/naverlogin/" element={<NaverLogin />}></Route>

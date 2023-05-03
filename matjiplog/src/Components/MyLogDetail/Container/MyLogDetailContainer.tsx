@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
 import { useEffect, useRef, useState } from 'react';
 
+import Meta from '../../Common/Presentational/Meta/Meta';
 import ImageInfo from '../Presentational/ImageInfo/ImageInfo';
 import UserInfo from '../Presentational/UserInfo/UserInfo';
 import ContentInfo from '../Presentational/ContentInfo/ContentInfo';
@@ -103,6 +104,7 @@ function MyLogDetailContainer(): JSX.Element {
 
     return (
         <InfoSection>
+            <Meta title={`${myLogDetail.data.data.matjip.name} 로그`} description={myLogDetail.data.data.content} />
             <ImgAndContent>
                 <ImageInfo 
                     leftClick={leftClick}

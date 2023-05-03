@@ -20,6 +20,7 @@ import { postLoginData } from '../../../Services/user-service';
 import { JWT_EXPIRY_TIME, reloginWithRefreshToken, setAccessTokenInHeader } from '../../../utils/jwtController';
 
 import { userStore } from '../../../stores/user';
+import Meta from '../../Common/Presentational/Meta/Meta';
 
 function LoginContainer() : JSX.Element{
   const clientid = "342265387464-l63hoeittmlehh04f2efoaohenn8gphp.apps.googleusercontent.com";
@@ -73,7 +74,8 @@ function LoginContainer() : JSX.Element{
   }
   return(
     <LoginDiv>
-      <Logo></Logo>
+      <Meta title={"로그인"} description={"맛집 로그 서비스를 이용하기 위한 로그인입니다"}/>
+      <Logo />
       <ContentDiv>
         <SideImage />
         <Input 
@@ -83,7 +85,7 @@ function LoginContainer() : JSX.Element{
           clickGoogleHandler={clickGoogleHandler}
         />
       </ContentDiv>
-      <Find></Find>
+      <Find />
     </LoginDiv>
   );
 }
