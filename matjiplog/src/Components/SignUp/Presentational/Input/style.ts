@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexRow, FlexRowAlignCenter, FlexRowCenterCenter } from "../../../../styles/flexStyle";
+import { FlexColumn, FlexRow, FlexRowAlignCenter, FlexRowCenterCenter } from "../../../../styles/flexStyle";
 
 
 export const RadioText = styled.span`
@@ -24,15 +24,14 @@ export const InputRadio = styled.input`
 
 export const GenderInputDiv = styled(FlexRowAlignCenter)`
   position: relative;
-  width: 290px;
+  width: 80%;
   margin-right: 90px;
   height: 30px;
 `;
 
 export const ValidDiv = styled.div<{ valid: string }>`
-  width: 290px;
+  width: 90%;
   height: 30px;
-  margin: -10px 90px 0px 110px;
   color : ${props => props.valid === "false" ? "red" : "rgb(174,174,174)"};
   
 `;
@@ -52,45 +51,45 @@ export const EmailBtn = styled(FlexRowCenterCenter)`
 `;
 export const ElementInput = styled.input<{ border : string}>`
   font-size: 10px;
-  width: 290px;
   height: 35px;
   padding : 0px 10px 0px 10px;
   border: 1px solid;
   border-color: ${props => props.border};
   outline: none;
   overflow: hidden;
-  margin-right: 90px;
 `;
 
 export const EmailInput = styled.input< {border : string, background : string} >`
+  flex : 1;
   font-size: 10px;
-  width: 290px;
   height: 35px;
-  padding : 0px 10px 0px 10px;
   border: 1px solid;
   border-color: ${props => props.border};
   outline: none;
   overflow: hidden;
   background-color: ${props => props.background};
+  padding : 0px 10px 0px 10px;
 `;
 
 export const EmailAuthCodeInput = styled(EmailInput)`
-  width: 200px;
+  width: 80%;
 `;
 
 export const ElementP = styled.p`
-  margin-right: 30px;
   font-size : 12px;
   font-weight: 700;
-  width: 80px;
+  width: 80%;
   height: 35px;
   display: flex;
   align-items: center;
 `;
 
-export const ElementDiv = styled(FlexRow)`
-  display: flex;
-  margin-bottom: 20px;
+export const BtnWrap = styled(FlexRow)`
+`;
+
+export const ElementDiv = styled(FlexColumn)`
+  width: 90%;
+  margin-bottom: 10px;
 `;
 
 export const TextH = styled.h2`
@@ -98,14 +97,13 @@ export const TextH = styled.h2`
   font-size: 17px;
   font-weight: 600;
   line-height: 25px;
-  margin: 0px 40px 0px 40px;
   text-align: center;
 `;
 
 export const SignUpBtn = styled(FlexRowCenterCenter)`
   border: 1px solid rgb(219,219,219);
   border-radius: 3px;
-  width: 350px;
+  width: 90%;
   height: 35px;
   font-size: 12px;
   background-color: #FF6701;
