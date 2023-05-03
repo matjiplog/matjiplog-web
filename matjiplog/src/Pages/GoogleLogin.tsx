@@ -14,11 +14,10 @@ function GoogleLogin() {
   let params = new URL(window.location.href).searchParams;
   let code = params.get("code");
   const grant_type = "authorization_code";
-  // const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-  const CLIENT_ID = "342265387464-l63hoeittmlehh04f2efoaohenn8gphp.apps.googleusercontent.com"
+  const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const REDIRECT_URI = "http://localhost:3000/googlelogin";
-  // const CLIENT_SECRET = process.env.REACT_APP_GOOGLE_CLIENT_SECRET;
-  const CLIENT_SECRET = "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"
+  const CLIENT_SECRET = process.env.REACT_APP_GOOGLE_CLIENT_SECRET;
+  
   useEffect(()=> {
     getToken().then((res)=>{
       getUserData(res.access_token).then(async (res) =>{
