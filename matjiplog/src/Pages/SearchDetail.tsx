@@ -8,10 +8,10 @@ function SearchDetail() {
   return(
     <>
       <SearchDetailWrap>
-        <HeaderContainer></HeaderContainer>
-        <MatJipDetailContainer></MatJipDetailContainer>
+        <HeaderContainer />
+        <MatJipDetailContainer />
       </SearchDetailWrap>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

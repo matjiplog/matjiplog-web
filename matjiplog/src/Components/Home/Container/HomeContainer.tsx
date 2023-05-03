@@ -26,6 +26,7 @@ import { useRadius } from '../Presentational/useRadius';
 import { useDrawMarker } from '../../../Hooks/useDrawMarker';
 
 import { getMatjipMyPlace } from '../../../Services/matjipApi';
+import Meta from '../../Common/Presentational/Meta/Meta';
 
 function HomeContainer(): JSX.Element {
     const introImageUrl: string[] = useMemo(() => {
@@ -72,6 +73,7 @@ function HomeContainer(): JSX.Element {
     return (
         <>
             <IntroSection>
+                <Meta title={"맛집 로그"} description={"맛집을 기록하고 공유하는 맛집로그입니다"}/>
                 <IntroButton 
                     leftClick={leftClick} 
                     rightClick={rightClick} 

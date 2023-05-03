@@ -5,6 +5,7 @@ import FooterContainer from '../Components/Common/Container/Footer2/FooterContai
 import { HomePageWrap } from "../styles/wrap";
 
 function HomePage(): JSX.Element {
+
   return (
     <HomePageWrap>
       <HeaderContainer />

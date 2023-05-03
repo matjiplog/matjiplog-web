@@ -1,5 +1,5 @@
 import { useMutation } from 'react-query';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import SelectImage from '../Presentational/SelectImage/SelectImage';
 import InputMap from '../Presentational/InputMap/InputMap';
@@ -28,6 +28,7 @@ import { userStore } from '../../../stores/user';
 
 import { postLog, putLogInfo } from '../../../Services/LogAPi';
 import { postMatjipCustom } from '../../../Services/matjipApi';
+import Meta from '../../Common/Presentational/Meta/Meta';
 
 function CreateMyLogFormContainer(): JSX.Element {
     const { dropBarMenu, initDropBarMenu }: dropBarMenuState = dropBarMenuStore();
@@ -39,7 +40,7 @@ function CreateMyLogFormContainer(): JSX.Element {
 
     const logPostMutation = useMutation(["postLog"], (logData: PostLogRequest) => postLog(logData), {
         onSuccess(response) {
-            handleUrl("/mylog");
+            handleUrl("/myLog");
         },
         onError(error) {
             alert('로그 등록 에러.');
@@ -57,7 +58,7 @@ function CreateMyLogFormContainer(): JSX.Element {
     });
     const logPutMutatjion = useMutation(["putLog"], (modifiedLogInfo: PutLogInfoRequest) => putLogInfo(modifiedLogInfo), {
         onSuccess(response) {
-            if(response?.success) handleUrl("/mylog");
+            if(response?.success) handleUrl("/myLog");
             else alert('맛집 수정에 실패했습니다.');
         },
         onError(error) {
@@ -105,6 +106,7 @@ function CreateMyLogFormContainer(): JSX.Element {
 
     return (
         <CreateMyLogForm onSubmit={submitPostLog}>
+            <Meta title={order === "put" ? "맛집 수정" : "맛집 등록"} description={order === "put" ? "등록된 맛집을 수정해보세요" : "새로운 맛집을 등록해주세요"}/>
             <InfoAndReview>
                 <InfoDiv>
                     <Info />

@@ -10,9 +10,9 @@ import { LogGrid, NonSearchDiv, Section } from "./style";
 import LodingSpinner from "../../Common/Loding";
 import { useLogList } from "../Presentational/useLogList";
 import { useScrollObserver } from "../Presentational/useScrollObserver";
+import Meta from '../../Common/Presentational/Meta/Meta';
 
 function LogContainer() {
-  // const queryClient = useQueryClient();
   const gridRef = useRef<HTMLDivElement>(null); // Observer 그리드 아이템 추적할 ref
   const scrollRef = useRef<number>(0); //스크롤 지정을 위한 ref
   const [comment, setComment] = useState<string>(""); // 댓글
@@ -149,6 +149,7 @@ function LogContainer() {
   
   return(
     <Section>
+      <Meta title={"공개 로그"} description={"다른 사용자와 로그를 공유해보세요"}/>
       <SearchForm>
         <DropDown items={items} category={category} dropdown={dropdown} EventCategoryClick={EventCategoryClick} EventDropdownItemClick={EventDropdownItemClick}></DropDown>
         <LogSearch category={category} keyword={keyword} onChangehandler={onChangeKeyword} EventKeywordSearchLog={EventLogKeywordSearch}></LogSearch>

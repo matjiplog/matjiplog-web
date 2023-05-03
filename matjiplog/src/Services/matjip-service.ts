@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { matjipAPI } from "../Api/axios";
-import { matjipDto, responseMatjip } from "../types/matjipDto";
+import { matjipDto } from "../types/matjipDto";
 
 export const axiosMatjipDetail = async (matjipSequence : string | undefined) : Promise<matjipDto | null> =>{
   try {

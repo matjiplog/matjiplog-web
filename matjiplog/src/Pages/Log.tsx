@@ -4,18 +4,17 @@ import Footer from "../Components/Common/Footer";
 import LogContainer from "../Components/Log/Container/LogContainer";
 
 function Log() {
+
   return(
     <>
       <LogWrap>
-        <HeaderContainer></HeaderContainer>
+        <HeaderContainer />
         <LogContainer/>
       </LogWrap>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }
-
-
 
 const LogWrap = styled.div`
   min-height: 100%;

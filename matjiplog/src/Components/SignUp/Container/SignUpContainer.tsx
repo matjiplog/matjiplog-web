@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSwal } from "../Presentational/useSwal";
 import { axiosEmailauthCodeCheck, axiosEmailCheck, axiosEmailPost, axiosIdCheck, axiosSignUp } from "../../../Services/user-service";
 import Logo from "../../Common/Logo";
@@ -7,6 +7,7 @@ import { useInput } from "../Presentational/useInput";
 import { useTimer } from "../Presentational/useTimer";
 import useValid from "../Presentational/useValid";
 import { SignUpDiv } from "./style";
+import Meta from '../../Common/Presentational/Meta/Meta';
 
 function SignUpContainer() : JSX.Element  {
   const { signUpForm, onChangehandler } = useInput(); 
@@ -110,17 +111,16 @@ function SignUpContainer() : JSX.Element  {
   }
 
  // 이메일 인증 확인 클릭시
- const EventEmailAuthCodeCheck = async ()=>{
-  const res = await axiosEmailauthCodeCheck(signUpForm.email, signUpForm.authCode)
-  console.log(res);
-  if(res){
-    alertTextSucess("인증번호가 일치합니다.");
-    setEmailReadOnly(true);
-    setTimer(false);
-  }
-  else{
-    alertTextError("인증번호가 일치하지 않습니다.");
-  }
+  const EventEmailAuthCodeCheck = async ()=>{
+    const res = await axiosEmailauthCodeCheck(signUpForm.email, signUpForm.authCode)
+    if(res){
+      alertTextSucess("인증번호가 일치합니다.");
+      setEmailReadOnly(true);
+      setTimer(false);
+    }
+    else{
+      alertTextError("인증번호가 일치하지 않습니다.");
+    }
 }
 
 //이메일 인증 번호 전송
@@ -132,7 +132,6 @@ const EventEmailAuthCodeSend =async () =>{
   }
   apiIdCheck();
   const res = await axiosEmailPost(signUpForm.email); 
-  console.log(res);
   if(res === true){
     alertTextSucess("성공적으로 인증번호가\n전송되었습니다. \n남은 시간을 확인해주세요.");
     setSeconds(299);
@@ -148,7 +147,8 @@ const EventEmailAuthCodeSend =async () =>{
 
   return(
     <SignUpDiv>
-      <Logo></Logo>
+      <Meta title={`회원가입`} description={'맛집 로그 가입해 다양한 서비스를 확인해보세요'} />
+      <Logo />
       <SignUpInput
         signUpForm={signUpForm}
         onChangehandler={onChangehandler}

@@ -5,6 +5,7 @@ import CreateMyLogFormContainer from '../Components/CreateMyLog/Container/Create
 import { CreateMyLogWrap } from "../styles/wrap";
 
 function CreateMyLogPage(): JSX.Element {
+
   return (
     <CreateMyLogWrap>
       <HeaderContainer />

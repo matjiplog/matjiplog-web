@@ -11,7 +11,6 @@ export const axiosPublicLogList = async (page : number) : Promise<responseLogDto
         page: page,
       }
     })
-    console.log(data);
     return data;
   } catch (e) {
     const { message, response, code } = e as unknown as AxiosError;

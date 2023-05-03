@@ -33,6 +33,7 @@ import { dropBarMenuStore } from '../../../stores/dropBar';
 import { mapShowStore } from '../../../stores/mapShow';
 
 import { getMatjipData, getMatjipSearch, getMatjipSearchAddress, getMatjipSearchName } from '../../../Services/matjipApi';
+import Meta from '../../Common/Presentational/Meta/Meta';
 
 function SearchMatjipContainer(): JSX.Element {
     const [searchKey, setSearchKey] = useState<"matjips" | "searchAll" | "searchName" | "searchAddress">("matjips");
@@ -102,6 +103,7 @@ function SearchMatjipContainer(): JSX.Element {
 
     return (
         <SearchSection>
+            <Meta title={'맛집 찾기'} description={'국내 맛집 목록에서 선택하여 기록하고 공유해보세요'} />
             <handlerContext.Provider value={{ keywordSubmitHandler, addHasTag, deleteHasTag }}>
                 <SearchBarContainer />
             </handlerContext.Provider>
@@ -109,12 +111,12 @@ function SearchMatjipContainer(): JSX.Element {
                 <MyPlaceMap mapRef={mapRef} />
             ): (
                 <SearchListGrid>
-                    {viewList.map((matjip: MatjipDto, index: number) => {
+                    {!isLoading && viewList.map((matjip: MatjipDto, index: number) => {
                         const { matjipSequence } = matjip;
                         const isLastCard = index === viewList.length - 1;
 
                         return (
-                            <MatjipItem key={matjipSequence} onClick={() => {handleUrl(`/search/${matjipSequence}`)}}>
+                            <MatjipItem key={matjipSequence} onClick={() => {handleUrl(`/matjip/${matjipSequence}`)}}>
                                 <MatjipImage imgUrl="/assets/images/Matjip.png" />
                                 <MatjipInfo data={matjip} />
                                 <LikeAndWrite data={matjip} />
@@ -122,10 +124,16 @@ function SearchMatjipContainer(): JSX.Element {
                             </MatjipItem>
                         );
                     })}
+                    
                 </SearchListGrid>
             )}
-            {!viewList.length && !isLoading && <NonSearchDiv>검색결과가 없습니다.<br></br>다시 검색해주세요!</NonSearchDiv>}
             {isLoading && <LodingSpinner />}
+            {!isLoading && !viewList.length && (
+                <NonSearchDiv>
+                    검색결과가 없습니다.<br></br>
+                    다시 검색해주세요!
+                </NonSearchDiv>
+            )}
         </SearchSection>
     )
 }
