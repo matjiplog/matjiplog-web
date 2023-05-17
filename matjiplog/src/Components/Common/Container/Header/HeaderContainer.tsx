@@ -11,9 +11,8 @@ function HeaderContainer(): JSX.Element {
   const [navShow, setNavShow] = useState<boolean>(false);
   const path: string = useLocation().pathname;
   
-  const toggleNavShow = () => { setNavShow(!navShow); }
-
-  return <HeaderSection>
+  return (
+    <HeaderSection>
       <Logo />
       <GlobalNav 
         navShow={navShow}
@@ -23,8 +22,12 @@ function HeaderContainer(): JSX.Element {
         navShow={navShow} 
         toggleNavShow={toggleNavShow} 
       />
-  </HeaderSection>
+    </HeaderSection>
+  )
 
+  function toggleNavShow(): void {
+    setNavShow(!navShow);
+  }
 }
 
 export default HeaderContainer

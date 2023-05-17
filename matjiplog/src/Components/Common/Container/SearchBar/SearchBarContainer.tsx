@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+
 import { getDropBarMenu } from '../../../../utils/getDropBarMenu';
 import { getHasTagMenu } from '../../../../utils/getHasTagMenu';
 
@@ -19,10 +20,14 @@ function SearchBarContainer(): JSX.Element {
 
     return (
         <SearchBarDiv>
-            <DropBarContinaer title={dropList[0]} dropList={dropList} category={"filter"}/>
+            <DropBarContinaer 
+                title={dropList[0]} 
+                dropList={dropList} 
+                category={"filter"}
+            />
             <InputAndHastag>
                 <KeyWordForm />
-                <HasTagList hasTagList={hasTagList}/>
+                <HasTagList hasTagList={hasTagList} />
             </InputAndHastag>
             <SelectLogView />
         </SearchBarDiv>

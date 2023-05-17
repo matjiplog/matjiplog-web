@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 import { MatjipItem, NonSearchDiv, SearchListGrid, SearchSection } from './SearchMatjipContainerStyle';
 

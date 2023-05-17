@@ -32,7 +32,10 @@ function Login({ navShow, toggleNavShow }: LoginProps): JSX.Element {
           }}>로그인</LoginBtn>
         )}
       </LoginDiv>
-      <MenuBar size={40} onClick={toggleNavShow} />
+      <MenuBar 
+        size={40} 
+        onClick={toggleNavShow} 
+      />
     </>
   );
 }

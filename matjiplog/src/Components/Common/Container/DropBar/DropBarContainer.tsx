@@ -12,11 +12,18 @@ import { useDropBar } from '../../../../Hooks/useDropBar';
 function DropBarContinaer({ title, dropList, category }: DropBarContainerProps): JSX.Element {
     const { dropBarShow, dropBarMenu, toggleDropBar, updateSelectItem }: useDropBarResult = useDropBar(title);
 
-    return <DropBarDiv>
-        <Category>{category}</Category>
-        <Select toggleDropBar={toggleDropBar}>{dropBarMenu}</Select>
-        <DropList dropBarShow={dropBarShow} itemList={dropList} dropBarMenu={dropBarMenu} updateSelectItem={updateSelectItem}/>
-    </DropBarDiv>
+    return  (
+        <DropBarDiv>
+            <Category>{category}</Category>
+            <Select toggleDropBar={toggleDropBar}>{dropBarMenu}</Select>
+            <DropList 
+                dropBarShow={dropBarShow} 
+                itemList={dropList} 
+                dropBarMenu={dropBarMenu} 
+                updateSelectItem={updateSelectItem}
+            />
+        </DropBarDiv>
+    )
 }
 
 export default DropBarContinaer;

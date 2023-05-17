@@ -8,7 +8,11 @@ function EmogiPicker({ handleEmogiSelect }: EmogiPickerProps): JSX.Element {
 
     return (
         <EmogeDiv>
-            <EmojiPicker onEmojiClick={handleEmogiSelect} width={250} height={450}/>
+            <EmojiPicker 
+                onEmojiClick={handleEmogiSelect} 
+                width={250} 
+                height={450}
+            />
         </EmogeDiv>
     )
 }
