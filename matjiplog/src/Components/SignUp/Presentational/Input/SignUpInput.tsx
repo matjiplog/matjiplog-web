@@ -1,4 +1,4 @@
-import { RadioText, InputRadio, GenderInputDiv, ValidDiv, EmailBtn, ElementInput, EmailInput ,EmailAuthCodeInput, ElementP, ElementDiv, TextH, SignUpBtn } from "./style";
+import { RadioText, InputRadio, GenderInputDiv, ValidDiv, EmailBtn, ElementInput, EmailInput ,EmailAuthCodeInput, ElementP, ElementDiv, TextH, SignUpBtn, BtnWrap } from "./style";
 import {signUpProps} from "../../../../types/props/SignUp/signUpProps";
 
 function SignUpInput({ signUpForm, onChangehandler, emailReadOnly, idReadOnly, validText, isValid, displaySeconds, displayMinutes, timer, EventEmailDoubleCheck, EventIdDoubleCheck, EventPostSignUp, EventEmailAuthCodeCheck, EventEmailAuthCodeSend}: signUpProps): JSX.Element  {
@@ -21,16 +21,18 @@ function SignUpInput({ signUpForm, onChangehandler, emailReadOnly, idReadOnly, v
       </ElementDiv>
       <ElementDiv>
         <ElementP>아이디</ElementP>
-        <EmailInput
-          type="text"
-          value={signUpForm.id} 
-          name="id"
-          onChange={onChangehandler}
-          border="#b4b4b4"
-          readOnly={idReadOnly}
-          background = {idReadOnly === true ? "rgb(225,225,225)" : ""}
-        ></EmailInput>
-        <EmailBtn  onClick={EventIdDoubleCheck}>중복확인</EmailBtn>
+        <BtnWrap>
+          <EmailInput
+            type="text"
+            value={signUpForm.id} 
+            name="id"
+            onChange={onChangehandler}
+            border="#b4b4b4"
+            readOnly={idReadOnly}
+            background = {idReadOnly === true ? "rgb(225,225,225)" : ""}
+          ></EmailInput>
+          <EmailBtn  onClick={EventIdDoubleCheck}>중복확인</EmailBtn>
+        </BtnWrap>
       </ElementDiv>
       <ElementDiv>
         <ElementP>비밀번호</ElementP>
@@ -101,33 +103,37 @@ function SignUpInput({ signUpForm, onChangehandler, emailReadOnly, idReadOnly, v
       </ElementDiv>
       <ElementDiv>
         <ElementP>이메일</ElementP>
-        <EmailInput
-          value={signUpForm.email} 
-          name="email"
-          type="email"
-          placeholder="이메일 형식으로 작성해주세요"
-          onChange={onChangehandler}
-          border={isValid.isEmail === false && signUpForm.email !== '' ? "red" : "#b4b4b4"}
-          readOnly={emailReadOnly}
-          background = {emailReadOnly === true ? "rgb(225,225,225)" : ""}
-        ></EmailInput>
-        <EmailBtn  onClick={EventEmailDoubleCheck}>인증번호 전송</EmailBtn>
+        <BtnWrap>
+          <EmailInput
+            value={signUpForm.email} 
+            name="email"
+            type="email"
+            placeholder="이메일 형식으로 작성해주세요"
+            onChange={onChangehandler}
+            border={isValid.isEmail === false && signUpForm.email !== '' ? "red" : "#b4b4b4"}
+            readOnly={emailReadOnly}
+            background = {emailReadOnly === true ? "rgb(225,225,225)" : ""}
+          ></EmailInput>
+          <EmailBtn  onClick={EventEmailDoubleCheck}>인증번호 전송</EmailBtn>
+        </BtnWrap>
       </ElementDiv>
       <ValidDiv valid="true">*이메일 형식으로 작성해주세요</ValidDiv>
       {!emailReadOnly &&
         <ElementDiv>
           <ElementP>이메일 인증</ElementP>
-          <EmailAuthCodeInput
-            type="text"
-            value={signUpForm.authCode} 
-            name="authCode"
-            onChange={onChangehandler}
-            placeholder="인증번호를 입력해주세요."
-            border="#b4b4b4"
-            background = ""
-          ></EmailAuthCodeInput>
-        <EmailBtn onClick={EventEmailAuthCodeCheck}>확인</EmailBtn>
-        <EmailBtn onClick={EventEmailAuthCodeSend}>재전송</EmailBtn>
+          <BtnWrap>
+            <EmailAuthCodeInput
+              type="text"
+              value={signUpForm.authCode} 
+              name="authCode"
+              onChange={onChangehandler}
+              placeholder="인증번호를 입력해주세요."
+              border="#b4b4b4"
+              background = ""
+            ></EmailAuthCodeInput>
+            <EmailBtn onClick={EventEmailAuthCodeCheck}>확인</EmailBtn>
+            <EmailBtn onClick={EventEmailAuthCodeSend}>재전송</EmailBtn>
+          </BtnWrap>
         </ElementDiv>
       }
       {timer && <ValidDiv valid="false">남은시간 {displayMinutes}:{displaySeconds < 10 ? `0${displaySeconds}` : displaySeconds}</ValidDiv>}
