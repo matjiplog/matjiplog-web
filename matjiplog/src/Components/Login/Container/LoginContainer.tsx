@@ -29,7 +29,7 @@ function LoginContainer() : JSX.Element{
   const { handleUrl } = useNavigateUrl();
   const { form: userData, onChangeHandler }: useInputResult = useInput({ userId: "", password: ""});
 
-  const postLoginMutation = useMutation(["login"], (loginData: {id: string, password: string}) => postLoginData(loginData), {
+  const postLoginMutation = useMutation(["login"], (loginData: {userId: string, password: string}) => postLoginData(loginData), {
     onSuccess(response) {
       if(response)  {
         setAccessTokenInHeader(response.accessToken);

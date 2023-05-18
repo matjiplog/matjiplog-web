@@ -4,7 +4,7 @@ import {userAPI} from "../Api/axios";
 import { userDto } from "../types/userDto";
 import qs from 'qs';
 
-export const postLoginData = async (loginData: {id: string, password: string}): Promise<{ accessToken: string, userSequence: number } | null> => {
+export const postLoginData = async (loginData: {userId: string, password: string}): Promise<{ accessToken: string, userSequence: number } | null> => {
   try{
     const response = await userAPI.post("login", loginData);
     const accessToken = response.headers["token"];
@@ -125,8 +125,8 @@ export const axiosLogin = async (userId : string, password: string) =>{
   try{
     const data = { 'userId': userId , 'password' : password};
     const res = await userAPI.post("/login", data);
-    const accessToken = res.headers["token"]
-    const userSequence = res.headers["userseq"]
+    const accessToken = res.headers["token"];
+    const userSequence = res.headers["userseq"];
     return { res, accessToken, userSequence };
   } catch (e) {
     const { message, response, code } = e as unknown as AxiosError;
