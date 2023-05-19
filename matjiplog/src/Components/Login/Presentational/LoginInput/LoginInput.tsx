@@ -7,8 +7,8 @@ import { useNavigateUrl } from '../../../../Hooks/useNavigateUrl';
 import { LoginInputProps } from '../../../../types/props/login/LoginInput';
 
 function LoginInput({ onChangeHandler, clickKakaoHandler, clickGoogleHandler, doLogin }: LoginInputProps): JSX.Element {
-  const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER__CLIENT_ID;
-	const NAVER_CALLBACK_URL = process.env.REACT_APP_NAVER__CALLBACK_URL;
+  const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
+	const NAVER_CALLBACK_URL = process.env.REACT_APP_NAVER_CALLBACK_URL;
 
   const naverRef = useRef<HTMLDivElement | null>(null);
 
