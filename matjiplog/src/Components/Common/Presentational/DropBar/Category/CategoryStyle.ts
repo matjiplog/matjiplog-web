@@ -8,6 +8,6 @@ export const CategoryTitle = styled.span`
   color: #ff6701;
   top: -8px;
   left: 6px;
-  font-size: 0.5rem;
+  font-size: 10px;
   z-index: 999;
 `;

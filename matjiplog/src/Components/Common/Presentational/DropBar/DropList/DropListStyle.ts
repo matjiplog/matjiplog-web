@@ -18,6 +18,7 @@ export const DropItem = styled.li<{ active: number }>`
   display: flex;
   align-items: center;
   background-color: ${whiteFont};
+  font-size: 6.5px;
   color: ${(props => props.active ? mainFont : blackFont)}; 
   
   &:hover {

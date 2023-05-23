@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { blackFont, mainFont, whiteFont } from '../../../../../styles/fontColor';
 
 export const HasTagItem = styled.li<{ active: number }>`
-    margin: 2em;
     padding: 10px;
+    margin: 3px;
+    font-size: 10px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
     border-radius: 18.5px;
     background-color: ${(props) => props.active ? mainFont : whiteFont};

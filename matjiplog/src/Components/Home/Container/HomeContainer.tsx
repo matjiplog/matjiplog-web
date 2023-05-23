@@ -30,7 +30,7 @@ import Meta from '../../Common/Presentational/Meta/Meta';
 
 function HomeContainer(): JSX.Element {
     const introImageUrl: string[] = useMemo(() => {
-        return [ "/assets/Home/introbg1.png", "/assets/Home/introbg2.png", "/assets/Home/introbg2.png" ];
+        return [ "/assets/Home/introbg1.png", "/assets/Home/introbg7.jpg", "/assets/Home/introbg8.jpg" ];
     }, []);
 
     const { slideIndex, leftClick, rightClick }: useImageSlideResult = useImageSlide(introImageUrl.length-1);

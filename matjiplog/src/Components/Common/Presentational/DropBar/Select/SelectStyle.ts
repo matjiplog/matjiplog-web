@@ -9,4 +9,5 @@ export const SelectItem = styled.div`
   height: 40px;
   display: flex;
   align-items: center;
+  font-size: 6.5px;
 `;
