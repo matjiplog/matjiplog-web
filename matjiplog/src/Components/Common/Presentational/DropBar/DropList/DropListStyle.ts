@@ -12,15 +12,15 @@ export const DropItems = styled.ul`
 `;
 
 export const DropItem = styled.li<{ active: number }>`
+  justify-content: center;
   width: 100%;
-  padding: 3em 2em 3em 2em;
   height: 40px;
   display: flex;
   align-items: center;
   background-color: ${whiteFont};
   font-size: 6.5px;
-  color: ${(props => props.active ? mainFont : blackFont)}; 
-  
+  color: ${(props) => (props.active ? mainFont : blackFont)};
+
   &:hover {
     color: ${mainFont};
   }

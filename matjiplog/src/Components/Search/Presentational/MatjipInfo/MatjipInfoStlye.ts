@@ -4,8 +4,9 @@ import { darkgrayFont, mainFont, yellowFont } from '../../../../styles/fontColor
 import { StarIcon } from '../../../../styles/icons';
 
 export const Category = styled.span`
-    color: ${mainFont};
-`
+  font-size: 1.5rem;
+  color: ${mainFont};
+`;
 
 export const TitleAndScope = styled.div`
     display: flex;
@@ -40,9 +41,10 @@ export const Star = styled(StarIcon)<{ active: number }>`
 `;
 
 export const Address = styled.p`
-    margin-top: 5px;
-    color: ${darkgrayFont};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  font-size: 1.5rem;
+  margin-top: 5px;
+  color: ${darkgrayFont};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

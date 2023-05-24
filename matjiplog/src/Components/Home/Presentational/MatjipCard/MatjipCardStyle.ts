@@ -5,9 +5,10 @@ import { hoverFont, darkgrayFont, yellowFont, mainFont, redFont } from '../../..
 import { CardBorderShaodw } from '../../../../styles/borderStyle';
 
 export const MatjipCardDiv = styled(CardBorderShaodw)`
+  font-size: 1rem;
   position: relative;
-  padding: 3em 5em 3em 5em;
-  margin: 0 0 5em 0;
+  padding: 1em 2em 1em 2em;
+  margin: 0 0 1em 0;
   
   &:hover {
     background-color: ${hoverFont};
@@ -21,16 +22,18 @@ export const NameAndCategory = styled.div`
 
 export const Name = styled.h3`
   margin-right: 0.5em;
-  font-size: 3em;
+  font-size: 1.5rem;
 `
 
 export const Category = styled.span`
   color: ${mainFont};
-`
+  font-size: 1rem;
+`;
 
 export const Address = styled.p`
   margin-top: 1em;
   color: ${darkgrayFont};
+  font-size: 1rem;
 `
 
 export const ImageDiv = styled.div`
@@ -72,13 +75,14 @@ export const Button = styled.button`
   font-size: 1.5rem;
 `
 const IconStyle = `
+  font-size: 1.5rem;
   position: absolute;
   top: 10px;
 `
 
 export const Like = styled(LikeIcon)`
   ${IconStyle};
-  right: 30px;
+  right: 2em;
   :hover{
     color: ${redFont};
     transform: scale(1.2);
@@ -87,7 +91,7 @@ export const Like = styled(LikeIcon)`
 `
 export const Wrtie = styled(WriteIcon)`
   ${IconStyle};
-  right: 5px;
+  right: 0.5em;
   :hover{
     color: ${mainFont};
     transform: scale(1.2);

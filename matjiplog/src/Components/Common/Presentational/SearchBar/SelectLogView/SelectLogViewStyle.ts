@@ -18,11 +18,11 @@ export const IconBtn = styled.button`
 `
 
 export const Map = styled(MapIcon)<{ active: number }>`
-    font-size: 3rem;
+    font-size: 2rem;
     color: ${(props) => props.active ? mainFont : blackFont};
 `
 
 export const GridDot = styled(GridDotIcon)<{ active: number }>`
-    font-size: 3rem;
+    font-size: 2rem;
     color: ${(props) => props.active ? blackFont : mainFont};
 `

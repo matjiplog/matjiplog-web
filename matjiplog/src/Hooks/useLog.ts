@@ -25,14 +25,14 @@ export const useLog = (): useLogResult => {
         setMatjip({...matjipInfo});
         setLog({logSequence: 0, content: "", isCustom: false, orderingMethod: "", isPublic: false,});
         setOrder("post");
-        handleUrl("/createMyLog");
+        handleUrl("/myLogWork");
     }
 
     const writeCustumMatjip = () => {
         if(!isLogin) return handleUrl("/login");
         
         initWriteLogStore();
-        handleUrl("/createMyLog");
+        handleUrl("/myLogWork");
     }
 
     const configLog = (e: React.MouseEvent<HTMLLIElement | HTMLDivElement>, matjipInfo: MatjipDto, logInfo: logStore) => {
@@ -42,12 +42,12 @@ export const useLog = (): useLogResult => {
         setMatjip({...matjipInfo});
         setLog({...logInfo});
         setOrder("put");
-        handleUrl("/createMyLog");
+        handleUrl("/myLogWork");
     }
 
     const searchMatjip = () => {
         initWriteLogStore();
-        handleUrl("/search");
+        handleUrl("/matjip");
     }
 
     const setMatjipStore = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

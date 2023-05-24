@@ -110,7 +110,7 @@ function SearchMatjipContainer(): JSX.Element {
                 <MyPlaceMap mapRef={mapRef} />
             ): (
                 <SearchListGrid>
-                    {!isLoading && viewList.map((matjip: MatjipDto, index: number) => {
+                    {viewList.map((matjip: MatjipDto, index: number) => {
                         const { matjipSequence } = matjip;
                         const isLastCard = index === viewList.length - 1;
 
